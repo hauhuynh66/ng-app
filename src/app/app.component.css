@@ -7,7 +7,7 @@ mat-sidenav{
   background-color: cornflowerblue;
 }
 
-.toolbar-spacer {
+.spacer {
   flex: 1 1 auto;
 }
 

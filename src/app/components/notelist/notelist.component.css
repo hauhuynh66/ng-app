@@ -1,0 +1,26 @@
+.note{
+    cursor: move;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.note-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 150px;
+}
+
+.note-header{
+    display: flex;
+    justify-content: center;
+    min-height: 40px;
+}
+
+::ng-deep .mat-card-header-text {
+    margin: 0 !important; 
+}
