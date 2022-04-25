@@ -1,1 +1,49 @@
-<app-sidebar></app-sidebar>
+<mat-sidenav-container>
+  <mat-sidenav mode="side" [(opened)] = "sidenavState">
+    <div class = "m-5">
+      <div class="d-flex justify-content-center mb-3">
+        <i class="fa fa-cubes icon-large"></i>
+      </div>
+      <div class="d-flex justify-content-center">
+        <h1>Title</h1>
+      </div>
+    </div>
+    <mat-nav-list>
+      <mat-divider></mat-divider>
+      <a mat-list-item href="#">
+        <i class="fa-solid fa-1"></i>
+      </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item href="#">
+        <i class="fa-solid fa-2"></i>
+      </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item href="#">
+        <i class="fa-solid fa-3"></i>
+      </a>
+      <mat-divider></mat-divider>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <!--TOPBAR-->
+    <mat-toolbar color="primary">
+      <button mat-raised-button color="primary" (click)="sidenavState = !sidenavState">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <button mat-fab class="circular-normal ml-4" color="primary"  >
+        <span matBadge = "5"><mat-icon class="icon-custom">notification_important</mat-icon></span>
+      </button>
+      <mat-menu #langMenu>
+        <button mat-menu-item>English</button>
+        <button mat-menu-item>Vietnamese</button>
+        <button mat-menu-item>Japanese</button>
+      </mat-menu>
+      <span class="toolbar-spacer"></span>
+      <button color="primary" mat-raised-button [matMenuTriggerFor]="langMenu">Language</button>
+
+    </mat-toolbar>
+    <app-notelist></app-notelist>
+    <!--TOPBAR-->
+  </mat-sidenav-content>
+</mat-sidenav-container>

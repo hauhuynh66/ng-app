@@ -1,0 +1,39 @@
+mat-sidenav-container{
+  height: 100%;
+}
+
+mat-sidenav{
+  width: 25%;
+  background-color: cornflowerblue;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.icon-custom{
+  transform: scale(1.3);
+}
+
+.icon-normal{
+  transform: scale(2);
+  padding: 0 10px 0 10px;
+}
+
+.icon-large{
+  transform: scale(3);
+  padding: 0 15px 0 15px;
+}
+
+.icon-xl{
+  transform: scale(4);
+  padding: 0 20px 0 20px;
+}
+
+.circular-small{
+  transform: scale(0.6);
+}
+
+.circular-normal{
+  transform: scale(0.8);
+}
