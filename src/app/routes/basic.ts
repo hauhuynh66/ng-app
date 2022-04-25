@@ -3,11 +3,17 @@ import { Routes, RouterModule, Router, ActivatedRoute, ParamMap } from '@angular
 import { LoginComponent } from '../components/login/login.component';
 import { NotelistComponent } from '../components/notelist/notelist.component';
 import { ProfileComponent } from '../components/profile/profile.component';
+import { StatsComponent } from '../components/stats/stats.component';
+import { RegisterComponent } from '../components/register/register.component';
+import { PagenotfoundComponent } from '../components/pagenotfound/pagenotfound.component';
 
 const routes: Routes = [
     {path: 'login', component: LoginComponent},
+    {path: 'register', component: RegisterComponent},
     {path: 'notelist', component: NotelistComponent},
-    {path: 'profile', component: ProfileComponent}
+    {path: 'profile', component: ProfileComponent},
+    {path: 'stats', component: StatsComponent},
+    {path: '**', component: PagenotfoundComponent}
 ]; 
 
 @NgModule({
@@ -15,7 +21,7 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 
-export class AppRoutingModule implements OnInit{
+export class BasicRoutingModule implements OnInit{
     name : string = "";
 
     constructor(private route: ActivatedRoute){}
@@ -26,3 +32,9 @@ export class AppRoutingModule implements OnInit{
         })
     }
  }
+
+ export const BasicRoutingComponents = [
+     LoginComponent,
+     NotelistComponent,
+     ProfileComponent
+ ];

@@ -10,15 +10,15 @@
     </div>
     <mat-nav-list>
       <mat-divider></mat-divider>
-      <a mat-list-item href="/notelist">
+      <a mat-list-item routerLink="/notelist">
         <i class="fa-solid fa-1"></i>
       </a>
       <mat-divider></mat-divider>
-      <a mat-list-item href="/profile">
+      <a mat-list-item routerLink="/profile">
         <i class="fa-solid fa-2"></i>
       </a>
       <mat-divider></mat-divider>
-      <a mat-list-item href="#">
+      <a mat-list-item routerLink="/stats">
         <i class="fa-solid fa-3"></i>
       </a>
       <mat-divider></mat-divider>
@@ -43,7 +43,7 @@
       <button color="primary" mat-raised-button [matMenuTriggerFor]="langMenu">Language</button>
 
     </mat-toolbar>
-    <app-notelist></app-notelist>
+    <router-outlet></router-outlet>
     <!--TOPBAR-->
   </mat-sidenav-content>
 </mat-sidenav-container>
