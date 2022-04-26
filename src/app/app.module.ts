@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MaterialModule} from "./material.module";
 import { BasicRoutingModule, BasicRoutingComponents } from './routes/basic';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { ChartModule } from 'angular2-chartjs';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
     MaterialModule,
     HttpClientModule,
     BasicRoutingModule, 
-    FormsModule
+    FormsModule,
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]

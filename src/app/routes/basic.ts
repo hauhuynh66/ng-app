@@ -1,5 +1,5 @@
 import { NgModule, OnInit } from '@angular/core';
-import { Routes, RouterModule, Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Routes, RouterModule, ActivatedRoute } from '@angular/router';
 import { LoginComponent } from '../components/login/login.component';
 import { NotelistComponent } from '../components/notelist/notelist.component';
 import { ProfileComponent } from '../components/profile/profile.component';
@@ -36,5 +36,8 @@ export class BasicRoutingModule implements OnInit{
  export const BasicRoutingComponents = [
      LoginComponent,
      NotelistComponent,
-     ProfileComponent
+     ProfileComponent,
+     RegisterComponent,
+     StatsComponent,
+     PagenotfoundComponent
  ];

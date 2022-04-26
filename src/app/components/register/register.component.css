@@ -1,0 +1,19 @@
+.mat-card{
+    padding: 0px;
+    border-radius: 20px;
+}
+
+.mat-card-header{
+    border-radius: 20px 20px 0 0;
+    background-color: blue;
+    padding : 20px;
+}
+
+.mat-card-actions{
+    padding : 20px !important;
+}
+
+.limiter{
+    width: 80%;
+    margin: 80px auto;
+}
