@@ -16,6 +16,7 @@ import { ChartModule } from 'angular2-chartjs';
     BasicRoutingComponents,
     PagenotfoundComponent
   ],
+  
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
