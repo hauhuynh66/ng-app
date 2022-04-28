@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -9,11 +11,10 @@ import { environment } from 'src/environments/environment';
 })
 
 export class LoginComponent implements OnInit {
-
-  readonly url = environment.requestUrl + "/login";
   hide:boolean;
   username:string = "";
   password:string = "";
+  url = "http://localhost:8400/login"
 
   constructor(private http: HttpClient) {
     this.hide = true;
@@ -26,5 +27,27 @@ export class LoginComponent implements OnInit {
   log(){
     console.log(this.username);
     console.log(this.password);
+  }
+
+  test(){
+    let data = {
+      username : 'hauhuynh66',
+      password : 'Hauhuynh'
+    }
+
+    const options = {
+      headers : new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
+      observable : 'response'
+    }
+
+    this.http.post<any>(this.url, data).subscribe( {
+        next: res => {
+          console.log(res);
+        },
+        error: e =>{
+          console.log(e);
+        }
+      }
+    );
   }
 }
