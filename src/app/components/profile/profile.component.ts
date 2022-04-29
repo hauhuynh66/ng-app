@@ -9,13 +9,13 @@ import { HttpClient } from '@angular/common/http';
 
 export class ProfileComponent implements OnInit {
 
-  readonly url = "https://jsonplaceholder.typicode.com/users";
+  
   users:any;
 
   constructor(private http:HttpClient) { }
 
   ngOnInit(): void {
-    this.users = this.http.get(this.url);
+
   }
 
 }

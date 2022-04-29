@@ -13,7 +13,7 @@ const routes: Routes = [
     {path: 'notelist', component: NotelistComponent},
     {path: 'profile', component: ProfileComponent},
     {path: 'stats', component: StatsComponent},
-    {path: '**', component: PagenotfoundComponent}
+    {path: '**', redirectTo: "/login"}
 ]; 
 
 @NgModule({

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs';
+import { Router } from '@angular/router';
+import config from "../../../assets/config.json";
 
 @Component({
   selector: 'app-login',
@@ -11,38 +12,42 @@ import { catchError, retry } from 'rxjs';
 })
 
 export class LoginComponent implements OnInit {
-  hide:boolean;
+  hide:boolean = true;
   username:string = "";
   password:string = "";
-  url = "http://localhost:8400/login"
-
-  constructor(private http: HttpClient) {
-    this.hide = true;
+  constructor(private http: HttpClient, private router: Router) {
+    
   }
 
   ngOnInit(): void {
+    let options = {
+      headers : new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("access_token"))
+    }
 
+    this.http.get(config.url.main + "/api/user/profile", options).subscribe({
+      next: res => {
+        console.log(res);
+      },
+      error : err => {
+        
+      }
+    });
   }
 
-  log(){
-    console.log(this.username);
-    console.log(this.password);
-  }
-
-  test(){
+  authenticate(){
     let data = {
-      username : 'hauhuynh66',
-      password : 'Hauhuynh'
+      'username' : this.username,
+      'password' : this.password
     }
 
-    const options = {
-      headers : new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
-      observable : 'response'
-    }
-
-    this.http.post<any>(this.url, data).subscribe( {
+    this.http.post<any>(config.url.main + config.url.login, data, {observe: 'response'}).subscribe( {
         next: res => {
-          console.log(res);
+          let token = res.headers.get("x-token");
+          if (token != null){
+            localStorage.setItem("access_token", token);
+            this.router.navigate(['/profile']);
+          }
+          
         },
         error: e =>{
           console.log(e);
