@@ -1,16 +1,39 @@
 <div class="container p-5">
-    <div class="row">
-        <div *ngFor="let n of notelist" class="col-4">
-            <mat-card class="note" cdkDrag>
-                <mat-card-header class="note-header">
-                    
-                </mat-card-header>
-                <mat-card-content class="note-content">
-                    
-                </mat-card-content>
-            </mat-card>
-        </div>
-    </div>
+    <mat-card cdkDropList [cdkDropListData]="notelist" 
+    cdkDropListOrientation="vertical" (cdkDropListDropped)="dropNote($event)">
+        <mat-card-header class="m-2">
+            <div class="half-width vc">
+                <h1 class="mb-0">Diary</h1>
+            </div>
+            <div class="half-width he vc">
+                <mat-form-field appearance="fill" class="pt-3">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="picker" 
+                    class="card-header-dp" [formControl]="date" (dateChange)="dateChange($event)">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </mat-card-header>
+        <mat-card-content class="p-3" *ngIf="notelist.length>0;else empty">
+            <mat-accordion *ngFor="let note of notelist">
+                <mat-expansion-panel cdkDrag class="note">
+                    <mat-expansion-panel-header class="full-width">
+                        <mat-panel-title>{{note.title}}</mat-panel-title>
+                    </mat-expansion-panel-header>
+                <p>{{note.message}}</p>
+                <mat-action-row>
+                    <p>{{note.createDate | date : 'shortTime'}}</p>
+                </mat-action-row>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </mat-card-content>
+        <ng-template #empty>
+            <mat-card-content class="p-3 empty-content">
+                <h3>Nothing here!</h3>
+            </mat-card-content>
+        </ng-template>
+    </mat-card>
 </div>
 <div class="bt"></div>
 <!--<div class="m-5">

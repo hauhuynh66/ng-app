@@ -13,25 +13,14 @@ import config from "../../../assets/config.json";
 
 export class LoginComponent implements OnInit {
   hide:boolean = true;
-  username:string = "";
-  password:string = "";
+  username:string = "hauhuynh66";
+  password:string = "Hauhuynh";
   constructor(private http: HttpClient, private router: Router) {
     
   }
 
   ngOnInit(): void {
-    let options = {
-      headers : new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("access_token"))
-    }
-
-    this.http.get(config.url.main + "/api/user/profile", options).subscribe({
-      next: res => {
-        console.log(res);
-      },
-      error : err => {
-        
-      }
-    });
+    
   }
 
   authenticate(){

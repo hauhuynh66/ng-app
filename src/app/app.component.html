@@ -8,21 +8,24 @@
         <h1>Title</h1>
       </div>
     </div>
-    <mat-nav-list>
+    <mat-list>
       <mat-divider></mat-divider>
-      <a mat-list-item routerLink="/notelist">
-        <i class="fa-solid fa-1"></i>
-      </a>
+      <mat-list-item class="justify-content-center" routerLink="/notelist">
+        <i matListIcon class="fa-solid fa-book"></i>
+        <h1 matLine class="menuItem">Notes</h1>
+      </mat-list-item>
       <mat-divider></mat-divider>
-      <a mat-list-item routerLink="/profile">
-        <i class="fa-solid fa-2"></i>
-      </a>
+      <mat-list-item routerLink="/profile">
+        <i matListIcon class="fa-solid fa-address-book"></i>
+        <h1 matLine class="menuItem">Profile</h1>
+      </mat-list-item>
       <mat-divider></mat-divider>
-      <a mat-list-item routerLink="/stats">
-        <i class="fa-solid fa-3"></i>
-      </a>
+      <mat-list-item routerLink="/stats">
+        <i matListIcon class="fa-solid fa-chart-pie"></i>
+        <h1 matLine class="menuItem">Stats</h1>
+      </mat-list-item>
       <mat-divider></mat-divider>
-    </mat-nav-list>
+    </mat-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <!--TOPBAR-->

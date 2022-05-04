@@ -1,5 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import config from "../../../assets/config.json";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -8,14 +10,24 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class ProfileComponent implements OnInit {
-
-  
-  users:any;
-
-  constructor(private http:HttpClient) { }
+  profile:any = {};
+  constructor(private http:HttpClient, private router:Router) { }
 
   ngOnInit(): void {
-
+    if(localStorage.getItem("access_token")==null){
+      this.router.navigate(["/login"]);
+    }
+    let options = {
+      headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("access_token"))
+    }
+    this.http.get(config.url.main+config.url.profile, options).subscribe({
+      next : data=>{
+        this.profile = data;
+      },
+      error: ()=>{
+        this.router.navigate(["/login"]);
+      }
+    });
   }
 
 }

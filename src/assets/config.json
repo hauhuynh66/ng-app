@@ -2,7 +2,7 @@
     "url": {
         "main" : "http://localhost:8400",
         "login" : "/login",
-        "check" : "/check",
-        "profile" : "/api/profile"
+        "profile" : "/api/user/profile",
+        "note" : "/api/notes/list"
     }
 }

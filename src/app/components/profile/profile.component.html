@@ -1,5 +1,30 @@
 <div class="m-5">
-    <div *ngFor="let user of users | async">
-        {{user.name}}
-    </div>
+    <h1>Profile</h1>
+    <mat-list>
+        <h2 mat-subheader>Personal Info</h2>
+        <mat-list-item>
+            <i matListIcon class="fa fa-1"></i>
+            <div matLine>Firstname</div>
+            <div matLine>{{profile.firstname}}</div>
+        </mat-list-item>
+        <mat-list-item>
+            <i matListIcon class="fa fa-2"></i>
+            <div matLine>Lastname</div>
+            <div matLine>{{profile.lastname}}</div>
+        </mat-list-item>
+        <h2 mat-subheader>Account Info</h2>
+        <mat-list-item>
+            <i matListIcon class="fa fa-1"></i>
+            <div matLine>Username</div>
+            <div matLine>{{profile.username}}</div>
+        </mat-list-item>
+        <mat-list-item>
+            <i matListIcon class="fa fa-2"></i>
+            <div matLine>Email</div>
+            <div matLine>{{profile.email}}</div>
+        </mat-list-item>
+        <h3 mat-subheader>Basic stats</h3>
+        
+    </mat-list>
+    
 </div>
