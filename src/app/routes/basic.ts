@@ -7,6 +7,8 @@ import { StatsComponent } from '../components/stats/stats.component';
 import { RegisterComponent } from '../components/register/register.component';
 import { PagenotfoundComponent } from '../components/pagenotfound/pagenotfound.component';
 import { MiscComponent } from '../components/misc/misc.component';
+import { CreatenoteComponent } from '../components/dialog/createnote/createnote.component';
+import { MapComponent } from '../components/map/map.component';
 
 const routes: Routes = [
     {path: 'login', component: LoginComponent},
@@ -15,6 +17,7 @@ const routes: Routes = [
     {path: 'profile', component: ProfileComponent},
     {path: 'stats', component: StatsComponent},
     {path: 'misc', component: MiscComponent},
+    {path: 'map', component: MapComponent},
     {path: '**', redirectTo: "/login"}
 ]; 
 
@@ -42,5 +45,7 @@ export class BasicRoutingModule implements OnInit{
      RegisterComponent,
      StatsComponent,
      MiscComponent,
-     PagenotfoundComponent
+     PagenotfoundComponent,
+     CreatenoteComponent,
+     MapComponent
  ];

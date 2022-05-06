@@ -7,18 +7,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MaterialModule} from "./material.module";
 import { BasicRoutingModule, BasicRoutingComponents } from './routes/basic';
-import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { ChartModule } from 'angular2-chartjs';
-import { MiscComponent } from './components/misc/misc.component';
-import { CreatenoteComponent } from './components/dialog/createnote/createnote.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BasicRoutingComponents,
-    PagenotfoundComponent,
-    MiscComponent,
-    CreatenoteComponent
+    BasicRoutingComponents
   ],
   
   imports: [
@@ -29,7 +24,10 @@ import { CreatenoteComponent } from './components/dialog/createnote/createnote.c
     BasicRoutingModule, 
     FormsModule,
     ChartModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: ''
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
