@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs';
 import { Router } from '@angular/router';
 import config from "../../../assets/config.json";
 
@@ -34,7 +32,7 @@ export class LoginComponent implements OnInit {
           let token = res.headers.get("x-token");
           if (token != null){
             localStorage.setItem("access_token", token);
-            this.router.navigate(['/profile']);
+            this.router.navigate(['/notelist']);
           }
           
         },
@@ -43,5 +41,10 @@ export class LoginComponent implements OnInit {
         }
       }
     );
+  }
+
+  clear(){
+    this.username = "";
+    this.password = "";
   }
 }

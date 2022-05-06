@@ -1,10 +1,11 @@
-import { Component, Inject, Injectable, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, Injectable, OnInit, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import config from "../../../assets/config.json";
 import { Router } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 import { FormControl } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 @Component({
@@ -14,6 +15,7 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 })
 
 export class NotelistComponent implements OnInit {
+  @ViewChild('file') fileRef:ElementRef = {} as ElementRef;
   notelist: any = [];
   date = new FormControl(new Date());
 
@@ -30,13 +32,10 @@ export class NotelistComponent implements OnInit {
   }
 
   dateChange(event: MatDatepickerInputEvent<Date>){
-    //console.log(this.date.value)
     this.getRequest(this.date.value.toDateString());
   }
 
   getRequest(d:string){
-    
-
     let options = {
       headers : new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("access_token")),
       params : {
@@ -44,7 +43,7 @@ export class NotelistComponent implements OnInit {
       }
     }
 
-    this.http.get(config.url.main + config.url.note, options).subscribe({
+    this.http.get(config.url.main + config.url.note.main + config.url.note.list, options).subscribe({
       next: data=>{
         this.notelist = data;
       },
@@ -52,6 +51,33 @@ export class NotelistComponent implements OnInit {
         this.router.navigate(["/login"]);
       }
     })
+  }
+
+  fileUpload(event:any){
+    let file = event.target.files[0];
+    let formData = new FormData();
+    formData.append('csv', file);
+
+    let options = {
+      headers : new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("access_token"))
+    }
+
+    if(file.name!==undefined){
+      this.http.post(config.url.main + config.url.note.main + config.url.note.check, formData, options).subscribe({
+        next : data =>{
+          console.log(data);
+        },
+        error : err =>{
+          console.log(err.message);
+        }
+      })
+    }
+
+    this.reset();
+  }
+
+  reset(){
+    this.fileRef.nativeElement.value = '';
   }
 
 }

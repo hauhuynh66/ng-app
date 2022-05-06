@@ -3,6 +3,22 @@
         "main" : "http://localhost:8400",
         "login" : "/login",
         "profile" : "/api/user/profile",
-        "note" : "/api/notes/list"
+        "note" : {
+            "main" : "/api/notes",
+            "list" : "/list",
+            "upload" : "/import",
+            "check" : "/import_check"
+        } 
+    },
+    "openweathermap":{
+        "key" : "1f21f91e5b111cf398a465df830c423b",
+        "defaults" : {
+            "lon" : 106.6667, 
+            "lat" : 10.75
+        },
+        "url" : {
+            "weather" : "https://api.openweathermap.org/data/2.5/weather",
+            "forecast" : "https://api.openweathermap.org/data/2.5/forecast"
+        }
     }
 }

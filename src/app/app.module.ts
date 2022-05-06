@@ -9,12 +9,16 @@ import { MaterialModule} from "./material.module";
 import { BasicRoutingModule, BasicRoutingComponents } from './routes/basic';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { ChartModule } from 'angular2-chartjs';
+import { MiscComponent } from './components/misc/misc.component';
+import { CreatenoteComponent } from './components/dialog/createnote/createnote.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BasicRoutingComponents,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    MiscComponent,
+    CreatenoteComponent
   ],
   
   imports: [

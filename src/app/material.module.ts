@@ -16,6 +16,7 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatDatepickerModule} from "@angular/material/datepicker";
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const material = [
   MatSidenavModule,
@@ -34,7 +35,8 @@ const material = [
   DragDropModule,
   MatDialogModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatPaginatorModule
 ];
 
 @NgModule({

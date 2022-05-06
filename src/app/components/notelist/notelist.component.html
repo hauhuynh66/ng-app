@@ -1,4 +1,9 @@
 <div class="container p-5">
+    <div class="d-flex justify-content-end">
+        <button mat-mini-fab color="primary" class="m-2" (click)="file.click()"><i class="fa-solid fa-file-import"></i></button>
+        <button mat-mini-fab class="m-2"><i class="fa-solid fa-file-export"></i></button>
+        <input type="file" accept=".csv" (change)="fileUpload($event)"  #file hidden>
+    </div>
     <mat-card cdkDropList [cdkDropListData]="notelist" 
     cdkDropListOrientation="vertical" (cdkDropListDropped)="dropNote($event)">
         <mat-card-header class="m-2">
@@ -21,13 +26,21 @@
                     <mat-expansion-panel-header class="full-width">
                         <mat-panel-title>{{note.title}}</mat-panel-title>
                     </mat-expansion-panel-header>
-                <p>{{note.message}}</p>
-                <mat-action-row>
-                    <p>{{note.createDate | date : 'shortTime'}}</p>
-                </mat-action-row>
+                    <p>{{note.message}}</p>
+                    <mat-action-row>
+                        <p>{{note.createDate | date : 'shortTime'}}</p>
+                    </mat-action-row>
+                    
                 </mat-expansion-panel>
             </mat-accordion>
         </mat-card-content>
+        <mat-card-actions>
+            <mat-paginator [length]="notelist.size"
+                            [pageSize]="5"
+                            [pageSizeOptions]="[5, 10, 25, 100]"
+                            aria-label="Select page">
+                    </mat-paginator>
+        </mat-card-actions>
         <ng-template #empty>
             <mat-card-content class="p-3 empty-content">
                 <h3>Nothing here!</h3>
