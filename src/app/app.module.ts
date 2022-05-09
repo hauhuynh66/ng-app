@@ -6,9 +6,8 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MaterialModule} from "./material.module";
-import { BasicRoutingModule, BasicRoutingComponents } from './routes/basic';
+import { BasicRoutingModule, BasicRoutingComponents } from './router.module';
 import { ChartModule } from 'angular2-chartjs';
-import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -24,10 +23,7 @@ import { AgmCoreModule } from '@agm/core';
     BasicRoutingModule, 
     FormsModule,
     ChartModule,
-    ReactiveFormsModule,
-    AgmCoreModule.forRoot({
-      apiKey: ''
-    })
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

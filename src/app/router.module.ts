@@ -1,14 +1,13 @@
 import { NgModule, OnInit } from '@angular/core';
 import { Routes, RouterModule, ActivatedRoute } from '@angular/router';
-import { LoginComponent } from '../components/login/login.component';
-import { NotelistComponent } from '../components/notelist/notelist.component';
-import { ProfileComponent } from '../components/profile/profile.component';
-import { StatsComponent } from '../components/stats/stats.component';
-import { RegisterComponent } from '../components/register/register.component';
-import { PagenotfoundComponent } from '../components/pagenotfound/pagenotfound.component';
-import { MiscComponent } from '../components/misc/misc.component';
-import { CreatenoteComponent } from '../components/dialog/createnote/createnote.component';
-import { MapComponent } from '../components/map/map.component';
+import { LoginComponent } from './components/login/login.component';
+import { NotelistComponent } from './components/notelist/notelist.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { StatsComponent } from './components/stats/stats.component';
+import { RegisterComponent } from './components/register/register.component';
+import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { MiscComponent } from './components/misc/misc.component';
+import { CreatenoteComponent } from './components/dialog/createnote/createnote.component';
 
 const routes: Routes = [
     {path: 'login', component: LoginComponent},
@@ -17,7 +16,6 @@ const routes: Routes = [
     {path: 'profile', component: ProfileComponent},
     {path: 'stats', component: StatsComponent},
     {path: 'misc', component: MiscComponent},
-    {path: 'map', component: MapComponent},
     {path: '**', redirectTo: "/login"}
 ]; 
 
@@ -46,6 +44,5 @@ export class BasicRoutingModule implements OnInit{
      StatsComponent,
      MiscComponent,
      PagenotfoundComponent,
-     CreatenoteComponent,
-     MapComponent
+     CreatenoteComponent
  ];

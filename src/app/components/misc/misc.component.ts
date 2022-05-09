@@ -21,6 +21,7 @@ export class MiscComponent implements OnInit {
 
   ngOnInit(): void {
     this.getWeatherData();
+    
     this.getForecastData();
   }
 
@@ -57,7 +58,6 @@ export class MiscComponent implements OnInit {
     }
     this.http.get<any>(config.openweathermap.url.forecast, forecastOptions).subscribe({
       next: data =>{
-        console.log(data);
         let fList:Array<any> = data.list;
         let label:Array<any> = [];
         let tData:Array<number> = [];
