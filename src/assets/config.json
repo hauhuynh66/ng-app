@@ -4,11 +4,13 @@
         "login" : "/login",
         "profile" : "/api/user/profile",
         "note" : {
-            "main" : "/api/notes",
-            "list" : "/list",
-            "upload" : "/import",
-            "check" : "/import_check"
-        } 
+            "list" : "/api/notes/list",
+            "upload" : "/api/notes/import",
+            "check" : "/api/notes/import_check"
+        },
+        "item" :{
+            "list" : "/api/item/list"
+        }
     },
     "openweathermap":{
         "key" : "1f21f91e5b111cf398a465df830c423b",

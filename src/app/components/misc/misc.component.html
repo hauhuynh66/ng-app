@@ -1,6 +1,9 @@
 <div class="row p-5">
     <div class="col-6">
         <mat-card>
+            <mat-card-header class="d-flex justify-content-center">
+                Temperature
+            </mat-card-header>
             <mat-card-content class="d-flex justify-content-center">
                 {{t|number: '2.0-3'}}
             </mat-card-content>
@@ -8,10 +11,20 @@
     </div>
     <div class="col-6">
         <mat-card>
+            <mat-card-header class="d-flex justify-content-center">
+                Humidity
+            </mat-card-header>
             <mat-card-content class="d-flex justify-content-center">
                 {{h|number: '2.0-0'}}
             </mat-card-content>
         </mat-card>
     </div>
 </div>
-<chart [type]="chartType" [options]="chartOptions" [data]="forecastData" class="large"></chart>
+<mat-card class="ml-5 mr-5 mb-5">
+    <mat-card-header>
+        Forecast
+    </mat-card-header>
+    <mat-card-content class="p-5">
+        <chart [type]="chartType" [options]="chartOptions" [data]="forecastData" class="large"></chart>
+    </mat-card-content>
+</mat-card>

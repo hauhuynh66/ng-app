@@ -17,6 +17,7 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatDatepickerModule} from "@angular/material/datepicker";
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBarModule} from '@angular/material/snack-bar';
 
 const material = [
   MatSidenavModule,
@@ -36,7 +37,8 @@ const material = [
   MatDialogModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatSnackBarModule
 ];
 
 @NgModule({

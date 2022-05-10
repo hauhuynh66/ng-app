@@ -8,6 +8,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { MiscComponent } from './components/misc/misc.component';
 import { CreatenoteComponent } from './components/dialog/createnote/createnote.component';
+import { ItemlistComponent } from './components/itemlist/itemlist.component';
+import { PurchaseComponent } from './components/purchase/purchase.component';
 
 const routes: Routes = [
     {path: 'login', component: LoginComponent},
@@ -16,12 +18,16 @@ const routes: Routes = [
     {path: 'profile', component: ProfileComponent},
     {path: 'stats', component: StatsComponent},
     {path: 'misc', component: MiscComponent},
+    {path: 'item', component: ItemlistComponent},
+    {path: 'history', component: PurchaseComponent},
     {path: '**', redirectTo: "/login"}
 ]; 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  declarations: [
+  ]
 })
 
 export class BasicRoutingModule implements OnInit{
@@ -44,5 +50,7 @@ export class BasicRoutingModule implements OnInit{
      StatsComponent,
      MiscComponent,
      PagenotfoundComponent,
-     CreatenoteComponent
+     CreatenoteComponent,
+     ItemlistComponent,
+     PurchaseComponent
  ];

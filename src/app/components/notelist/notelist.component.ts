@@ -1,11 +1,10 @@
-import { Component, ElementRef, Inject, Injectable, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import config from "../../../assets/config.json";
 import { Router } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 import { FormControl } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 @Component({
@@ -43,7 +42,7 @@ export class NotelistComponent implements OnInit {
       }
     }
 
-    this.http.get(config.url.main + config.url.note.main + config.url.note.list, options).subscribe({
+    this.http.get(config.url.main + config.url.note.list, options).subscribe({
       next: data=>{
         this.notelist = data;
       },
@@ -63,7 +62,7 @@ export class NotelistComponent implements OnInit {
     }
 
     if(file.name!==undefined){
-      this.http.post(config.url.main + config.url.note.main + config.url.note.check, formData, options).subscribe({
+      this.http.post(config.url.main + config.url.note.check, formData, options).subscribe({
         next : data =>{
           console.log(data);
         },
