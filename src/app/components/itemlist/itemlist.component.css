@@ -25,3 +25,23 @@
     justify-content: center;
     align-items: center;
 }
+
+.item-actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.btn-small{
+    width: 30px;
+    height: 
+    30px;
+}
+
+.flex-input{
+    min-width: 0 !important;
+}
+
+.amount{
+    text-align: center;
+}

@@ -8,11 +8,26 @@
                 <mat-card-content>
                     <img [src]="item.imgUrl"  class="w-100">
                 </mat-card-content>
+                <mat-card-actions class="item-actions">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-success" (click)="minus(item.name)">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                        </div>
+                        <input class="form-control amount" value="{{item.count}}">
+                        <div class="input-group-append">
+                            <button class="btn btn-success" (click)="plus(item.name)">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </mat-card-actions>
             </mat-card>
         </div>
     </div>
     
-    <div class="boundary-container" cdkDropList [cdkDropListData]="purchaseList" (cdkDropListDropped)="drop($event)">
+    <div class="boundary-container my-2" cdkDropList [cdkDropListData]="purchaseList" (cdkDropListDropped)="drop($event)">
         <div *ngFor="let p of purchaseList" class="boundary-item">
             <div class="item-col">
                 {{p.name}}
@@ -25,6 +40,6 @@
             </div>
         </div>
     </div>
-    <div>{{total | currency:'VND' : 'symbol-narrow' : '4'}}</div>
+    <div><p class="h4">{{total | currency:'VND' : 'symbol-narrow' : '4.'}}</p></div>
     
 </div>
