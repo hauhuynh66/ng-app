@@ -26,6 +26,12 @@
             </mat-card>
         </div>
     </div>
+    <mat-paginator [length]="count"
+                [pageSize]="10"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+                (page)="pageChange($event)"
+                aria-label="Select page">
+    </mat-paginator>
     
     <div class="boundary-container my-2" cdkDropList [cdkDropListData]="purchaseList" (cdkDropListDropped)="drop($event)">
         <div *ngFor="let p of purchaseList" class="boundary-item">

@@ -3,6 +3,7 @@ import { CdkDragDrop, CdkDragEnter, copyArrayItem, moveItemInArray, transferArra
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import config from '../../../assets/config.json';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-itemlist',
@@ -14,19 +15,33 @@ export class ItemlistComponent implements OnInit {
   @Output() itemCountChange = new EventEmitter();
   purchaseList:any[] = [];
   total:number = 0;
+  count:number = 0;
   constructor(private http:HttpClient, private router:Router) { }
 
   ngOnInit(): void {
-    this.getItemList();
+    this.getItemList(0);
   }
 
-  getItemList(){
+  pageChange(event:PageEvent){
+    this.getItemList(event.pageIndex);
+  }
+
+  getItemList(page:number){
     let options = {
       headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("access_token"))
     };
 
-    this.http.get<any[]>(config.url.main + config.url.item.list + "/" + 1, options).subscribe({
+    this.http.get<number>(config.url.main + config.url.item.count, options).subscribe({
       next: data=>{
+        this.count = data;
+      },
+      error: err=>{
+        console.log(err);
+      }
+    })
+    this.http.get<any[]>(config.url.main + config.url.item.list + "/" + page, options).subscribe({
+      next: data=>{
+        this.itemList = []
         data.forEach(item => {
           item.count = 1;
           this.itemList.push(item);
@@ -36,7 +51,7 @@ export class ItemlistComponent implements OnInit {
         this.router.navigate(["/login"]);
       }
     })
-  } 
+  }
   drop(event:CdkDragDrop<any[]>){
     if(event.previousContainer===event.container){
       
@@ -64,17 +79,23 @@ export class ItemlistComponent implements OnInit {
 
   plus(itemName:string){
     var item = this.itemList.find((list)=>{return list.name === itemName});
-    if(item.count<20){
+    
+    if(item.count < 20){
       item.count++;
     }
+
     this.itemList[this.itemList.map(item=>item.name).indexOf(itemName)] = item;
+    this.itemCountChange.emit(item.count);
   }
 
   minus(itemName:string){
     var item = this.itemList.find((list)=>{return list.name === itemName});
-    if(item.count>0){
+    
+    if(item.count > 1){
       item.count--;
     }
+
     this.itemList[this.itemList.map(item=>item.name).indexOf(itemName)] = item;
+    this.itemCountChange.emit(item.count);
   }
 }

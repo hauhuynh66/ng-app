@@ -12,15 +12,50 @@ import { ItemlistComponent } from './components/itemlist/itemlist.component';
 import { PurchaseComponent } from './components/purchase/purchase.component';
 
 const routes: Routes = [
-    {path: 'login', component: LoginComponent},
-    {path: 'register', component: RegisterComponent},
-    {path: 'notelist', component: NotelistComponent},
-    {path: 'profile', component: ProfileComponent},
-    {path: 'stats', component: StatsComponent},
-    {path: 'misc', component: MiscComponent},
-    {path: 'item', component: ItemlistComponent},
-    {path: 'history', component: PurchaseComponent},
-    {path: '**', redirectTo: "/login"}
+    {
+        path: 'login', 
+        component: LoginComponent,
+        data: {animation : 'login'}
+    },
+    {
+        path: 'register', 
+        component: RegisterComponent,
+        data: {animation : 'register'}
+    },
+    {
+        path: 'notelist',
+        component: NotelistComponent,
+        data: {animation : 'notelist'}
+    },
+    {
+        path: 'profile', 
+        component: ProfileComponent,
+        data: {animation : 'profile'}
+    },
+    {
+        path: 'stats', 
+        component: StatsComponent,
+        data: {animation : 'stats'}
+    },
+    {
+        path: 'misc', 
+        component: MiscComponent,
+        data: {animation : 'misc'}
+    },
+    {
+        path: 'item', 
+        component: ItemlistComponent,
+        data: {animation : 'item'}
+    },
+    {
+        path: 'history', 
+        component: PurchaseComponent,
+        data: {animation : 'history'}
+    },
+    {
+        path: '**', 
+        redirectTo: "/login"
+    }
 ]; 
 
 @NgModule({

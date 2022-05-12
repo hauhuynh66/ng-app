@@ -9,7 +9,8 @@
             "check" : "/api/notes/import_check"
         },
         "item" :{
-            "list" : "/api/item/list"
+            "list" : "/api/item/list",
+            "count" : "/api/item/count"
         }
     },
     "openweathermap":{
