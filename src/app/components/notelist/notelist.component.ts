@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 import { FormControl } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { MatDialog } from '@angular/material/dialog';
+import { CreatenoteComponent } from '../dialog/createnote/createnote.component';
 
 
 @Component({
@@ -18,7 +20,7 @@ export class NotelistComponent implements OnInit {
   notelist: any = [];
   date = new FormControl(new Date());
 
-  constructor(private http: HttpClient, private router:Router) {
+  constructor(private http: HttpClient, private router:Router, public dialog: MatDialog) {
     
   }
 
@@ -55,7 +57,7 @@ export class NotelistComponent implements OnInit {
   fileUpload(event:any){
     let file = event.target.files[0];
     let formData = new FormData();
-    formData.append('csv', file);
+    formData.append('file', file);
 
     let options = {
       headers : new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("access_token"))
@@ -67,7 +69,7 @@ export class NotelistComponent implements OnInit {
           console.log(data);
         },
         error : err =>{
-          console.log(err.message);
+          console.log(err);
         }
       })
     }
@@ -77,6 +79,16 @@ export class NotelistComponent implements OnInit {
 
   reset(){
     this.fileRef.nativeElement.value = '';
+  }
+
+  openNewDialog(){
+    const dialogRef = this.dialog.open(CreatenoteComponent, {
+      width : '600px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+        console.log(result);
+    })
   }
 
 }

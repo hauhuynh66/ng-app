@@ -1,8 +1,11 @@
 <div class="container p-5">
     <div class="d-flex justify-content-end">
-        <button mat-mini-fab color="primary" class="m-2" (click)="file.click()"><i class="fa-solid fa-file-import"></i></button>
-        <button mat-mini-fab class="m-2"><i class="fa-solid fa-file-export"></i></button>
-        <input type="file" accept=".csv" (change)="fileUpload($event)"  #file hidden>
+        <button mat-mini-fab color="primary" class="mx-2" (click)="file.click()"><i class="fa-solid fa-file-import"></i></button>
+        <button mat-mini-fab class="mx-2"><i class="fa-solid fa-file-export"></i></button>
+        <button mat-mini-fab class="mx-2" (click)="openNewDialog()">
+            <i class="fa-solid fa-calendar-plus"></i>
+        </button>
+        <input type="file" accept=".csv,.xlsx" (change)="fileUpload($event)"  #file hidden>
     </div>
     <mat-card cdkDropList [cdkDropListData]="notelist" 
     cdkDropListOrientation="vertical" (cdkDropListDropped)="dropNote($event)">
@@ -44,9 +47,3 @@
         </ng-template>
     </mat-card>
 </div>
-<div class="bt"></div>
-<!--<div class="m-5">
-    <button mat-raised-button (click)="openNewDialog()">
-        <i class="fa-solid fa-calendar-plus"></i>
-    </button>
-</div>-->
