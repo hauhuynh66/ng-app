@@ -27,14 +27,6 @@ p{
     height: 20px !important;
 }
 
-.vc{
-    align-items: center;
-}
-
-.he{
-    justify-content: end;
-}
-
 .empty-content{
     min-height: 100px;
     display: flex;

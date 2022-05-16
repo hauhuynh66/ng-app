@@ -15,7 +15,7 @@ import { ConfirmExportComponent } from '../dialog/confirm-export/confirm-export.
 @Component({
   selector: 'app-notelist',
   templateUrl: './notelist.component.html',
-  styleUrls: ['./notelist.component.css', '../../app.component.css']
+  styleUrls: ['./notelist.component.css', '../../global.style.css']
 })
 
 export class NotelistComponent implements OnInit {

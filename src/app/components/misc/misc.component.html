@@ -1,29 +1,29 @@
 <div class="m-5">
     <div class="d-flex flex-row my-3 justify-content-center">
         <div class="d-flex flex-column">
-            <h1 class="xst">{{weatherData.name}}</h1>
-            <h1 class="xst"></h1>
+            <h1 class="w-100 xst text-center">{{weatherData.name}}</h1>
+            <h1 class="w-100 xst text-center">{{weatherData.status}}</h1>
         </div>
         
     </div>
     <div class="row my-3">
         <div class="col-6">
             <mat-card>
-                <mat-card-header class="d-flex justify-content-center">
+                <mat-card-header class="d-flex justify-content-center border-bottom">
                     <h3>Temperature</h3>
                 </mat-card-header>
-                <mat-card-content class="d-flex justify-content-center">
-                    <h1 class="st">{{weatherData.t|number: '2.0-3'}}</h1>
+                <mat-card-content class="d-flex justify-content-center pt-3">
+                    <h1 class="st text-danger">{{weatherData.t|number: '2.0-3'}}</h1>
                 </mat-card-content>
             </mat-card>
         </div>
         <div class="col-6">
             <mat-card>
-                <mat-card-header class="d-flex justify-content-center">
+                <mat-card-header class="d-flex justify-content-center border-bottom">
                     <h3>Humidity</h3>
                 </mat-card-header>
-                <mat-card-content class="d-flex justify-content-center">
-                    <h1 class="st">{{weatherData.h|number: '2.0-0'}}</h1>
+                <mat-card-content class="d-flex justify-content-center pt-3">
+                    <h1 class="st text-info">{{weatherData.h|number: '2.0-0'}}</h1>
                 </mat-card-content>
             </mat-card>
         </div>
@@ -31,10 +31,10 @@
     <div class="row my-3">
         <div class="col-12">
             <mat-card>
-                <mat-card-header>
-                    Forecast
+                <mat-card-header class="border-bottom">
+                    <h3>Forecast</h3>
                 </mat-card-header>
-                <mat-card-content class="p-5">
+                <mat-card-content class="pt-3 py-2">
                     <chart [type]="chartType" [options]="chartOptions" [data]="forecastData" class="large"></chart>
                 </mat-card-content>
             </mat-card>

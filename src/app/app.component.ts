@@ -6,7 +6,7 @@ import { RouteAnimations } from './animation';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.css', './global.style.css'],
   animations: [ RouteAnimations ]
 })
 export class AppComponent implements OnInit{

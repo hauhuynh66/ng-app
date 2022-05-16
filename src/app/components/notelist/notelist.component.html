@@ -1,20 +1,20 @@
 <div class="container p-5">
     <div class="d-flex justify-content-end my-3">
         <button mat-mini-fab color="primary" class="mx-2" (click)="file.click()"><i class="fa-solid fa-file-import"></i></button>
-        <button mat-mini-fab class="mx-2" (click)="openExportConfirmDialog()"><i class="fa-solid fa-file-export"></i></button>
-        <button mat-mini-fab class="mx-2" (click)="openNewDialog()">
+        <button mat-mini-fab color="warn" class="mx-2" (click)="openExportConfirmDialog()"><i class="fa-solid fa-file-export"></i></button>
+        <button mat-mini-fab color="accent" class="mx-2" (click)="openNewDialog()">
             <i class="fa-solid fa-calendar-plus"></i>
         </button>
         <input type="file" accept=".csv,.xlsx" (change)="fileUpload($event)"  #file hidden>
     </div>
     <mat-card cdkDropList [cdkDropListData]="notelist" 
     cdkDropListOrientation="vertical" (cdkDropListDropped)="dropNote($event)" class="my-3">
-        <mat-card-header class="m-2">
-            <div class="half-width vc">
-                <h1 class="mb-0">Diary</h1>
+        <mat-card-header class="m-2 border-bottom">
+            <div class="d-flex flex-column w-50 justify-content-center">
+                <h1>Diary</h1>
             </div>
-            <div class="half-width he vc">
-                <mat-form-field appearance="fill" class="pt-3">
+            <div class="d-flex w-50 justify-content-end">
+                <mat-form-field appearance="fill" class="w-100">
                     <mat-label>Choose a date</mat-label>
                     <input matInput [matDatepicker]="picker" 
                     class="card-header-dp" [formControl]="date" (dateChange)="dateChange($event)">
@@ -23,7 +23,7 @@
                 </mat-form-field>
             </div>
         </mat-card-header>
-        <mat-card-content class="p-3" *ngIf="notelist.length>0;else empty">
+        <mat-card-content class="py-4 border-bottom" *ngIf="notelist.length>0;else empty">
             <mat-accordion *ngFor="let note of notelist">
                 <mat-expansion-panel cdkDrag class="note">
                     <mat-expansion-panel-header class="full-width">
@@ -42,7 +42,7 @@
             </mat-paginator>
         </mat-card-actions>
         <ng-template #empty>
-            <mat-card-content class="p-3 empty-content">
+            <mat-card-content class="py-4 empty-content border-bottom">
                 <h3>Nothing here!</h3>
             </mat-card-content>
         </ng-template>

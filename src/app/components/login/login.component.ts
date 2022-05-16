@@ -6,7 +6,7 @@ import config from "../../../assets/config.json";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css','../../app.component.css']
+  styleUrls: ['./login.component.css','../../global.style.css']
 })
 
 export class LoginComponent implements OnInit {

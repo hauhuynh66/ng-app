@@ -19,6 +19,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
+import { MatChipsModule } from '@angular/material/chips';
 
 const material = [
   MatSidenavModule,
@@ -40,7 +41,8 @@ const material = [
   MatNativeDateModule,
   MatPaginatorModule,
   MatSnackBarModule,
-  MatTableModule
+  MatTableModule,
+  MatChipsModule
 ];
 
 @NgModule({

@@ -4,11 +4,13 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import config from '../../../assets/config.json';
 import { PageEvent } from '@angular/material/paginator';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-itemlist',
   templateUrl: './itemlist.component.html',
-  styleUrls: ['./itemlist.component.css']
+  styleUrls: ['./itemlist.component.css', '../../global.style.css']
 })
 export class ItemlistComponent implements OnInit {
   @Input() itemList:any[] = [];
@@ -16,6 +18,8 @@ export class ItemlistComponent implements OnInit {
   purchaseList:any[] = [];
   total:number = 0;
   count:number = 0;
+  keywords:Array<string> = [];
+  selected:FormControl = new FormControl([''])
   constructor(private http:HttpClient, private router:Router) { }
 
   ngOnInit(): void {
@@ -99,5 +103,13 @@ export class ItemlistComponent implements OnInit {
 
     this.itemList[this.itemList.map(item=>item.name).indexOf(itemName)] = item;
     this.itemCountChange.emit(item.count);
+  }
+
+  removeKeyword(keyword:string){
+
+  }
+
+  addKeyword(event:MatChipInputEvent){
+
   }
 }

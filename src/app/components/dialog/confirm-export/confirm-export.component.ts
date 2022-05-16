@@ -25,12 +25,19 @@ export class ConfirmExportComponent implements OnInit {
       params: {
         "start" : this.startDate.value.toDateString(),
         "end" : this.endDate.value.toDateString()
-      }
+      },
+      responseType: 'blob' as const
     }
     this.http.get(config.url.main + "/api/notes/export", options).subscribe({
       next: data =>{
-        
+        this.download(data, 'text/csv');
       }
     })  
+  }
+
+  download(data:any, type:string){
+    let blob = new Blob([data], {type: type});
+    let url = window.URL.createObjectURL(blob);
+    window.open(url);
   }
 }

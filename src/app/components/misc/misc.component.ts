@@ -6,7 +6,7 @@ import config from '../../../assets/config.json';
 @Component({
   selector: 'app-misc',
   templateUrl: './misc.component.html',
-  styleUrls: ['./misc.component.css', '../../app.component.css']
+  styleUrls: ['./misc.component.css', '../../global.style.css']
 })
 
 
