@@ -1,1 +1,24 @@
-<p>confirm-export works!</p>
+<div class="m-2">
+    <div class="d-flex flex-row my-2">
+        <div class="w-50 px-2">
+            <mat-form-field class="w-100">
+                <mat-label>Start</mat-label>
+                <input matInput [formControl]="startDate" [matDatepicker]="startpicker">
+                <mat-date-range-picker #startpicker></mat-date-range-picker>
+                <mat-datepicker-toggle matSuffix [for]="startpicker"></mat-datepicker-toggle>
+            </mat-form-field>
+        </div>
+        <div class="w-50 px-2">
+            <mat-form-field class="w-100">
+                <mat-label>End</mat-label>
+                <input matInput [formControl]="endDate" [matDatepicker]="endpicker">
+                <mat-date-range-picker #endpicker></mat-date-range-picker>
+                <mat-datepicker-toggle matSuffix [for]="endpicker"></mat-datepicker-toggle>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="d-flex flex-row justify-content-end">
+        <button mat-raised-button mat-dialog-close class="mx-2">Close</button>
+        <button mat-raised-button class="mx-2" color="primary" (click)="export()">Confirm</button>
+    </div>
+</div>

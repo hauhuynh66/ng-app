@@ -4,6 +4,7 @@
         "login" : "/login",
         "profile" : "/api/user/profile",
         "note" : {
+            "export": "api/notes/export",
             "list" : "/api/notes/list",
             "upload" : "/api/notes/import",
             "check" : "/api/notes/import_check",

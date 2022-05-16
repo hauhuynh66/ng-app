@@ -10,9 +10,9 @@ import { MiscComponent } from './components/misc/misc.component';
 import { CreatenoteComponent } from './components/dialog/createnote/createnote.component';
 import { ItemlistComponent } from './components/itemlist/itemlist.component';
 import { PurchaseComponent } from './components/purchase/purchase.component';
-import { ErrorComponent } from './components/dialog/error/error.component';
 import { ConfirmUploadComponent } from './components/dialog/confirm-upload/confirm-upload.component';
 import { ConfirmExportComponent } from './components/dialog/confirm-export/confirm-export.component';
+import { CAGuard } from './guard';
 
 const routes: Routes = [
     {
@@ -28,17 +28,20 @@ const routes: Routes = [
     {
         path: 'notelist',
         component: NotelistComponent,
-        data: {animation : 'notelist'}
+        data: {animation : 'notelist'},
+        canActivate : [CAGuard]
     },
     {
         path: 'profile', 
         component: ProfileComponent,
-        data: {animation : 'profile'}
+        data: {animation : 'profile'},
+        canActivate : [CAGuard]
     },
     {
         path: 'stats', 
         component: StatsComponent,
-        data: {animation : 'stats'}
+        data: {animation : 'stats'},
+        canActivate : [CAGuard]
     },
     {
         path: 'misc', 
@@ -56,8 +59,13 @@ const routes: Routes = [
         data: {animation : 'history'}
     },
     {
+        path: '404',
+        component: PagenotfoundComponent,
+        data: {animation : '404'}
+    },
+    {
         path: '**', 
-        redirectTo: "/login"
+        redirectTo: "/404"
     }
 ]; 
 
@@ -65,11 +73,8 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
   declarations: [
-  
-    ErrorComponent,
-       ConfirmUploadComponent,
-       ConfirmExportComponent
-  ]
+  ],
+  providers: [CAGuard]
 })
 
 export class BasicRoutingModule implements OnInit{
@@ -94,5 +99,7 @@ export class BasicRoutingModule implements OnInit{
      PagenotfoundComponent,
      CreatenoteComponent,
      ItemlistComponent,
-     PurchaseComponent
+     PurchaseComponent,
+     ConfirmUploadComponent,
+     ConfirmExportComponent
  ];

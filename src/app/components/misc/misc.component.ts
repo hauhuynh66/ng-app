@@ -1,16 +1,23 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable, reduce } from 'rxjs';
-import config from '../../../assets/config.json'
+import config from '../../../assets/config.json';
+
 @Component({
   selector: 'app-misc',
   templateUrl: './misc.component.html',
   styleUrls: ['./misc.component.css', '../../app.component.css']
 })
 
+
 export class MiscComponent implements OnInit {
-  t: any = "";
-  h: any = "";
+  weatherData:any = {
+    t: 0,
+    h: 0,
+    name : "NAME",
+    status : "STATUS"
+  };
+
   forecastData:any = {};
   chartOptions = {
     responsive: true,
@@ -37,8 +44,10 @@ export class MiscComponent implements OnInit {
     }
     this.http.get<any>(config.openweathermap.url.weather, weatherOptions).subscribe({
       next: data =>{
-        this.t = data.main.temp - 273.15;
-        this.h = data.main.humidity;
+        this.weatherData.t = data.main.temp - 273.15;
+        this.weatherData.h= data.main.humidity;
+        this.weatherData.name = data.name;
+        this.weatherData.status = data.weather[0].description;
       },
       error : err =>{
         console.log(err.message);

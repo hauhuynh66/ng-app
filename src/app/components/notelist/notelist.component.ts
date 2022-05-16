@@ -8,6 +8,8 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { CreatenoteComponent } from '../dialog/createnote/createnote.component';
 import { PageEvent } from '@angular/material/paginator';
+import { ConfirmUploadComponent } from '../dialog/confirm-upload/confirm-upload.component';
+import { ConfirmExportComponent } from '../dialog/confirm-export/confirm-export.component';
 
 
 @Component({
@@ -87,8 +89,6 @@ export class NotelistComponent implements OnInit {
     });
   }
 
-
-
   fileUpload(event:any){
     let file = event.target.files[0];
     let formData = new FormData();
@@ -101,7 +101,10 @@ export class NotelistComponent implements OnInit {
     if(file.name!==undefined){
       this.http.post(config.url.main + config.url.note.check, formData, options).subscribe({
         next : data =>{
-          console.log(data);
+          this.dialog.open(ConfirmUploadComponent, {
+            width: '600px',
+            data: data
+          })
         },
         error : err =>{
           if(err.status === 403){
@@ -122,6 +125,12 @@ export class NotelistComponent implements OnInit {
     const dialogRef = this.dialog.open(CreatenoteComponent, {
       width : '600px'
     });
+  }
+
+  openExportConfirmDialog(){
+    const dialogRef = this.dialog.open(ConfirmExportComponent,{
+      width: '600px'
+    })
   }
 
   pageChange(event: PageEvent){

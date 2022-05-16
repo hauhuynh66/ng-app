@@ -7,42 +7,56 @@ import {
 	query,
 	animateChild,
 	group,
-	sequence} from '@angular/animations';
+	sequence,
+	animation,
+	useAnimation} from '@angular/animations';
 
-const ShakeAnimation = [
+export const ShakeAnimation = animation([
 	style({ transform: 'rotate(0)' }),
-	animate('0.1s', style({ transform: 'rotate(2deg)' })),
-	animate('0.1s', style({ transform: 'rotate(-2deg)' })),
-	animate('0.1s', style({ transform: 'rotate(2deg)' })),
-	animate('0.1s', style({ transform: 'rotate(0)' }))
-]
-
-const FadeInAnimation = [
-	style({ opacity: 0, transform: 'translateY(100px)' }),
-	animate('1s', style({ opacity: 1, transform: 'translateY(0)' }))
-]
-
-const FadeOutAnimation = [
-	animate('0.3s', style({ opacity: 0, transform: 'translateY(100px)' }))
-]
-
-const RotateInAnimation = [
-	style({transform : 'rotate(0)'}),
-	animate('0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940)', style({transform : 'rotate(360deg)'}))
-]
-
-const SlideInXAnimation = [
-	style({transform: 'translateX(-1000px)', opacity: 0}),
-	animate('0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940)', style({transform: 'translateX(0px)', opacity: 1}))
-]
-
-export const FadeInOut = trigger('fadeInOut', [
-	transition(':enter', FadeInAnimation),
-	transition(':leave', FadeOutAnimation),
+	animate('{{length}}', style({ transform: 'rotate(2deg)' })),
+	animate('{{length}}', style({ transform: 'rotate(-2deg)' })),
+	animate('{{length}}', style({ transform: 'rotate(2deg)' })),
+	animate('{{length}}', style({ transform: 'rotate(0)' }))
 ]);
+
+export const FadeOutAnimation = animation([
+	animate('{{length}}s', style({ opacity: 0, transform: 'translateY({{tx}}px)' }))
+])
+
+export const RotateInAnimation = animation([
+	style({transform : 'rotate(0)'}),
+	animate('{{length}}s cubic-bezier(0.250, 0.460, 0.450, 0.940)', style({transform : 'rotate(360deg)'}))
+])
+
+export const SlideInXAnimation = animation([
+	style({transform: 'translateX(-{{ix}}px)', opacity: 0}),
+	animate('{{length}}s cubic-bezier(0.250, 0.460, 0.450, 0.940)', style({transform: 'translateX(0px)', opacity: 1}))
+])
+
+export const FadeInAnimation = animation(
+	[
+		style({ 
+			opacity: '{{opi}}', 
+			transform: 'translateY({{height}})' 
+		}),		
+		animate('1s', style({ 
+			opacity: '{{opo}}', 
+			transform: 'translateY(0)' 
+		}))
+	]
+);
 
 export const RouteAnimations =
   trigger('routeAnimations', [
-    transition('* => login', ShakeAnimation),
-	transition('* => *', SlideInXAnimation)
+    transition('* => login', [useAnimation(ShakeAnimation, {
+		params: {
+			length: '0.1s'
+		}
+	})]),
+	transition('* => *', useAnimation(SlideInXAnimation,{
+		params: {
+			ix: '1000',
+			length: '0.5'
+		}
+	}))
 ]);

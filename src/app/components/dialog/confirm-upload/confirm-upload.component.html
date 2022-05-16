@@ -1,1 +1,29 @@
-<p>confirm-upload works!</p>
+<div class="mx-2">
+    <div class="d-flex justify-content-start">
+        <h1>Errors</h1>
+    </div>
+    <table mat-table class="mat-elevation-z8 w-100" [dataSource]="data">
+        <ng-container matColumnDef="no">
+          <th mat-header-cell *matHeaderCellDef>No.</th>
+          <td mat-cell *matCellDef="let element">{{element.no}}</td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Description</th>
+          <td mat-cell *matCellDef="let element">{{element.message}}</td>
+        </ng-container>
+        <ng-container matColumnDef="row">
+          <th mat-header-cell *matHeaderCellDef>Row</th>
+          <td mat-cell *matCellDef="let element">{{element.line}}</td>
+        </ng-container>
+        <ng-container matColumnDef="col">
+          <th mat-header-cell *matHeaderCellDef>Column</th>
+          <td mat-cell *matCellDef="let element">{{element.column}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="cols"></tr>
+        <tr mat-row *matRowDef="let row; columns: cols;"></tr>
+    </table>
+    <div class="d-flex justify-content-end mt-3">
+        <button mat-raised-button mat-dialog-close>Close</button>
+        <button *ngIf="data.length === 0" mat-raised-button color="primary">Commit</button>
+    </div>
+</div>

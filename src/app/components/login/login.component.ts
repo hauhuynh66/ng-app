@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     this.http.post<any>(config.url.main + config.url.login, data, {observe: 'response'}).subscribe( {
         next: res => {
           let token = res.headers.get("x-token");
-          if (token != null){
+          if (token !== null){
             localStorage.setItem("access_token", token);
             this.router.navigate(['/notelist']);
           }

@@ -1,14 +1,14 @@
 <div class="container p-5">
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-end my-3">
         <button mat-mini-fab color="primary" class="mx-2" (click)="file.click()"><i class="fa-solid fa-file-import"></i></button>
-        <button mat-mini-fab class="mx-2"><i class="fa-solid fa-file-export"></i></button>
+        <button mat-mini-fab class="mx-2" (click)="openExportConfirmDialog()"><i class="fa-solid fa-file-export"></i></button>
         <button mat-mini-fab class="mx-2" (click)="openNewDialog()">
             <i class="fa-solid fa-calendar-plus"></i>
         </button>
         <input type="file" accept=".csv,.xlsx" (change)="fileUpload($event)"  #file hidden>
     </div>
     <mat-card cdkDropList [cdkDropListData]="notelist" 
-    cdkDropListOrientation="vertical" (cdkDropListDropped)="dropNote($event)">
+    cdkDropListOrientation="vertical" (cdkDropListDropped)="dropNote($event)" class="my-3">
         <mat-card-header class="m-2">
             <div class="half-width vc">
                 <h1 class="mb-0">Diary</h1>
