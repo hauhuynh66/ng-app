@@ -7,6 +7,7 @@ import { FormControl } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { CreatenoteComponent } from '../dialog/createnote/createnote.component';
+import { PageEvent } from '@angular/material/paginator';
 
 
 @Component({
@@ -18,14 +19,15 @@ import { CreatenoteComponent } from '../dialog/createnote/createnote.component';
 export class NotelistComponent implements OnInit {
   @ViewChild('file') fileRef:ElementRef = {} as ElementRef;
   notelist: any = [];
-  date = new FormControl(new Date());
+  date:FormControl = new FormControl(new Date());
+  noteCount:number = 0;
 
   constructor(private http: HttpClient, private router:Router, public dialog: MatDialog) {
     
   }
 
   ngOnInit(): void {
-    this.getRequest(new Date().toDateString());
+    this.getNotes(new Date().toDateString());
   }
 
   dropNote(event : CdkDragDrop<string[]>){
@@ -33,26 +35,59 @@ export class NotelistComponent implements OnInit {
   }
 
   dateChange(event: MatDatepickerInputEvent<Date>){
-    this.getRequest(this.date.value.toDateString());
+    this.getNotes(this.date.value.toDateString());
   }
 
-  getRequest(d:string){
-    let options = {
-      headers : new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("access_token")),
-      params : {
-        "date" : d
-      }
+  getNotes(dateString:string, pageNumber?:number){
+    let pn = {
+      "date" : dateString,
+      "page" : 0
+    };
+
+    let p = {
+      "date" : dateString
     }
 
-    this.http.get(config.url.main + config.url.note.list, options).subscribe({
+    let authorizationToken = new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("access_token"));
+    
+    if(pageNumber!==undefined){
+      pn.page = pageNumber
+    }
+
+    let countOptions = {
+      headers : authorizationToken,
+      params : p
+    }
+
+    this.http.get<number>(config.url.main + config.url.note.count, countOptions).subscribe({
+      next: data=>{
+        this.noteCount = data;
+      },
+      error: err=>{
+        if(err.status===403){
+          this.router.navigate(["/login"]);
+        }
+      }
+    });
+
+    let listOptions = {
+      headers : authorizationToken,
+      params : pn
+    }
+
+    this.http.get(config.url.main + config.url.note.list, listOptions).subscribe({
       next: data=>{
         this.notelist = data;
       },
       error: err=>{
-        this.router.navigate(["/login"]);
+        if(err.status===403){
+          this.router.navigate(["/login"]);
+        }
       }
-    })
+    });
   }
+
+
 
   fileUpload(event:any){
     let file = event.target.files[0];
@@ -69,7 +104,9 @@ export class NotelistComponent implements OnInit {
           console.log(data);
         },
         error : err =>{
-          console.log(err);
+          if(err.status === 403){
+            this.router.navigate(["/login"])
+          }
         }
       })
     }
@@ -85,10 +122,10 @@ export class NotelistComponent implements OnInit {
     const dialogRef = this.dialog.open(CreatenoteComponent, {
       width : '600px'
     });
+  }
 
-    dialogRef.afterClosed().subscribe(result => {
-        console.log(result);
-    })
+  pageChange(event: PageEvent){
+    
   }
 
 }

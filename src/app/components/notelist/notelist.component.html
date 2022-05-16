@@ -30,15 +30,16 @@
                         <mat-panel-title>{{note.title}}</mat-panel-title>
                     </mat-expansion-panel-header>
                     <p>{{note.message}}</p>
-                    <mat-action-row>
-                        <p>{{note.createDate | date : 'shortTime'}}</p>
-                    </mat-action-row>
-                    
                 </mat-expansion-panel>
             </mat-accordion>
         </mat-card-content>
         <mat-card-actions>
-            
+            <mat-paginator [length]="noteCount"
+                [pageSize]="5"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+                (page)="pageChange($event)"
+                aria-label="Select page">
+            </mat-paginator>
         </mat-card-actions>
         <ng-template #empty>
             <mat-card-content class="p-3 empty-content">

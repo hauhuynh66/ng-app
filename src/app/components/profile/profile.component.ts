@@ -24,8 +24,10 @@ export class ProfileComponent implements OnInit {
       next : data=>{
         this.profile = data;
       },
-      error: ()=>{
-        this.router.navigate(["/login"]);
+      error: err=>{
+        if(err.status === 403){
+          this.router.navigate(["/login"]);
+        }
       }
     });
   }

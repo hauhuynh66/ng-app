@@ -10,6 +10,9 @@ import { MiscComponent } from './components/misc/misc.component';
 import { CreatenoteComponent } from './components/dialog/createnote/createnote.component';
 import { ItemlistComponent } from './components/itemlist/itemlist.component';
 import { PurchaseComponent } from './components/purchase/purchase.component';
+import { ErrorComponent } from './components/dialog/error/error.component';
+import { ConfirmUploadComponent } from './components/dialog/confirm-upload/confirm-upload.component';
+import { ConfirmExportComponent } from './components/dialog/confirm-export/confirm-export.component';
 
 const routes: Routes = [
     {
@@ -62,6 +65,10 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
   declarations: [
+  
+    ErrorComponent,
+       ConfirmUploadComponent,
+       ConfirmExportComponent
   ]
 })
 

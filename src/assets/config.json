@@ -6,7 +6,8 @@
         "note" : {
             "list" : "/api/notes/list",
             "upload" : "/api/notes/import",
-            "check" : "/api/notes/import_check"
+            "check" : "/api/notes/import_check",
+            "count": "/api/notes/count"
         },
         "item" :{
             "list" : "/api/item/list",
