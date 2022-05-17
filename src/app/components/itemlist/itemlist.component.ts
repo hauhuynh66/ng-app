@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import config from '../../../assets/config.json';
 import { PageEvent } from '@angular/material/paginator';
-import { MatChipInputEvent } from '@angular/material/chips';
+import { MatChip, MatChipInputEvent } from '@angular/material/chips';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -18,7 +18,7 @@ export class ItemlistComponent implements OnInit {
   purchaseList:any[] = [];
   total:number = 0;
   count:number = 0;
-  keywords:Array<string> = [];
+  keywords:Array<any> = [];
   selected:FormControl = new FormControl([''])
   constructor(private http:HttpClient, private router:Router) { }
 
@@ -52,9 +52,20 @@ export class ItemlistComponent implements OnInit {
         });
       },
       error: err=>{
-        if(err.status === 403){
-          this.router.navigate(["/login"]);
-        }
+        // if(err.status === 403){
+        //   this.router.navigate(["/login"]);
+        // }
+      }
+    })
+
+    this.http.get<string[]>(config.url.main + config.url.item.word, options).subscribe({
+      next: data=>{
+        this.keywords = data;
+      },
+      error: err=>{
+        // if(err.status === 403){
+        //   this.router.navigate(["/login"]);
+        // }
       }
     })
   }
@@ -105,11 +116,7 @@ export class ItemlistComponent implements OnInit {
     this.itemCountChange.emit(item.count);
   }
 
-  removeKeyword(keyword:string){
-
-  }
-
-  addKeyword(event:MatChipInputEvent){
-
+  toggleSelection(chip: MatChip){
+    chip.toggleSelected()
   }
 }

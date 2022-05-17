@@ -12,6 +12,7 @@
         },
         "item" :{
             "list" : "/api/item/list",
+            "word" : "/api/item/words",
             "count" : "/api/item/count"
         }
     },

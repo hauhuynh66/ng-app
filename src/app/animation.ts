@@ -19,6 +19,18 @@ export const ShakeAnimation = animation([
 	animate('{{length}}', style({ transform: 'rotate(0)' }))
 ]);
 
+export const TrackingInAnimation = animation([
+	style({ 'letter-spacing' : '{{x}}em', opacity : 0 }),
+	animate('{{length}}s cubic-bezier(0.215, 0.610, 0.355, 1.000)', style({ opacity: 0.6})),
+	animate('{{length}}s cubic-bezier(0.215, 0.610, 0.355, 1.000)', style({ opacity: 1}))
+])
+
+export const Blur = animation([
+	style({ filter: 'blur({{x}}px)', opacity: 0}),
+	animate('{{length}}s cubic-bezier(0.215, 0.610, 0.355, 1.000)', style({filter: 'blur(0px)', opacity: 1}))
+
+])
+
 export const FadeOutAnimation = animation([
 	animate('{{length}}s', style({ opacity: 0, transform: 'translateY({{tx}}px)' }))
 ])
