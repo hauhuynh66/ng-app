@@ -1,18 +1,18 @@
 <div class="m-3">
-    <mat-stepper orientation="vertical" #stepper>
+    <mat-stepper linear orientation="vertical" #stepper>
         <mat-step [stepControl]="userControl">
             <form [formGroup]="userControl">
                 <ng-template matStepLabel>Fill out your account information</ng-template>
                 <div class="my-3 w-100">
                     <mat-form-field appearance="fill">
                         <mat-label>Name</mat-label>
-                        <input matInput formControlName="nameCtrl">
+                        <input matInput formControlName="nameCtrl" required>
                     </mat-form-field>
                 </div>
                 <div class="my-3 w-100">
                     <mat-form-field appearance="fill">
                         <mat-label>Phone number</mat-label>
-                        <input matInput formControlName="phoneCtrl">
+                        <input matInput formControlName="phoneCtrl" required>
                     </mat-form-field>
                 </div>
                 <div>
@@ -26,7 +26,7 @@
                 <div class="my-3">
                     <mat-form-field appearance="fill">
                         <mat-label>Address</mat-label>
-                        <input matInput formControlName="addrCtrl">
+                        <input matInput formControlName="addrCtrl" required>
                     </mat-form-field>
                     <div>
                         <button mat-raised-button matStepperPrevious class="mx-2">Back</button>
@@ -35,9 +35,9 @@
                 </div>
             </form>
         </mat-step>
-        <mat-step>
+        <mat-step [editable]="false">
             <ng-template matStepLabel>Done</ng-template>
-            <div>
+            <div class="my-2">
                 <button mat-raised-button matStepperPrevious class="mx-2">Back</button>
                 <button mat-raised-button matStepperNext>Confirm</button>
             </div>

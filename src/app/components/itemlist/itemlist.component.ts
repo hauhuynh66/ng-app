@@ -8,7 +8,6 @@ import { MatChip, MatChipInputEvent, MatChipList } from '@angular/material/chips
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { PurchaseComponent } from '../purchase/purchase.component';
 import { PurchaseDialogComponent } from '../dialog/purchase-dialog/purchase-dialog.component';
 
 interface Item{
