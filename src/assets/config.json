@@ -13,7 +13,8 @@
         "item" :{
             "list" : "/api/item/list",
             "word" : "/api/item/words",
-            "count" : "/api/item/count"
+            "count" : "/api/item/count",
+            "search" : "/api/item/search"
         }
     },
     "openweathermap":{

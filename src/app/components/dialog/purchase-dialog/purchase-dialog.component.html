@@ -1,0 +1,46 @@
+<div class="m-3">
+    <mat-stepper orientation="vertical" #stepper>
+        <mat-step [stepControl]="userControl">
+            <form [formGroup]="userControl">
+                <ng-template matStepLabel>Fill out your account information</ng-template>
+                <div class="my-3 w-100">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Name</mat-label>
+                        <input matInput formControlName="nameCtrl">
+                    </mat-form-field>
+                </div>
+                <div class="my-3 w-100">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Phone number</mat-label>
+                        <input matInput formControlName="phoneCtrl">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button mat-raised-button matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="infoControl">
+            <form [formGroup]="infoControl">
+                <ng-template matStepLabel>Choose a place to receive your item</ng-template>
+                <div class="my-3">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Address</mat-label>
+                        <input matInput formControlName="addrCtrl">
+                    </mat-form-field>
+                    <div>
+                        <button mat-raised-button matStepperPrevious class="mx-2">Back</button>
+                        <button mat-raised-button matStepperNext>Done</button>
+                    </div>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            <div>
+                <button mat-raised-button matStepperPrevious class="mx-2">Back</button>
+                <button mat-raised-button matStepperNext>Confirm</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+</div>

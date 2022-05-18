@@ -1,6 +1,6 @@
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { TrackingInAnimation } from 'src/app/animation';
+import { RotateInAnimation, TrackingInAnimation } from 'src/app/animation';
 
 @Component({
   selector: 'app-pagenotfound',
@@ -13,6 +13,13 @@ import { TrackingInAnimation } from 'src/app/animation';
           x: -0.5,
           length: 0.3
         }
+      })])
+    ]),
+    trigger('test', [
+      transition(':enter', [useAnimation(RotateInAnimation, {
+      params : {
+        length: 1
+      }
     })])
   ])]
 })

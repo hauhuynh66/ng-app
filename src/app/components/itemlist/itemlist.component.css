@@ -50,3 +50,15 @@
     border-top: 2px solid gray;
     border-bottom: 2px solid gray;
 }
+
+.bordered-bottom{
+    border-bottom: 2px solid gray;
+}
+
+.tx{
+    text-align: center;
+}
+
+.te{
+    text-align: end;
+}

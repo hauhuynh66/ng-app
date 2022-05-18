@@ -1,18 +1,20 @@
 <div class="m-5">
-    <mat-card>
+    <mat-card class="mat-elevation-z6">
         <mat-card-header>
-            <mat-card-title>Login</mat-card-title>
+            <mat-card-title>
+                <h1 class="st">Login</h1>
+            </mat-card-title>
         </mat-card-header>
         <mat-card-content class="m-5">
-            <div class="row p-0">
+            <div class="row">
                 <div class="col-6">
-                    <mat-form-field class="full-width">
+                    <mat-form-field class="w-100" appearance="fill">
                         <mat-label>Username</mat-label>
                         <input matInput required [(ngModel)] = "username">
                     </mat-form-field>
                 </div>
                 <div class="col-6">
-                    <mat-form-field class="full-width">
+                    <mat-form-field class="w-100" appearance="fill">
                         <mat-label>Password</mat-label>
                         <input matInput required [type]="hide? 'password':'text'" [(ngModel)] = "password">
                         <button mat-icon-button matSuffix  (click)="hide=!hide">
@@ -22,10 +24,9 @@
                 </div>
             </div>
         </mat-card-content>
-        <mat-card-actions align="end">
+        <mat-card-actions align="end" class="py-2 pr-3">
             <button mat-raised-button (click)="clear()">Clear</button>
             <button mat-raised-button color="primary" (click)="authenticate()">Login</button>
-
         </mat-card-actions>
     </mat-card>
 </div>

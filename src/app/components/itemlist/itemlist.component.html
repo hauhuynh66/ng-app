@@ -1,43 +1,57 @@
 <div class="m-5">
     <div class="d-flex flex-column my-2 py-2 bordered">
-        <mat-expansion-panel>
+        <mat-expansion-panel expanded>
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     <h1 class="mb-0 st">Search</h1>
                 </mat-panel-title>
-                <mat-panel-description>
-                    <p class="mb-0 st">Filter items</p>
-                </mat-panel-description>
             </mat-expansion-panel-header>
             
             <mat-form-field class="w-100" appearance="fill">
                 <mat-label>Search Keywords</mat-label>
-                <mat-chip-list #chipList aria-label="Search Keywords" selectable multiple [formControl]="selected">
-                <mat-chip #chip="matChip"
-                    *ngFor="let keyword of keywords"
-                    [selected]="keyword"
-                    [value]="keyword" (click)="toggleSelection(chip)">
-                    {{keyword.word}}
-                </mat-chip>
+                <mat-chip-list #chipList aria-label="Search Keywords" selectable multiple>
+                    <mat-chip #chip="matChip"
+                        *ngFor="let keyword of keywords"
+                        [value]="keyword" (click)="toggleSelection(chip)">
+                        {{keyword.word}}
+                    </mat-chip>
                 </mat-chip-list>
             </mat-form-field>
             <mat-form-field appearance="fill" class="w-100 mt-3">
-                <input placeholder="Search" matInput>
+                <input placeholder="Search" matInput [formControl]="searchText">
             </mat-form-field>
             <div class="w-100 d-flex justify-content-end mb-3">
-                <button mat-raised-button color="accent">Search</button>
+                <button mat-raised-button (click)="clear(chipList)" class="mx-2">Clear</button>
+                <button mat-raised-button color="accent" (click)="search()">Search</button>
             </div>
         </mat-expansion-panel>
-        
+    </div>
+    <div class="d-flex flex-row justify-content-end my-2 bordered-bottom">
+        <mat-form-field appearance="fill">
+            <mat-label>Sort by</mat-label>
+            <mat-select [formControl]="sortOption" (selectionChange)="sortOptionChange()">
+                <mat-option class="tx py-2" value="NAME_ASC">Name <i class="fa-solid fa-angles-up text-danger"></i></mat-option>
+                <mat-option class="tx" value="PRICE_ASC">Price <i class="fa-solid fa-angles-up text-danger"></i></mat-option>
+                <mat-option class="tx" value="NAME_DESC">Name <i class="fa-solid fa-angles-down text-success"></i></mat-option>
+                <mat-option class="tx" value="PRICE_DESC" >Price <i class="fa-solid fa-angles-down text-success"></i></mat-option>
+            </mat-select>
+        </mat-form-field>
     </div>
     <div class="my-2" cdkDropListGroup>
         <div class="row" cdkDropList [cdkDropListData]="itemList" (cdkDropListDropped)="drop($event)">
             <div *ngFor="let item of itemList" class="col-lg-3 col-xs-6 col-md-3 col-sm-6 p-2">
                 <mat-card cdkDrag>
                     <mat-card-header>
-                        <p>{{item.name}}</p>
+                        <div class="d-flex flex-row w-100">
+                            <div class="w-50">
+                                <p class="st">{{item.name}}</p>
+                            </div>
+                            <div class="w-50">
+                                <p class="st text-danger te">{{item.price|currency: 'VND':'symbol-narrow':'4.2-2'}}</p>
+                            </div>
+                        </div>
                     </mat-card-header>
-                    <mat-card-content>
+                    <mat-card-content class="bordered py-2">
                         <img [src]="item.imgUrl" class="w-100">
                     </mat-card-content>
                     <mat-card-actions class="item-actions">
@@ -59,8 +73,8 @@
             </div>
         </div>
         <mat-paginator [length]="count"
-                    [pageSize]="10"
-                    [pageSizeOptions]="[5, 10, 25, 100]"
+                    [pageSize]="12"
+                    [pageSizeOptions]="[6, 12, 24, 100]"
                     (page)="pageChange($event)"
                     aria-label="Select page">
         </mat-paginator>
@@ -68,16 +82,23 @@
         <div class="boundary-container my-2" cdkDropList [cdkDropListData]="purchaseList" (cdkDropListDropped)="drop($event)">
             <div *ngFor="let p of purchaseList" class="boundary-item">
                 <div class="item-col">
-                    {{p.name}}
+                    <p class="st">{{p.name}}</p>
                 </div>
                 <div class="item-col">
-                    {{p.price | currency: 'VND' : 'symbol-narrow' : '4.2-2'}}
+                    <p class="st">{{p.price | currency: 'VND' : 'symbol-narrow' : '4.2-2'}}</p>
                 </div>
                 <div>
                     <button mat-fab (click)="deleteP(p)"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </div>
         </div>
-        <div><p class="h4">{{total | currency:'VND' : 'symbol-narrow' : '4.'}}</p></div>
+        <div class="my-2 d-flex">
+            <div class="w-50">
+                <p class="h4">{{total | currency:'VND' : 'symbol-narrow' : '4.'}}</p>
+            </div>
+            <div class="w-50 d-flex justify-content-end">
+                <button mat-raised-button color="accent" (click)="openInfoDialog()">Confirm</button>
+            </div>
+        </div>
     </div>
 </div>

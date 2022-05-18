@@ -13,6 +13,7 @@ import { PurchaseComponent } from './components/purchase/purchase.component';
 import { ConfirmUploadComponent } from './components/dialog/confirm-upload/confirm-upload.component';
 import { ConfirmExportComponent } from './components/dialog/confirm-export/confirm-export.component';
 import { CAGuard } from './guard';
+import { PurchaseDialogComponent } from './components/dialog/purchase-dialog/purchase-dialog.component';
 
 const routes: Routes = [
     {
@@ -60,8 +61,7 @@ const routes: Routes = [
     },
     {
         path: '404',
-        component: PagenotfoundComponent,
-        data: {animation : '404'}
+        component: PagenotfoundComponent
     },
     {
         path: '**', 
@@ -72,8 +72,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  declarations: [
-  ],
+  declarations: [],
   providers: [CAGuard]
 })
 
@@ -101,5 +100,6 @@ export class BasicRoutingModule implements OnInit{
      ItemlistComponent,
      PurchaseComponent,
      ConfirmUploadComponent,
-     ConfirmExportComponent
+     ConfirmExportComponent,
+     PurchaseDialogComponent
  ];
