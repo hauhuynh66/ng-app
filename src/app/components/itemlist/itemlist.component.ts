@@ -3,7 +3,7 @@ import { CdkDragDrop, CdkDragEnter, copyArrayItem, moveItemInArray, transferArra
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import config from '../../../assets/config.json';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatChip, MatChipInputEvent, MatChipList } from '@angular/material/chips';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -18,9 +18,15 @@ interface Item{
   imgUrl:string;
 }
 
-interface ItemData{
+interface SearchData{
   result:Array<Item>;
   count:number;
+}
+
+export interface ItemData{
+  name: string;
+  count: number;
+  price: number;
 }
 
 @Component({
@@ -31,24 +37,22 @@ interface ItemData{
 export class ItemlistComponent implements OnInit {
   @Input() itemList:Array<Item> = [];
   @Output() itemCountChange = new EventEmitter();
-  purchaseList:any[] = [];
+  purchaseList:Array<ItemData> = [];
   total:number = 0;
   count:number = 0;
   keywords:Array<any> = [];
   selected:Array<any> = [];
   searchText:FormControl = new FormControl("");
   sortOption:FormControl = new FormControl("NAME_ASC");
-  currentPage = 0;
   constructor(private http:HttpClient, private router:Router, private dialog: MatDialog, private snackbar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.getItemList(this.currentPage);
+    this.getItemList(0);
     this.getKeyword();
   }
 
   pageChange(event:PageEvent){
-    this.currentPage = event.pageIndex;
-    this.getItemList(this.currentPage);
+    this.getItemList(event.pageIndex);
   }
 
   getItemList(page:number){
@@ -58,7 +62,7 @@ export class ItemlistComponent implements OnInit {
       sw : this.searchText.value,
     }
 
-    this.http.post<ItemData>(config.url.main + config.url.item.list + "/" + page, data).subscribe({
+    this.http.post<SearchData>(config.url.main + config.url.item.list + "/" + page, data).subscribe({
       next: data=>{
         this.itemList = [];
         data.result.forEach(item => {
@@ -93,14 +97,12 @@ export class ItemlistComponent implements OnInit {
       
     }else{
       let item = this.itemList[event.previousIndex];
-      for(let i = 1; i <= item.count;i++){
-        copyArrayItem(
-          event.previousContainer.data,
-          event.container.data,
-          event.previousIndex,
-          event.currentIndex
-        );
-      }
+      this.purchaseList.push({
+        name: item.name,
+        count: item.count,
+        price: item.price*item.count,
+      });
+      this.itemList[event.previousIndex].count = 0;
     }
 
     this.total = this.purchaseList.length>0?this.purchaseList.map(item=>item.price).reduce(function(a,b){return a+b}):0;
@@ -138,16 +140,18 @@ export class ItemlistComponent implements OnInit {
   toggleSelection(chip: MatChip){
     chip.toggleSelected();
     chip.disabled=!chip.disabled;
-    if(chip.disabled){
-      this.selected.push(chip.value);
-    }else{
-      let index = this.selected.indexOf(chip.value);
-      this.selected.splice(index,1);
-    }
   }
 
-  search(){
+  search(el:Element, chipList:MatChipList, paginator:MatPaginator){
+    this.selected = [];
+    chipList.chips.forEach(chip=>{
+      if(chip.disabled){
+        this.selected.push(chip.value);
+      }
+    });
+    paginator.pageIndex = 0;
     this.getItemList(0);
+    this.scrollTo(el);
   }
 
   clear(chipList:MatChipList){
@@ -156,17 +160,25 @@ export class ItemlistComponent implements OnInit {
       chip.disabled = false;
     });
     this.selected = [];
+    this.getItemList(0);
   }
 
-  sortOptionChange(){
-    this.getItemList(this.currentPage);
+  sortOptionChange(paginator:MatPaginator){
+    this.getItemList(paginator.pageIndex);
   }
 
   openInfoDialog(){
     if(this.purchaseList.length>0){
       this.dialog.open(PurchaseDialogComponent, {
-        width: '600px'
+        width: '600px',
+        data:{
+          list : this.purchaseList
+        }
       })
     }
+  }
+
+  scrollTo(el: Element){
+    el.scrollIntoView();
   }
 }

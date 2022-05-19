@@ -42,9 +42,23 @@
     font-family: Koulen, cursive;
 }
 
-.xst{
-    font-family: Koulen, cursive;
-    font-size: 35px;
+.ft-xs{
+    font-size: 30px;
+    min-height: 40px;
+}
+
+.ft-bg{
+    font-size: 20px;
+    min-height: 25px;
+}
+
+
+.tx{
+    text-align: center;
+}
+
+.te{
+    text-align: end;
 }
 
 mat-sidenav-container{

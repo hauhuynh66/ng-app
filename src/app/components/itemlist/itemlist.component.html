@@ -6,7 +6,6 @@
                     <h1 class="mb-0 st">Search</h1>
                 </mat-panel-title>
             </mat-expansion-panel-header>
-            
             <mat-form-field class="w-100" appearance="fill">
                 <mat-label>Search Keywords</mat-label>
                 <mat-chip-list #chipList aria-label="Search Keywords" selectable multiple>
@@ -22,14 +21,14 @@
             </mat-form-field>
             <div class="w-100 d-flex justify-content-end mb-3">
                 <button mat-raised-button (click)="clear(chipList)" class="mx-2">Clear</button>
-                <button mat-raised-button color="accent" (click)="search()">Search</button>
+                <button mat-raised-button color="accent" (click)="search(iList, chipList, paginator)">Search</button>
             </div>
         </mat-expansion-panel>
     </div>
-    <div class="d-flex flex-row justify-content-end my-2 bordered-bottom">
+    <div class="d-flex flex-row justify-content-end my-2 bordered-bottom" #iList>
         <mat-form-field appearance="fill">
             <mat-label>Sort by</mat-label>
-            <mat-select [formControl]="sortOption" (selectionChange)="sortOptionChange()">
+            <mat-select [formControl]="sortOption" (selectionChange)="sortOptionChange(paginator)">
                 <mat-option class="tx py-2" value="NAME_ASC">Name <i class="fa-solid fa-angles-up text-danger"></i></mat-option>
                 <mat-option class="tx" value="PRICE_ASC">Price <i class="fa-solid fa-angles-up text-danger"></i></mat-option>
                 <mat-option class="tx" value="NAME_DESC">Name <i class="fa-solid fa-angles-down text-success"></i></mat-option>
@@ -76,13 +75,18 @@
                     [pageSize]="12"
                     [pageSizeOptions]="[6, 12, 24, 100]"
                     (page)="pageChange($event)"
-                    aria-label="Select page">
+                    aria-label="Select page" #paginator>
         </mat-paginator>
-        
-        <div class="boundary-container my-2" cdkDropList [cdkDropListData]="purchaseList" (cdkDropListDropped)="drop($event)">
+        <button (click)="scrollTo(pList)" mat-fab class="floating-button" cdkDropList [cdkDropListData]="purchaseList" (cdkDropListDropped)="drop($event)">
+            <i class="fa-solid fa-cart-arrow-down"></i>
+        </button>
+        <div class="boundary-container my-2" #pList>
             <div *ngFor="let p of purchaseList" class="boundary-item">
                 <div class="item-col">
                     <p class="st">{{p.name}}</p>
+                </div>
+                <div class="item-col">
+                    <p class="st">{{p.count}}</p>
                 </div>
                 <div class="item-col">
                     <p class="st">{{p.price | currency: 'VND' : 'symbol-narrow' : '4.2-2'}}</p>
@@ -97,7 +101,7 @@
                 <p class="h4">{{total | currency:'VND' : 'symbol-narrow' : '4.'}}</p>
             </div>
             <div class="w-50 d-flex justify-content-end">
-                <button mat-raised-button color="accent" (click)="openInfoDialog()">Confirm</button>
+                <button mat-raised-button color="primary" (click)="openInfoDialog()">Confirm</button>
             </div>
         </div>
     </div>

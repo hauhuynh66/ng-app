@@ -22,6 +22,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatTabsModule } from '@angular/material/tabs';
 
 const material = [
   MatSidenavModule,
@@ -46,7 +47,8 @@ const material = [
   MatTableModule,
   MatChipsModule,
   MatSelectModule,
-  MatStepperModule
+  MatStepperModule,
+  MatTabsModule
 ];
 
 @NgModule({

@@ -20,7 +20,7 @@
 }
 
 .item-col{
-    width: 45%;
+    width: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -55,10 +55,11 @@
     border-bottom: 2px solid gray;
 }
 
-.tx{
-    text-align: center;
-}
 
-.te{
-    text-align: end;
+.floating-button{
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 99;
+
 }

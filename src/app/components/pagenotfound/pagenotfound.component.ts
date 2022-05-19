@@ -5,7 +5,7 @@ import { RotateInAnimation, TrackingInAnimation } from 'src/app/animation';
 @Component({
   selector: 'app-pagenotfound',
   templateUrl: './pagenotfound.component.html',
-  styleUrls: ['./pagenotfound.component.css'],
+  styleUrls: ['./pagenotfound.component.css', '../../global.style.css'],
   animations: [
     trigger('trackingIn', [
       transition(':enter', [useAnimation(TrackingInAnimation, {
