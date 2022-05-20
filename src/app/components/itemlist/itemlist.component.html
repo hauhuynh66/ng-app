@@ -20,6 +20,7 @@
                 <input placeholder="Search" matInput [formControl]="searchText">
             </mat-form-field>
             <div class="w-100 d-flex justify-content-end mb-3">
+                <button mat-mini-fab color="" (click)="getKeyword()"><i class="fa-solid fa-arrow-rotate-right"></i></button>
                 <button mat-raised-button (click)="clear(chipList)" class="mx-2">Clear</button>
                 <button mat-raised-button color="accent" (click)="search(iList, chipList, paginator)">Search</button>
             </div>
@@ -46,7 +47,7 @@
                                 <p class="st">{{item.name}}</p>
                             </div>
                             <div class="w-50">
-                                <p class="st text-danger te">{{item.price|currency: 'VND':'symbol-narrow':'4.2-2'}}</p>
+                                <p class="st text-danger te">{{item.price|currency: 'VND':'symbol-narrow':'4.'}}</p>
                             </div>
                         </div>
                     </mat-card-header>
@@ -77,8 +78,9 @@
                     (page)="pageChange($event)"
                     aria-label="Select page" #paginator>
         </mat-paginator>
-        <button (click)="scrollTo(pList)" mat-fab class="floating-button" cdkDropList [cdkDropListData]="purchaseList" (cdkDropListDropped)="drop($event)">
-            <i class="fa-solid fa-cart-arrow-down"></i>
+        <button (click)="scrollTo(pList)" mat-fab class="floating-button" 
+        cdkDropList [cdkDropListData]="purchaseList" (cdkDropListDropped)="drop($event)">
+            <span  matBadge="{{purchaseList.length}}" matBadgeColor="accent" [matBadgeHidden]="badge"></span><i class="fa-solid fa-cart-arrow-down"></i>
         </button>
         <div class="boundary-container my-2" #pList>
             <div *ngFor="let p of purchaseList" class="boundary-item">
@@ -89,7 +91,7 @@
                     <p class="st">{{p.count}}</p>
                 </div>
                 <div class="item-col">
-                    <p class="st">{{p.price | currency: 'VND' : 'symbol-narrow' : '4.2-2'}}</p>
+                    <p class="st">{{p.price | currency: 'VND' : 'symbol-narrow' : '4.'}}</p>
                 </div>
                 <div>
                     <button mat-fab (click)="deleteP(p)"><i class="fa-solid fa-xmark"></i></button>

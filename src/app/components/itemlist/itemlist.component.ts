@@ -37,13 +37,14 @@ export interface ItemData{
 export class ItemlistComponent implements OnInit {
   @Input() itemList:Array<Item> = [];
   @Output() itemCountChange = new EventEmitter();
-  purchaseList:Array<ItemData> = [];
+  purchaseList:ItemData[] = [];
   total:number = 0;
   count:number = 0;
   keywords:Array<any> = [];
   selected:Array<any> = [];
   searchText:FormControl = new FormControl("");
   sortOption:FormControl = new FormControl("NAME_ASC");
+  badge:boolean = true;
   constructor(private http:HttpClient, private router:Router, private dialog: MatDialog, private snackbar: MatSnackBar) { }
 
   ngOnInit(): void {
@@ -97,14 +98,21 @@ export class ItemlistComponent implements OnInit {
       
     }else{
       let item = this.itemList[event.previousIndex];
-      this.purchaseList.push({
-        name: item.name,
-        count: item.count,
-        price: item.price*item.count,
-      });
+      let list = this.purchaseList.map(x=>x.name);
+      let index = list.indexOf(item.name);
+      if(index!==-1){
+        this.purchaseList[index].count += item.count
+        this.purchaseList[index].price += item.count * item.price; 
+      }else{
+        this.purchaseList.push({
+          name: item.name,
+          count: item.count,
+          price: item.price*item.count,
+        });
+      }
       this.itemList[event.previousIndex].count = 0;
     }
-
+    this.badge = this.purchaseList.length<1;
     this.total = this.purchaseList.length>0?this.purchaseList.map(item=>item.price).reduce(function(a,b){return a+b}):0;
   }
 
@@ -169,13 +177,16 @@ export class ItemlistComponent implements OnInit {
 
   openInfoDialog(){
     if(this.purchaseList.length>0){
-      this.dialog.open(PurchaseDialogComponent, {
+      let dialogRef = this.dialog.open(PurchaseDialogComponent, {
         width: '600px',
         data:{
-          list : this.purchaseList
+          data : this.purchaseList
         }
       })
+
+      dialogRef.componentInstance.isConfirm.subscribe(console.log);
     }
+
   }
 
   scrollTo(el: Element){

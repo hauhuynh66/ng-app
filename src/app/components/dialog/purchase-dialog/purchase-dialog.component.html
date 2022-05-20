@@ -17,7 +17,7 @@
                     </mat-form-field>
                 </div>
                 <div>
-                    <button mat-raised-button matStepperNext>Next</button>
+                    <button mat-raised-button matStepperNext (click)="check()">Next</button>
                 </div>
             </form>
         </mat-step>
@@ -30,17 +30,17 @@
                         <input matInput formControlName="addrCtrl" required>
                     </mat-form-field>
                     <div>
-                        <button mat-raised-button matStepperPrevious class="mx-2">Back</button>
-                        <button mat-raised-button matStepperNext>Done</button>
+                        <button mat-raised-button matStepperPrevious class="mx-3">Back</button>
+                        <button mat-raised-button matStepperNext (click)="check()">Next</button>
                     </div>
                 </div>
             </form>
         </mat-step>
         <mat-step [editable]="false">
-            <ng-template matStepLabel>Done</ng-template>
-            <div class="my-2">
-                <button mat-raised-button matStepperPrevious class="mx-2">Back</button>
-                <button mat-raised-button matStepperNext>Confirm</button>
+            <ng-template matStepLabel>Confirm</ng-template>
+            <div class="my-3">
+                <button mat-raised-button matStepperPrevious class="mx-3">Back</button>
+                <button mat-raised-button matStepperNext [disabled]="!isComplete" (click)="done()">Confirm</button>
             </div>
         </mat-step>
     </mat-stepper>

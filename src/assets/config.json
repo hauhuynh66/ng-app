@@ -14,7 +14,8 @@
             "list" : "/api/item/list",
             "word" : "/api/item/words",
             "count" : "/api/item/count",
-            "search" : "/api/item/search"
+            "search" : "/api/item/search",
+            "purchase": "/api/item/purchase"
         }
     },
     "openweathermap":{
