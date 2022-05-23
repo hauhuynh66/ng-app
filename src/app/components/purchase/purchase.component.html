@@ -1,1 +1,22 @@
-<p>purchase works!</p>
+<div class="m-5">
+    <div class="row">
+        <div class="col-6 p-3">
+            <mat-form-field class="w-100" appearance="fill">
+                <mat-label>Phone</mat-label>
+                <input matInput>
+            </mat-form-field>
+        </div>
+        <div class="col-5 p-3">
+            <mat-form-field class="w-100" appearance="fill">
+                <mat-label>Serial number</mat-label>
+                <input matInput>
+            </mat-form-field>
+        </div>
+        <div class="col-1 p-3">
+            <button mat-fab (click)="search()"><i class="fa-solid fa-search"></i></button>
+        </div>
+    </div>
+    <div class="row my-5 justify-content-center" *ngIf="isShow">
+        <h1 class="st">Result</h1>
+    </div>
+</div>

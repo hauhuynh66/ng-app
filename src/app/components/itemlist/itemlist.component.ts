@@ -179,8 +179,8 @@ export class ItemlistComponent implements OnInit {
     if(this.purchaseList.length>0){
       let dialogRef = this.dialog.open(PurchaseDialogComponent, {
         width: '600px',
-        data:{
-          data : this.purchaseList
+        data: {
+          items : this.purchaseList
         }
       })
 

@@ -17,7 +17,7 @@
                     </mat-form-field>
                 </div>
                 <div>
-                    <button mat-raised-button matStepperNext (click)="check()">Next</button>
+                    <button mat-raised-button matStepperNext (click)="check()" color="primary">Next</button>
                 </div>
             </form>
         </mat-step>
@@ -31,7 +31,7 @@
                     </mat-form-field>
                     <div>
                         <button mat-raised-button matStepperPrevious class="mx-3">Back</button>
-                        <button mat-raised-button matStepperNext (click)="check()">Next</button>
+                        <button mat-raised-button matStepperNext (click)="check()" color="primary">Next</button>
                     </div>
                 </div>
             </form>
@@ -40,7 +40,7 @@
             <ng-template matStepLabel>Confirm</ng-template>
             <div class="my-3">
                 <button mat-raised-button matStepperPrevious class="mx-3">Back</button>
-                <button mat-raised-button matStepperNext [disabled]="!isComplete" (click)="done()">Confirm</button>
+                <button mat-raised-button matStepperNext [disabled]="!isComplete" (click)="done()" color="primary">Confirm</button>
             </div>
         </mat-step>
     </mat-stepper>

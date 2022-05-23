@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ItemData } from '../../itemlist/itemlist.component';
 import config from '../../../../assets/config.json';
+import { Observable } from 'rxjs';
 
 interface PurchaseRequest{
   name:string;
@@ -26,8 +27,8 @@ export class PurchaseDialogComponent implements OnInit {
   purchaseList:ItemData[] = [];
   @Output() isConfirm:EventEmitter<boolean> = new EventEmitter();
   constructor(private dialogRef:MatDialogRef<PurchaseDialogComponent> ,
-    private formBuilder:FormBuilder, @Inject(MAT_DIALOG_DATA) private list:any, private http:HttpClient) { 
-      this.purchaseList = list.data;
+    private formBuilder:FormBuilder, @Inject(MAT_DIALOG_DATA) private data:any, private http:HttpClient) { 
+      this.purchaseList = data.items;
     }
 
   ngOnInit(): void {
@@ -55,7 +56,7 @@ export class PurchaseDialogComponent implements OnInit {
       name: this.userControl.value.nameCtrl,
       phone: this.userControl.value.phoneCtrl,
       address: this.infoControl.value.addrCtrl,
-      items: this.list
+      items: this.purchaseList
     }
     this.http.post(config.url.main + config.url.item.purchase, requestData).subscribe({
       next: data=>{

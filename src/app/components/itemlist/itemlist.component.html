@@ -40,7 +40,7 @@
     <div class="my-2" cdkDropListGroup>
         <div class="row" cdkDropList [cdkDropListData]="itemList" (cdkDropListDropped)="drop($event)">
             <div *ngFor="let item of itemList" class="col-lg-3 col-xs-6 col-md-3 col-sm-6 p-2">
-                <mat-card cdkDrag>
+                <mat-card cdkDrag class="">
                     <mat-card-header>
                         <div class="d-flex flex-row w-100">
                             <div class="w-50">
@@ -52,7 +52,8 @@
                         </div>
                     </mat-card-header>
                     <mat-card-content class="bordered py-2">
-                        <img [src]="item.imgUrl" class="w-100">
+                        <!-- <img [src]="item.imgUrl" class="w-100"> -->
+                        <img class="w-100">
                     </mat-card-content>
                     <mat-card-actions class="item-actions">
                         <div class="input-group">
