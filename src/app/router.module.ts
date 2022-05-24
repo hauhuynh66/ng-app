@@ -14,6 +14,7 @@ import { ConfirmUploadComponent } from './components/dialog/confirm-upload/confi
 import { ConfirmExportComponent } from './components/dialog/confirm-export/confirm-export.component';
 import { CAGuard } from './guard';
 import { PurchaseDialogComponent } from './components/dialog/purchase-dialog/purchase-dialog.component';
+import { MessageDialogComponent } from './components/dialog/message-dialog/message-dialog.component';
 
 const routes: Routes = [
     {
@@ -72,7 +73,9 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  declarations: [],
+  declarations: [
+    MessageDialogComponent
+  ],
   providers: [CAGuard]
 })
 

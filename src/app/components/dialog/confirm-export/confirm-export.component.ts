@@ -24,7 +24,8 @@ export class ConfirmExportComponent implements OnInit {
       headers : new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('access_token')),
       params: {
         "start" : this.startDate.value.toDateString(),
-        "end" : this.endDate.value.toDateString()
+        "end" : this.endDate.value.toDateString(),
+        "type" : "excel"
       },
       responseType: 'blob' as const
     }
