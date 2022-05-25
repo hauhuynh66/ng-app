@@ -16,6 +16,10 @@
             "count" : "/api/item/count",
             "search" : "/api/item/search",
             "purchase": "/api/item/purchase"
+        },
+        "excel" :{
+            "get" : "/excel/get",
+            "change" : "/excel/change"
         }
     },
     "openweathermap":{

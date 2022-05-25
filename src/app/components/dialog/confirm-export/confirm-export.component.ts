@@ -13,6 +13,7 @@ import config from '../../../../assets/config.json';
 export class ConfirmExportComponent implements OnInit { 
   startDate:FormControl = new FormControl(new Date());
   endDate:FormControl = new FormControl(new Date());
+  type:string = "excel";
 
   constructor(private http: HttpClient) { }
 
@@ -27,18 +28,30 @@ export class ConfirmExportComponent implements OnInit {
         "end" : this.endDate.value.toDateString(),
         "type" : "excel"
       },
-      responseType: 'blob' as const
+      responseType : 'blob' as const
     }
     this.http.get(config.url.main + "/api/notes/export", options).subscribe({
       next: data =>{
-        this.download(data, 'text/csv');
+        //this.download(data, 'text/csv');
+        this.download(data, 'application/octet-stream');
       }
     })  
   }
 
   download(data:any, type:string){
-    let blob = new Blob([data], {type: type});
+    var blob:Blob|MediaSource;
+    blob = new Blob([data], {type: type});
     let url = window.URL.createObjectURL(blob);
-    window.open(url);
+    let a = document.createElement("a");
+    a.download = "export.xlsx";
+    a.href = url;
+    a.click();
+  }
+
+  string2ArrayBuffer(s:string){
+    let buf = new ArrayBuffer(s.length);
+    let view = new Uint8Array(buf);
+    for (let i=0; i!=s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+    return buf;
   }
 }

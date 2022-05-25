@@ -73,9 +73,7 @@ export class MiscComponent implements OnInit {
         let fData:Array<number> = [];
         fList.forEach(e =>{
           let date = new Date(e.dt*1000);
-          let dateLabel = 
-            date.getFullYear().toString().concat("/", date.getMonth().toString(),"/", date.getDay().toString(), "  ",
-            date.getHours().toString(), ":", date.getMinutes().toLocaleString('en-US',{minimumIntegerDigits:2}));
+          let dateLabel = date.toDateString().concat(' ', '0' + date.getHours().toString(),':', '0' + date.getMinutes().toString());
           label.push(dateLabel);
           tData.push(e.main.temp - 273.15);
           fData.push(e.main.humidity);

@@ -15,6 +15,7 @@ import { ConfirmExportComponent } from './components/dialog/confirm-export/confi
 import { CAGuard } from './guard';
 import { PurchaseDialogComponent } from './components/dialog/purchase-dialog/purchase-dialog.component';
 import { MessageDialogComponent } from './components/dialog/message-dialog/message-dialog.component';
+import { ExcelEditorComponent } from './components/excel-editor/excel-editor.component';
 
 const routes: Routes = [
     {
@@ -61,6 +62,11 @@ const routes: Routes = [
         data: {animation : 'history'}
     },
     {
+        path: 'edit', 
+        component: ExcelEditorComponent,
+        data: {animation : 'edit'}
+    },
+    {
         path: '404',
         component: PagenotfoundComponent
     },
@@ -73,9 +79,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  declarations: [
-    MessageDialogComponent
-  ],
   providers: [CAGuard]
 })
 
@@ -104,5 +107,7 @@ export class BasicRoutingModule implements OnInit{
      PurchaseComponent,
      ConfirmUploadComponent,
      ConfirmExportComponent,
-     PurchaseDialogComponent
+     PurchaseDialogComponent,
+     MessageDialogComponent,
+     ExcelEditorComponent
  ];

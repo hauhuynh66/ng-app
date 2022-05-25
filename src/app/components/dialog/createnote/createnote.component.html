@@ -1,19 +1,19 @@
 <div class="p-3">
     <mat-form-field class="my-2 w-100">
         <mat-label>Title</mat-label>
-        <input matInput [required]="true">
+        <input matInput [required]="true" [formControl]="title">
         <mat-hint>Note title</mat-hint>
     </mat-form-field>
     <mat-form-field class="my-2 w-100">
         <mat-label>Date</mat-label>
-        <input matInput [matDatepicker]="picker" [required]="true">
+        <input matInput [matDatepicker]="picker" [required]="true" [formControl]="displayDate">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <mat-hint>Date for display</mat-hint>
     </mat-form-field>
     <mat-form-field class="my-2 w-100">
         <mat-label>Content</mat-label>
-        <textarea matInput rows="5" [required]="true" [minLength]="5"></textarea>
+        <textarea matInput rows="5" [required]="true" [minLength]="5" [formControl]="content"></textarea>
         <mat-hint>Note content</mat-hint>
     </mat-form-field>
     <div class="row justify-content-end">
