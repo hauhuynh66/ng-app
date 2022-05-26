@@ -13,6 +13,11 @@ interface Question{
   possibleAnswers:Array<Answer>;
 }
 
+interface CurrentAnswer{
+  qc:string;
+  
+}
+
 @Component({
   selector: 'app-test-component',
   templateUrl: './test-component.component.html',
@@ -21,6 +26,7 @@ interface Question{
 
 export class TestComponentComponent implements OnInit {
   questions:Array<Question> = []
+  chooseAnswers:Array<>
   testname:string = "";
   characters:string = "ABCDEF";
   constructor(private http:HttpClient, private route:ActivatedRoute) {
