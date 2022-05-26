@@ -1,6 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import config from "../../../assets/config.json";
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { cf, ms} from '../../../asset.loader';
+import { TextInputDialogComponent } from '../dialog/text-input-dialog/text-input-dialog.component';
 
 interface ExcelData{
   rowNum:number,
@@ -15,12 +18,9 @@ interface ExcelData{
 export class ExcelEditorComponent implements OnInit {
   @ViewChild('file') fileRef:ElementRef = {} as ElementRef;
   excelData:Array<ExcelData> = []
-  excelHeader:ExcelData = {
-    rowNum: 0,
-    data: new Array()
-  }
+  excelHeader:string[] = [];
   
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private sb:MatSnackBar, private dialog:MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -31,10 +31,18 @@ export class ExcelEditorComponent implements OnInit {
     formData.append('file', file);
 
     if(file.name!==undefined){
-      this.http.post<Array<ExcelData>>(config.url.main + config.url.excel.get, formData).subscribe({
+      this.http.post<Array<ExcelData>>(cf.url.main + cf.url.excel.get, formData).subscribe({
         next: data=>{
-          this.excelHeader = data.filter((val)=> val.rowNum == 0)[0];
-          this.excelData = data.filter((val)=> val.rowNum > 0);
+          if(data==null){
+            this.sb.open(ms.ERR_NO.NO_1, ms.ACTION_MESSAGE.OK, {
+              duration: 2000
+            });
+          }else{
+            let header = data.filter((val)=> val.rowNum == 0)[0];
+            this.excelData = data.filter((val)=> val.rowNum > 0);
+            this.excelHeader = header.data.map(x=>x.value);
+          }
+          console.log(this.excelData);
         }
       });
     }
@@ -42,8 +50,21 @@ export class ExcelEditorComponent implements OnInit {
     this.fileRef.nativeElement.value = '';
   }
 
-  test(cell:any){
-    
+  clear(){
+    this.excelData = []
+    this.excelHeader = []
+    this.fileRef.nativeElement.value = '';
+  }
+
+  edit(row:any, i:number){
+    console.log(row);
+    this.dialog.open(TextInputDialogComponent,{
+      width: '600px',
+      data: {
+        "data" : row.data[i].value,
+        "type" : row.data[i].type
+      }
+    });
   }
 
 }

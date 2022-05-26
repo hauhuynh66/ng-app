@@ -7,12 +7,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MaterialModule} from "./material.module";
 import { BasicRoutingModule, BasicRoutingComponents } from './router.module';
+import { ExamRoutingModule, ExamRoutingComponents } from './exam.module';
 import { ChartModule } from 'angular2-chartjs';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BasicRoutingComponents
+    BasicRoutingComponents,
+    ExamRoutingComponents
   ],
   
   imports: [
@@ -20,7 +22,8 @@ import { ChartModule } from 'angular2-chartjs';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    BasicRoutingModule, 
+    ExamRoutingModule,
+    BasicRoutingModule,
     FormsModule,
     ChartModule,
     ReactiveFormsModule

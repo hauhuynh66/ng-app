@@ -12,10 +12,12 @@ import { ItemlistComponent } from './components/itemlist/itemlist.component';
 import { PurchaseComponent } from './components/purchase/purchase.component';
 import { ConfirmUploadComponent } from './components/dialog/confirm-upload/confirm-upload.component';
 import { ConfirmExportComponent } from './components/dialog/confirm-export/confirm-export.component';
-import { CAGuard } from './guard';
 import { PurchaseDialogComponent } from './components/dialog/purchase-dialog/purchase-dialog.component';
 import { MessageDialogComponent } from './components/dialog/message-dialog/message-dialog.component';
 import { ExcelEditorComponent } from './components/excel-editor/excel-editor.component';
+import { TextInputDialogComponent } from './components/dialog/text-input-dialog/text-input-dialog.component';
+
+import { CAGuard } from './guard';
 
 const routes: Routes = [
     {
@@ -109,5 +111,6 @@ export class BasicRoutingModule implements OnInit{
      ConfirmExportComponent,
      PurchaseDialogComponent,
      MessageDialogComponent,
+     TextInputDialogComponent,
      ExcelEditorComponent
  ];

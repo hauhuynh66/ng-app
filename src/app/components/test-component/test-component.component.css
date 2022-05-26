@@ -1,0 +1,27 @@
+.question_content{
+    min-height: 100px;
+    text-align: center;
+    width: 100%;
+    border: 1px solid gray;
+    border-radius: 20px;
+    padding-top: 20px;
+}
+
+.answers_wrapper{
+    flex-flow: wrap;
+}
+
+.answer_content{
+    min-height: 50px;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding-top: 15px;
+}
+
+.answer_content:hover{
+    background-color: aqua;
+    cursor: pointer;
+}

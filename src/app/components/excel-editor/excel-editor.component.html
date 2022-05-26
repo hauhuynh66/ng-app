@@ -1,19 +1,20 @@
 <div class="container p-5">
     <div class="d-flex justify-content-center my-3">
         <button mat-raised-button color="accent" class="mx-2" (click)="file.click()">Choose file</button>
+        <button *ngIf="excelData.length > 0" mat-raised-button class="mx-2" (click)="clear()"><i class="fa-solid fa-trash-can"></i></button>
         <input type="file" accept=".csv,.xlsx" (change)="fileUpload($event)"  #file hidden>
     </div>
 
     <div class="mt-5" *ngIf="excelData.length > 0">
         <table mat-table [dataSource]="excelData" class="w-100">
-            <div *ngFor="let d of excelHeader.data; let i = index">
+            <div *ngFor="let d of excelHeader; let i = index">
                 <ng-container matColumnDef="{{d}}">
                     <th mat-header-cell *matHeaderCellDef>{{d}}</th>
-                    <td mat-cell *matCellDef="let element" (click)="test(cell)" #cell>{{element.data[i]}}</td>
+                    <td mat-cell *matCellDef="let element" (click)="edit(element, i)" #cell>{{element.data[i].value}}</td>
                 </ng-container>
             </div>
-            <tr mat-header-row *matHeaderRowDef="excelHeader.data"></tr>
-            <tr mat-row *matRowDef="let row; columns: excelHeader.data;"></tr>
+            <tr mat-header-row *matHeaderRowDef="excelHeader"></tr>
+            <tr mat-row *matRowDef="let row; columns: excelHeader;"></tr>
         </table>
     </div>
 </div>
