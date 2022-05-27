@@ -2,11 +2,11 @@
     <div class="d-flex justify-content-center my-3">
         <button mat-raised-button color="accent" class="mx-2" (click)="file.click()">Choose file</button>
         <button *ngIf="excelData.length > 0" mat-raised-button class="mx-2" (click)="clear()"><i class="fa-solid fa-trash-can"></i></button>
-        <input type="file" accept=".csv,.xlsx" (change)="fileUpload($event)"  #file hidden>
+        <input type="file" accept=".xlsx" (change)="fileUpload($event)"  #file hidden>
     </div>
 
     <div class="mt-5" *ngIf="excelData.length > 0">
-        <table mat-table [dataSource]="excelData" class="w-100">
+        <table mat-table [dataSource]="excelData" class="w-100 mat-elevation-z2">
             <div *ngFor="let d of excelHeader; let i = index">
                 <ng-container matColumnDef="{{d}}">
                     <th mat-header-cell *matHeaderCellDef>{{d}}</th>

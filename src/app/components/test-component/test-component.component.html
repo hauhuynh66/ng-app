@@ -2,10 +2,12 @@
     <h1 class="st">{{testname}}</h1>
     <div class="mt-5">
         <div *ngFor="let q of questions">
-            <div class="question_content my-3"><span class="st">{{q.content}}</span></div>
+            <div class="question_content my-3"><span class="ft-bg st">{{q.content}}</span></div>
             <div class="d-flex flex-row answers_wrapper w-100">
                 <div *ngFor="let answer of q.possibleAnswers; let i = index" class="w-50 px-3 py-2">
-                    <div class="answer_content" #answer (click)="choose(answer)"><span class="st">{{answer.content}}</span></div>
+                    <div class="answer_content" #answer (click)="choose(answer)">
+                        <span class="st">{{answer.content}}</span>
+                    </div>
                 </div>
             </div>
         </div>

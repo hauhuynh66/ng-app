@@ -30,7 +30,7 @@ export class ExcelEditorComponent implements OnInit {
     let formData = new FormData();
     formData.append('file', file);
 
-    if(file.name!==undefined){
+    if(file.name!=null){
       this.http.post<Array<ExcelData>>(cf.url.main + cf.url.excel.get, formData).subscribe({
         next: data=>{
           if(data==null){

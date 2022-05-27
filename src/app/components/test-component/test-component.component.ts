@@ -15,7 +15,7 @@ interface Question{
 
 interface CurrentAnswer{
   qc:string;
-  
+  ac:string;
 }
 
 @Component({
@@ -26,7 +26,7 @@ interface CurrentAnswer{
 
 export class TestComponentComponent implements OnInit {
   questions:Array<Question> = []
-  chooseAnswers:Array<>
+  chooseAnswers:Array<CurrentAnswer> = []
   testname:string = "";
   characters:string = "ABCDEF";
   constructor(private http:HttpClient, private route:ActivatedRoute) {

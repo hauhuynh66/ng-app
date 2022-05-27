@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable, reduce } from 'rxjs';
 import config from '../../../assets/config.json';
+import moment from 'moment';
 
 @Component({
   selector: 'app-misc',
@@ -73,7 +74,8 @@ export class MiscComponent implements OnInit {
         let fData:Array<number> = [];
         fList.forEach(e =>{
           let date = new Date(e.dt*1000);
-          let dateLabel = date.toDateString().concat(' ', '0' + date.getHours().toString(),':', '0' + date.getMinutes().toString());
+          //let dateLabel = date.toDateString().concat(' ', '0' + date.getHours().toString(),':', '0' + date.getMinutes().toString());
+          let dateLabel = moment(date).format('MM/DD HH:mm a')
           label.push(dateLabel);
           tData.push(e.main.temp - 273.15);
           fData.push(e.main.humidity);
