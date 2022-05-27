@@ -1,9 +1,7 @@
 <div class="m-5">
     <mat-card class="w-50" *ngFor="let t of test; let i = index">
-        <mat-card-content class="test-card" (click)="goToExam(t)">
-            <div class="d-flex justify-content-center pt-4">
-                <p class="ft-xs st">{{t}}</p>
-            </div>
+        <mat-card-content class="test-card d-flex justify-content-center align-items-center" (click)="goToExam(t)">
+            <p class="ft-xs st">{{t}}</p>
         </mat-card-content>
     </mat-card>
 </div>

@@ -32,9 +32,8 @@ export class LoginComponent implements OnInit {
           let token = res.headers.get("x-token");
           if (token !== null){
             localStorage.setItem("access_token", token);
-            this.router.navigate(['/notelist']);
+            this.router.navigate(['/profile']);
           }
-          
         },
         error: e =>{
           console.log(e);

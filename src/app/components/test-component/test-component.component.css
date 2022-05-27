@@ -2,9 +2,12 @@
     min-height: 100px;
     text-align: center;
     width: 100%;
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
     border-radius: 20px;
     padding-top: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
 
 .answers_wrapper{
@@ -16,12 +19,34 @@
     width: 100%;
     text-align: center;
     align-items: center;
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
     border-radius: 10px;
     padding-top: 15px;
 }
 
-.answer_content:hover{
-    background-color: aqua;
+.choosed{
+    background-color: blueviolet;
+}
+
+.not_choosed{
+    background-color: white;
+}
+
+.choosed:hover{
     cursor: pointer;
 }
+
+.not_choosed:hover{
+    cursor: pointer;
+    background-color: aquamarine;
+}
+
+.test_container{
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* .answer_content:hover{
+    background-color: aqua;
+    cursor: pointer;
+} */
