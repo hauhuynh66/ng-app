@@ -50,7 +50,6 @@ export class TestComponentComponent implements OnInit {
   getQuestions(){
     this.http.get<Array<Question>>(cf.url.main + "/api/exam/questions/"+ this.testname).subscribe({
       next: data=>{
-        console.log(data);
         this.questions = data;
         this.questions.forEach(question=>{
           question.possibleAnswers.forEach(answer=>{

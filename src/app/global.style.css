@@ -45,13 +45,14 @@
 .ft-xs{
     font-size: 30px;
     min-height: 40px;
+    line-height: 40px;
 }
 
 .ft-bg{
     font-size: 20px;
     min-height: 25px;
+    line-height: 25px;
 }
-
 
 .tx{
     text-align: center;
