@@ -21,14 +21,6 @@
     padding: 0 20px 0 20px;
 }
 
-.circular-small{
-    transform: scale(0.6);
-}
-
-.circular-normal{
-    transform: scale(0.8);
-}
-
 .menuItem{
     font-size: 1.5em !important;
     cursor: pointer;  

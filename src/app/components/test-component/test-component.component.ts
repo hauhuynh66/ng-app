@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { cf, ms } from '../../../asset.loader';
+import { MessageDialogComponent } from '../dialog/message-dialog/message-dialog.component';
 
 interface Answer{
   answerId:number,
@@ -11,7 +13,7 @@ interface Answer{
 }
 
 interface Question{
-  questionId:number,
+  id:number,
   content:string;
   possibleAnswers:Array<Answer>;
 }
@@ -32,8 +34,10 @@ export class TestComponentComponent implements OnInit {
   chooseAnswers:Array<CurrentAnswer> = []
   testname:string = "";
   characters:string = "ABCDEF";
-  constructor(private http:HttpClient, private route:ActivatedRoute) {
-    this.route.params.subscribe((param:Params)=>this.testname = param['testname']);
+  constructor(private http:HttpClient, private route:ActivatedRoute, private router:Router, private dialog:MatDialog) {
+    this.route.params.subscribe((param:Params)=>{
+      this.testname = param['testname'];
+    });
   }
 
   ngOnInit(): void {
@@ -58,7 +62,7 @@ export class TestComponentComponent implements OnInit {
         })
       },
       error: err=>{
-
+        
       }
     })
   }
@@ -68,7 +72,7 @@ export class TestComponentComponent implements OnInit {
     this.chooseAnswers = this.questions.map((question)=>{
       let a = question.possibleAnswers.filter(answer => answer.selected===true).map(a => a.answerId)[0]
       return {
-        qc: question.questionId,
+        qc: question.id,
         ac: a==null?0:a
       }
     });
@@ -78,15 +82,22 @@ export class TestComponentComponent implements OnInit {
     }
 
     let options = {
-      headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("access_token"))
+      headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("access_token")),
+      responseType: 'text' as const
     }
     
-    this.http.post(cf.url.main+"/api/exam/submit", data, options).subscribe({
-      next: data=>{
-        console.log(data);
+    this.http.post(cf.url.main + "/api/exam/submit", data, options).subscribe({
+      next: ()=>{
+        this.router.navigate(["/result", this.testname, 0]);
       },
       error: err=>{
-        console.log(err);
+        this.dialog.open(MessageDialogComponent,{
+          width: '600px',
+          data: {
+            header: "Error",
+            code: err.error
+          }
+        })
       }
     })
   }

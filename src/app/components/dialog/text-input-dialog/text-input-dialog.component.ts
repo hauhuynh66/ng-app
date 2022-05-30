@@ -10,6 +10,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class TextInputDialogComponent implements OnInit,OnDestroy {
   text:FormControl = new FormControl('');
   type:string = 'TEXT';
+  format:string = '';
   @Output() changedData:EventEmitter<any> = new EventEmitter();
   constructor(@Inject(MAT_DIALOG_DATA) private data:any) { 
     this.type = this.data.type;
@@ -24,13 +25,15 @@ export class TextInputDialogComponent implements OnInit,OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if(this.type!='DATE'){
       this.changedData.emit(this.text.value);
+    }
   }
 
-
-
   close(){
-    this.changedData.emit(this.text.value);
+    if(this.type!='DATE'){
+      this.changedData.emit(this.text.value);
+    }
   }
 
 }

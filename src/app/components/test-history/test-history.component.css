@@ -1,0 +1,10 @@
+.mat-card-content{
+    min-height: 60px;
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}

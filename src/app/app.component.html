@@ -15,10 +15,6 @@
         <h1 matLine class="menuItem">Notes</h1>
       </mat-list-item>
       <mat-divider></mat-divider>
-      <mat-list-item routerLink="/profile">
-        <i matListIcon class="fa-solid fa-address-book"></i>
-        <h1 matLine class="menuItem">Profile</h1>
-      </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item routerLink="/stats">
         <i matListIcon class="fa-solid fa-chart-pie"></i>
@@ -58,9 +54,11 @@
       <button mat-raised-button color="primary" (click)="sidenavState = !sidenavState">
         <mat-icon>menu</mat-icon>
       </button>
-
-      <button mat-fab class="circular-normal ml-4" color="primary"  >
-        <span matBadge = "5"><mat-icon class="icon-custom">notification_important</mat-icon></span>
+      <button mat-mini-fab color="primary" class="mx-2" routerLink="/profile">
+        <i class="fa-solid fa-address-book icon-custom"></i>
+      </button>
+      <button mat-mini-fab class="mx-2" color="primary">
+        <span matBadge = "5" matBadgePosition="before"><i class="fa-solid fa-bell icon-custom"></i></span>
       </button>
       <mat-menu #langMenu>
         <button mat-menu-item>English</button>

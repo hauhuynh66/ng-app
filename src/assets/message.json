@@ -4,5 +4,9 @@
     },
     "ACTION_MESSAGE": {
         "OK" : "OK"
+    },
+    "TEST_ERROR":{
+        "LIMIT" : "YOU HAVE REACHED THE LIMITED TIMES TO SUBMIT ANSWER FOR THIS TEST",
+        "OTHERS" : "UNRESOLVED SERVER ERROR"
     }
 }

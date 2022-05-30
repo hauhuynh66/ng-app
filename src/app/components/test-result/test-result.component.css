@@ -1,0 +1,13 @@
+.mat-column-Correct{
+    flex: 0 0 20% !important;
+    width: 20% !important;
+    text-align: center;
+}
+
+.fa-x{
+    color: red;
+}
+
+.fa-check{
+    color: greenyellow;
+}

@@ -25,6 +25,6 @@ export class ExamComponentComponent implements OnInit {
   }
 
   goToExam(testname:any){
-    this.router.navigate(["/test", testname]);
+    this.router.navigate(["/summary", testname]);
   }
 }

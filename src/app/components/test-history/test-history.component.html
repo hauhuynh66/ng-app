@@ -1,0 +1,12 @@
+<div class="m-5">
+    <div class="row">
+        <div class="col-6 p-3" *ngFor="let i of timeArray">
+            <mat-card>
+                <mat-card-content class="content" (click)="view(i)">
+                    <h1>{{i}}</h1>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <button mat-raised-button (click)="next()">Do test</button>
+</div>
