@@ -1,10 +1,12 @@
 .message_container{
+    display: flex;
     min-height: 100px;
+    justify-content: flex-start;
     align-items: center;
 }
 
 .footer{
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
 }

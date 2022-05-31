@@ -94,8 +94,7 @@ export class TestComponentComponent implements OnInit {
         this.dialog.open(MessageDialogComponent,{
           width: '600px',
           data: {
-            header: "Error",
-            code: err.error
+            header: "Error"
           }
         })
       }

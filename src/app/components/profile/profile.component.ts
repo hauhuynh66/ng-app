@@ -11,7 +11,25 @@ import { Router } from '@angular/router';
 
 export class ProfileComponent implements OnInit {
   profile:any = {};
-  constructor(private http:HttpClient, private router:Router) { }
+  type:string = 'line';
+  data:any;
+  options:any;
+  constructor(private http:HttpClient, private router:Router) {
+    this.data = {
+      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      datasets: [
+        {
+          label: "My First dataset",
+          data: [65, 59, 80, 81, 56, 55, 40]
+        }
+      ]
+    };
+    
+    this.options = {
+      responsive: true,
+      maintainAspectRatio: false
+    };
+  }
 
   ngOnInit(): void {
     if(localStorage.getItem("access_token")==null){

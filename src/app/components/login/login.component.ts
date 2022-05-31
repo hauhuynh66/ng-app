@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import config from "../../../assets/config.json";
@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   hide:boolean = true;
   username:string = "hauhuynh66";
   password:string = "Hauhuynh";
+  from:string = "";
   constructor(private http: HttpClient, private router: Router) {
     
   }

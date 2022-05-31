@@ -8,12 +8,11 @@
             "list" : "/api/notes/list",
             "upload" : "/api/notes/import",
             "check" : "/api/notes/import_check",
-            "count": "/api/notes/count"
+            "add" : "/api/notes/add"
         },
         "item" :{
             "list" : "/api/item/list",
             "word" : "/api/item/words",
-            "count" : "/api/item/count",
             "search" : "/api/item/search",
             "purchase": "/api/item/purchase"
         },

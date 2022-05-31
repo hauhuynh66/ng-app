@@ -36,7 +36,7 @@ export class ExcelEditorComponent implements OnInit {
         next: data=>{
           this.clear();
           if(data==null){
-            this.sb.open(ms.ERR_NO.NO_1, ms.ACTION_MESSAGE.OK, {
+            this.sb.open("", "", {
               duration: 2000
             });
           }else{

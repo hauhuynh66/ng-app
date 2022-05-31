@@ -3,7 +3,6 @@ import { Routes, RouterModule, ActivatedRoute } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { NotelistComponent } from './components/notelist/notelist.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { StatsComponent } from './components/stats/stats.component';
 import { RegisterComponent } from './components/register/register.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { MiscComponent } from './components/misc/misc.component';
@@ -40,12 +39,6 @@ const routes: Routes = [
         path: 'profile', 
         component: ProfileComponent,
         data: {animation : 'profile'},
-        canActivate : [CAGuard]
-    },
-    {
-        path: 'stats', 
-        component: StatsComponent,
-        data: {animation : 'stats'},
         canActivate : [CAGuard]
     },
     {
@@ -101,7 +94,6 @@ export class BasicRoutingModule implements OnInit{
      NotelistComponent,
      ProfileComponent,
      RegisterComponent,
-     StatsComponent,
      MiscComponent,
      PagenotfoundComponent,
      CreatenoteComponent,

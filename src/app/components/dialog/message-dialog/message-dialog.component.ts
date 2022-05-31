@@ -1,5 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ms} from '../../../../asset.loader';
 
 @Component({
@@ -9,24 +9,24 @@ import { ms} from '../../../../asset.loader';
 })
 
 export class MessageDialogComponent implements OnInit {
+  @Output() value:EventEmitter<any> = new EventEmitter();
   header:string = "";
-  code:string = "";
   message:string="";
   type:string="error";
-  constructor(@Inject(MAT_DIALOG_DATA) private data:any) {
-    this.header = data.header;
-    this.code = data.code;
-    switch(this.code){
-      case "LIMIT_ERR":
-        this.message = ms.TEST_ERROR.LIMIT;
-        break;
-      default:
-        this.message = ms.TEST_ERROR.OTHERS;
-        break;
+  constructor(@Inject(MAT_DIALOG_DATA) private data:any, private dialogRef:MatDialogRef<MessageDialogComponent>) {
+    this.type = data.type;
+    if(this.type==="confirm"){
+      this.dialogRef.disableClose = true;
     }
   }
 
   ngOnInit(): void {
+    this.header = this.data.header;
+    this.message = this.data.message;
+  }
+
+  confirm(){
+    this.value.emit(true);
   }
 
 }
