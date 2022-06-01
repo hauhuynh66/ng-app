@@ -62,6 +62,11 @@ const routes: Routes = [
         data: {animation : 'edit'}
     },
     {
+        path: 'logout',
+        component: LoginComponent,
+        data: {animation : 'edit'}
+    },
+    {
         path: '404',
         component: PagenotfoundComponent
     },

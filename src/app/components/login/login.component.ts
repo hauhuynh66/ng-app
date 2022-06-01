@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { NavigationEnd, Router, RoutesRecognized } from '@angular/router';
 import config from "../../../assets/config.json";
+import { filter, pairwise } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -15,11 +16,19 @@ export class LoginComponent implements OnInit {
   password:string = "Hauhuynh";
   from:string = "";
   constructor(private http: HttpClient, private router: Router) {
-    
+    localStorage.setItem("access_token", "");
   }
 
   ngOnInit(): void {
-    
+    this.router.events.pipe(filter(e=>
+      e instanceof RoutesRecognized
+    ),pairwise()).subscribe((event : any[])=>{  
+      if(event[1].url === "/login"){
+        this.from = event[0].url;
+      }else{
+        this.from = "/profile";
+      }
+    });
   }
 
   authenticate(){
@@ -33,7 +42,7 @@ export class LoginComponent implements OnInit {
           let token = res.headers.get("x-token");
           if (token !== null){
             localStorage.setItem("access_token", token);
-            this.router.navigate(['/profile']);
+            this.router.navigate([this.from]);
           }
         },
         error: e =>{

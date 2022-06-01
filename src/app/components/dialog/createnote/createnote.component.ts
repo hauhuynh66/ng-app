@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 export interface Note{
   title:string,
   displayDate:Date,
-  content:string
+  message:string
 }
 
 @Component({
@@ -31,7 +31,7 @@ export class CreatenoteComponent implements OnInit {
     this.note.emit({
       title: this.title.value,
       displayDate: this.displayDate.value,
-      content: this.content.value
+      message: this.content.value
     });
   }
 

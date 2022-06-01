@@ -21,7 +21,7 @@ export class CAGuard implements CanActivate, CanActivateChild, CanDeactivate<Not
         }
         let invalid:boolean = false;
         let token = localStorage.getItem("access_token");
-        if(token!==null){
+        if(token!==null&&token!==""){
             let decoded:any = jwt_decode(token);
             if(new Date() > new Date(decoded.exp*1000)){
                 invalid = true;
