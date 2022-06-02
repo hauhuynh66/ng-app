@@ -1,5 +1,13 @@
-<div class="py-5 px-3">
-    <div class="test_container mat-elevation-z1">
+<div class="py-5 px-3" *ngIf="!limited; else return">
+    <div class="d-flex">
+        <div class="d-flex w-50 px-2">
+            <h1 class="st">TIME:</h1>
+        </div>
+        <div class="d-flex w-50 justify-content-end px-2">
+            <h1 class="st">{{this.min}}:{{this.remainTime/1000 - this.min*60|number:'2.0-0'}}</h1>
+        </div>
+    </div>
+    <div class="test_container mat-elevation-z1 mt-3">
         <h1 class="st">{{testname}}</h1>
         <div *ngFor="let q of questions" class="mb-5">
             <div class="question_content mat-elevation-z2"><span class="ft-bg st">{{q.content}}</span></div>
@@ -21,3 +29,11 @@
         <button mat-flat-button color="accent" (click)="submit()">Submit</button>
     </div>
 </div>
+<ng-template #return>
+    <div class="m-5">
+        <div class="d-flex justify-content-center my-2">
+            <h1 class="ft-xs st text-align-center">You have ran out of times to do this test</h1>
+        </div>
+        <button mat-raised-button (click)="back()" class="my-2">Back</button>
+    </div>
+</ng-template>

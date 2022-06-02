@@ -60,8 +60,11 @@ export class NotelistComponent implements OnInit {
 
       dialogRef.componentInstance.value.subscribe(value=>{
         let confirm = value;
+        let options = {
+          headers: new HttpHeaders().set("Authorization", "Bearer "+localStorage.getItem("access_token"))
+        }
         if(confirm === true){
-          console.log("Delete");
+          this.http.get<string>(cf.url.main + "/api/note/delete",)
         }
       })
       

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {cf, ms} from '../../../asset.loader';
@@ -17,7 +17,10 @@ export class ExamComponentComponent implements OnInit {
   }
 
   get(){
-    this.http.get<Array<any>>(cf.url.main + "/api/exam/tests").subscribe({
+    let options = {
+      headers: new HttpHeaders().set("Authorization", "Bearer "+ localStorage.getItem("access_token"))
+    }
+    this.http.get<Array<any>>(cf.url.main + "/api/exam/tests", options).subscribe({
       next: data=>{
         this.test = data.map(d=>d.name);
       }

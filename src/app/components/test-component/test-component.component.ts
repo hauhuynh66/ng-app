@@ -1,5 +1,6 @@
+import { Location } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { cf, ms } from '../../../asset.loader';
@@ -30,11 +31,15 @@ interface CurrentAnswer{
 })
 
 export class TestComponentComponent implements OnInit {
-  questions:Array<Question> = []
-  chooseAnswers:Array<CurrentAnswer> = []
+  limited:boolean = false;
+  questions:Array<Question> = [];
+  remainTime:number = 0;
+  min:number = 0;
+  chooseAnswers:Array<CurrentAnswer> = [];
   testname:string = "";
   characters:string = "ABCDEF";
-  constructor(private http:HttpClient, private route:ActivatedRoute, private router:Router, private dialog:MatDialog) {
+  constructor(private http:HttpClient, 
+    private route:ActivatedRoute, private router:Router, private dialog:MatDialog, private location:Location) {
     this.route.params.subscribe((param:Params)=>{
       this.testname = param['testname'];
     });
@@ -52,14 +57,28 @@ export class TestComponentComponent implements OnInit {
   }
 
   getQuestions(){
-    this.http.get<Array<Question>>(cf.url.main + "/api/exam/questions/"+ this.testname).subscribe({
+    let options = {
+      headers: new HttpHeaders().set("Authorization", "Bearer "+ localStorage.getItem("access_token"))
+    }
+
+    this.http.get<any>(cf.url.main + "/api/exam/questions/"+ this.testname, options).subscribe({
       next: data=>{
-        this.questions = data;
-        this.questions.forEach(question=>{
-          question.possibleAnswers.forEach(answer=>{
-            answer.selected = false;
-          })
-        })
+        if(data!=null){
+          this.questions = data.questions;
+          this.remainTime = data.remaining;
+          this.min = Math.floor(this.remainTime/1000/60);
+          this.questions.forEach(question=>{
+            question.possibleAnswers.forEach(answer=>{
+              answer.selected = false;
+            })
+          });
+          setInterval(()=>{
+            this.remainTime -= 1000;
+            this.min = Math.floor(this.remainTime/1000/60);
+          }, 1000);
+        }else{
+          this.limited = true;
+        }
       },
       error: err=>{
         
@@ -100,5 +119,8 @@ export class TestComponentComponent implements OnInit {
       }
     })
   }
-
+  
+  back(){
+    this.location.back();
+  }
 }

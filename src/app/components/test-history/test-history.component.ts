@@ -40,6 +40,10 @@ export class TestHistoryComponent implements OnInit {
     this.router.navigate(["/test", this.testname]);
   }
 
+  back(){
+    this.router.navigate(["/exam"]);
+  }
+
   view(i:number){
     this.router.navigate(["/result", this.testname, i]);
   }
