@@ -10,11 +10,14 @@ import { ms} from '../../../../asset.loader';
 
 export class MessageDialogComponent implements OnInit {
   @Output() value:EventEmitter<any> = new EventEmitter();
+  inout:any;
   header:string = "";
   message:string="";
   type:string="error";
   constructor(@Inject(MAT_DIALOG_DATA) private data:any, private dialogRef:MatDialogRef<MessageDialogComponent>) {
-    this.type = data.type;
+    this.type = this.data.type;
+    this.inout = this.data.extra;
+    console.log(this.inout);
     if(this.type==="confirm"){
       this.dialogRef.disableClose = true;
     }
@@ -26,7 +29,10 @@ export class MessageDialogComponent implements OnInit {
   }
 
   confirm(){
-    this.value.emit(true);
+    this.value.emit({
+      value : true,
+      extra: this.inout
+    });
   }
 
 }

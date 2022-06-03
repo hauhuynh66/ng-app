@@ -45,7 +45,6 @@ export class NotelistComponent implements OnInit {
   }
 
   deleteNote(event : CdkDragDrop<NoteListData>){
-    console.log(event);
     if(event.previousContainer===event.container){
 
     }else{
@@ -54,17 +53,33 @@ export class NotelistComponent implements OnInit {
         data: {
           header: "Delete",
           message: "Are you sure you want to delete this note?",
-          type: "confirm"
+          type: "confirm",
+          extra: this.notelist.data[event.currentIndex].id
         }
       });
 
       dialogRef.componentInstance.value.subscribe(value=>{
-        let confirm = value;
+        let confirm = value.value;
+        let id = value.extra;
+        console.log(confirm);
+
         let options = {
-          headers: new HttpHeaders().set("Authorization", "Bearer "+localStorage.getItem("access_token"))
+          headers: new HttpHeaders().set("Authorization", "Bearer "+localStorage.getItem("access_token")),
+          params: {
+            id: id
+          },
+          responseType: 'text' as const
         }
-        if(confirm === true){
-          this.http.get<string>(cf.url.main + "/api/note/delete",)
+
+        if(confirm == true){
+          this.http.get(cf.url.main + "/api/notes/delete",options).subscribe({
+            next: data=>{
+              console.log(data);
+              if(data==="OK"){
+                this.notelist.data = this.notelist.data.filter((c)=>c.id! != id)
+              }
+            }
+          })
         }
       })
       
@@ -151,9 +166,8 @@ export class NotelistComponent implements OnInit {
         headers: this.token
       }
       this.http.post(cf.url.main + cf.url.note.add, data, options).subscribe({
-        next: d=>{
+        next: () => {
           this.notelist.data.push(data);
-          console.log(this.notelist);
         },
         error: err=>{
           /*insert error handler here

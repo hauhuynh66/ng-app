@@ -5,6 +5,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 export interface Note{
+  id?:number,
   title:string,
   displayDate:Date,
   message:string
