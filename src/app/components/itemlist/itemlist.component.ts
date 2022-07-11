@@ -60,7 +60,7 @@ export class ItemlistComponent implements OnInit {
     let data = {
       mode : this.sortOption.value,
       keys : this.selected.map(x=>x.word),
-      sw : this.searchText.value,
+      sw : this.searchText.value
     }
 
     this.http.post<SearchData>(config.url.main + config.url.item.list + "/" + page, data).subscribe({
@@ -104,11 +104,14 @@ export class ItemlistComponent implements OnInit {
         this.purchaseList[index].count += item.count
         this.purchaseList[index].price += item.count * item.price; 
       }else{
-        this.purchaseList.push({
-          name: item.name,
-          count: item.count,
-          price: item.price*item.count,
-        });
+        if( item.count>0 ){
+          this.purchaseList.push({
+            name: item.name,
+            count: item.count,
+            price: item.price*item.count,
+          });
+        }
+        
       }
       this.itemList[event.previousIndex].count = 0;
     }

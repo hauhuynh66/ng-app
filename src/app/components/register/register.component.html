@@ -1,21 +1,81 @@
 <div class="m-5">
     <mat-card>
         <mat-card-header>
-            <mat-card-title>Login</mat-card-title>
+            <mat-card-title class="st">Register</mat-card-title>
         </mat-card-header>
         <mat-card-content class="m-5">
             <div class="row p-0">
                 <div class="col-6">
-                    <mat-form-field>
-
+                    <mat-form-field class="w-100" appearance="fill">
+                        <mat-label>Firstname</mat-label>
+                        <input matInput>
                     </mat-form-field>
                 </div>
                 <div class="col-6">
-                    <mat-form-field>
-                        
+                    <mat-form-field class="w-100" appearance="fill">
+                        <mat-label>Lastname</mat-label>
+                        <input matInput>
                     </mat-form-field>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field class="w-100 my-2" appearance="fill">
+                        <mat-label>Username</mat-label>
+                        <input matInput (change)="checkUser()" [formControl]="username">
+                        <span matSuffix *ngIf="show[0]">
+                            <span *ngIf = "validation[0]; else e">
+                                <i class="fa-solid fa-check text-success"></i>
+                            </span>
+                            <ng-template #e>
+                                <i class="fa-solid fa-xmark text-danger"></i>
+                            </ng-template>
+                        </span>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field class="w-100 my-2" appearance="fill">
+                        <mat-label>Birthday</mat-label>
+                        <input matInput [matDatepicker]="picker" [required]="true">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+            <mat-form-field class="w-100 my-2" appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput>
+            </mat-form-field>
+            <mat-form-field class="w-100 my-2" appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput [type]="hideP? 'password':'text'" [formControl]="password" (change)="passwordChange()">
+                <button matSuffix mat-icon-button (click)="hideP = !hideP">
+                    <mat-icon>{{hideP? 'visibility_off ' : 'visibility' }}</mat-icon>
+                </button>
+                <span matSuffix *ngIf="show[1]">
+                    <span *ngIf = "validation[1]; else e">
+                        <i class="fa-solid fa-check text-success"></i>
+                    </span>
+                    <ng-template #e>
+                        <i class="fa-solid fa-xmark text-danger"></i>
+                    </ng-template>
+                </span>
+            </mat-form-field>
+            <mat-form-field class="w-100 my-2" appearance="fill">
+                <mat-label>Confirm Password</mat-label>
+                <input matInput [type]="hideC? 'password':'text'" (change)="confirmChange()" [formControl]="confirmPassword">
+                <button matSuffix mat-icon-button (click)="hideC = !hideC">
+                    <mat-icon>{{hideC? 'visibility_off ' : 'visibility' }}</mat-icon>
+                </button>
+                <span matSuffix *ngIf="show[2]">
+                    <span *ngIf = "validation[2]; else e">
+                        <i class="fa-solid fa-check text-success"></i>
+                    </span>
+                    <ng-template #e>
+                        <i class="fa-solid fa-xmark text-danger"></i>
+                    </ng-template>
+                </span>
+            </mat-form-field> 
             
         </mat-card-content>
         <mat-card-actions align="end">

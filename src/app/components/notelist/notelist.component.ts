@@ -64,7 +64,7 @@ export class NotelistComponent implements OnInit {
         console.log(confirm);
 
         let options = {
-          headers: new HttpHeaders().set("Authorization", "Bearer "+localStorage.getItem("access_token")),
+          headers: new HttpHeaders().set("Authorization", "Bearer "+ localStorage.getItem("access_token")),
           params: {
             id: id
           },

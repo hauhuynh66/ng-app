@@ -3,6 +3,9 @@
         "main" : "http://localhost:8400",
         "login" : "/login",
         "profile" : "/api/user/profile",
+        "user" : {
+            "check" : "/api/user/check_username"
+        },
         "note" : {
             "export": "api/notes/export",
             "list" : "/api/notes/list",
