@@ -2,16 +2,12 @@ import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanDeactivate, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
 import jwt_decode from "jwt-decode";
 import { Observable } from "rxjs";
-import { NotelistComponent } from "./components/notelist/notelist.component";
 
 @Injectable()
-export class CAGuard implements CanActivate, CanActivateChild, CanDeactivate<NotelistComponent>{
+export class CAGuard implements CanActivate, CanActivateChild{
 
     constructor(private router:Router){
 
-    }
-    canDeactivate(component: NotelistComponent, currentRoute: ActivatedRouteSnapshot, currentState: RouterStateSnapshot, nextState?: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-        return true;
     }
     
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): 

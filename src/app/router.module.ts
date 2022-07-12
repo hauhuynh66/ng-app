@@ -17,6 +17,7 @@ import { ExcelEditorComponent } from './components/excel-editor/excel-editor.com
 import { TextInputDialogComponent } from './components/dialog/text-input-dialog/text-input-dialog.component';
 
 import { CAGuard } from './guard';
+import { DA_Guard } from './guard_da';
 
 const routes: Routes = [
     {
@@ -27,7 +28,8 @@ const routes: Routes = [
     {
         path: 'register', 
         component: RegisterComponent,
-        data: {animation : 'register'}
+        data: {animation : 'register'},
+        canDeactivate : [DA_Guard]
     },
     {
         path: 'notelist',

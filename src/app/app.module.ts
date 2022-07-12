@@ -9,6 +9,7 @@ import { MaterialModule} from "./material.module";
 import { BasicRoutingModule, BasicRoutingComponents } from './router.module';
 import { ExamRoutingModule, ExamRoutingComponents } from './exam.module';
 import { ChartModule } from 'angular2-chartjs';
+import { DA_Guard } from './guard_da';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { ChartModule } from 'angular2-chartjs';
     ChartModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [DA_Guard],
   bootstrap: [AppComponent]
 })
 

@@ -8,13 +8,13 @@
                 <div class="col-6">
                     <mat-form-field class="w-100" appearance="fill">
                         <mat-label>Firstname</mat-label>
-                        <input matInput>
+                        <input matInput [required]="true" [formControl]="firstname">
                     </mat-form-field>
                 </div>
                 <div class="col-6">
                     <mat-form-field class="w-100" appearance="fill">
                         <mat-label>Lastname</mat-label>
-                        <input matInput>
+                        <input matInput [required]="true" [formControl]="lastname">
                     </mat-form-field>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                 <div class="col-6">
                     <mat-form-field class="w-100 my-2" appearance="fill">
                         <mat-label>Username</mat-label>
-                        <input matInput (change)="checkUser()" [formControl]="username">
+                        <input matInput (change)="checkUser()" [formControl]="username" [required]="true">
                         <span matSuffix *ngIf="show[0]">
                             <span *ngIf = "validation[0]; else e">
                                 <i class="fa-solid fa-check text-success"></i>
@@ -36,7 +36,7 @@
                 <div class="col-6">
                     <mat-form-field class="w-100 my-2" appearance="fill">
                         <mat-label>Birthday</mat-label>
-                        <input matInput [matDatepicker]="picker" [required]="true">
+                        <input matInput [matDatepicker]="picker">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
@@ -44,11 +44,11 @@
             </div>
             <mat-form-field class="w-100 my-2" appearance="fill">
                 <mat-label>Email</mat-label>
-                <input matInput>
+                <input matInput [required]="true" [formControl]="email">
             </mat-form-field>
             <mat-form-field class="w-100 my-2" appearance="fill">
                 <mat-label>Password</mat-label>
-                <input matInput [type]="hideP? 'password':'text'" [formControl]="password" (change)="passwordChange()">
+                <input matInput [type]="hideP? 'password':'text'" [formControl]="password" (change)="passwordChange()" [required]="true">
                 <button matSuffix mat-icon-button (click)="hideP = !hideP">
                     <mat-icon>{{hideP? 'visibility_off ' : 'visibility' }}</mat-icon>
                 </button>
@@ -76,7 +76,7 @@
                     </ng-template>
                 </span>
             </mat-form-field> 
-            
+            <a routerLink="/login">Already have an account?</a>
         </mat-card-content>
         <mat-card-actions align="end">
             <button mat-raised-button>Clear</button>

@@ -65,6 +65,11 @@ export const RouteAnimations =
 			length: '0.1s'
 		}
 	})]),
+	transition('* => register', [useAnimation(ShakeAnimation, {
+		params: {
+			length: '0.1s'
+		}
+	})]),
 	transition('* => *', useAnimation(SlideInXAnimation,{
 		params: {
 			ix: '1000',

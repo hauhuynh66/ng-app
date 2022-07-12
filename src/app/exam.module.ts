@@ -6,6 +6,7 @@ import { TestComponentComponent } from './components/test-component/test-compone
 import { TestResultComponent } from './components/test-result/test-result.component';
 import { TestHistoryComponent } from './components/test-history/test-history.component';
 import { CAGuard } from './guard';
+import { DA_Guard } from './guard_da';
 
 const routes: Routes = [
     {
@@ -18,7 +19,8 @@ const routes: Routes = [
         path: 'test/:testname', 
         component: TestComponentComponent,
         data: {animation : 'test'},
-        canActivate : [CAGuard]
+        canActivate : [CAGuard],
+        canDeactivate : [DA_Guard]
     },
     {
         path: 'summary/:testname', 

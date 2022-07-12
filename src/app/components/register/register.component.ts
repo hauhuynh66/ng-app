@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { CanDeactivateComponent } from 'src/app/guard_da';
 import { cf } from '../../../asset.loader';
 
 @Component({
@@ -8,7 +10,7 @@ import { cf } from '../../../asset.loader';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css','../../app.component.css', '../../global.style.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, CanDeactivateComponent {
   username : FormControl = new FormControl("");
   password : FormControl = new FormControl("");
   confirmPassword : FormControl = new FormControl("");
@@ -24,6 +26,16 @@ export class RegisterComponent implements OnInit {
   constructor(private http : HttpClient) { }
 
   ngOnInit(): void {
+  }
+
+  @HostListener('window:beforeunload')
+  canDeactivate () : boolean | Observable<boolean>{
+    let da = this.firstname.value.length==0 && 
+              this.lastname.value.length==0 &&
+              this.username.value.length==0 &&
+              this.email.value.length==0 &&
+              this.password.value.length;
+    return da;
   }
 
   checkUser(){

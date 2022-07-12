@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { CanDeactivateComponent } from 'src/app/guard_da';
 import { cf, ms } from '../../../asset.loader';
 import { MessageDialogComponent } from '../dialog/message-dialog/message-dialog.component';
 
@@ -30,7 +32,7 @@ interface CurrentAnswer{
   styleUrls: ['./test-component.component.css','../../global.style.css']
 })
 
-export class TestComponentComponent implements OnInit {
+export class TestComponentComponent implements OnInit, CanDeactivateComponent {
   limited:boolean = false;
   questions:Array<Question> = [];
   remainTime:number = 0;
@@ -43,6 +45,10 @@ export class TestComponentComponent implements OnInit {
     this.route.params.subscribe((param:Params)=>{
       this.testname = param['testname'];
     });
+  }
+  canDeactivate() : boolean | Observable<boolean>{
+    let da = this.chooseAnswers.length > 0;
+    return da;
   }
 
   ngOnInit(): void {
