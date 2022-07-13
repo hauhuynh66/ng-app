@@ -46,9 +46,9 @@ export class TestComponentComponent implements OnInit, CanDeactivateComponent {
       this.testname = param['testname'];
     });
   }
+
   canDeactivate() : boolean | Observable<boolean>{
-    let da = this.chooseAnswers.length > 0;
-    return da;
+    return false;
   }
 
   ngOnInit(): void {
@@ -79,7 +79,11 @@ export class TestComponentComponent implements OnInit, CanDeactivateComponent {
             })
           });
           setInterval(()=>{
-            this.remainTime -= 1000;
+            if(this.remainTime > 1000){
+              this.remainTime -= 1000;
+            }else{
+              /**show out of time dialog */
+            }
             this.min = Math.floor(this.remainTime/1000/60);
           }, 1000);
         }else{

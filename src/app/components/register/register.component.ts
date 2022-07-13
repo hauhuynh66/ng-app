@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit, CanDeactivateComponent {
               this.lastname.value.length==0 &&
               this.username.value.length==0 &&
               this.email.value.length==0 &&
-              this.password.value.length;
+              this.password.value.length==0;
     return da;
   }
 

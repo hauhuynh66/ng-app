@@ -61,7 +61,6 @@ export class NotelistComponent implements OnInit {
       dialogRef.componentInstance.value.subscribe(value=>{
         let confirm = value.value;
         let id = value.extra;
-        console.log(confirm);
 
         let options = {
           headers: new HttpHeaders().set("Authorization", "Bearer "+ localStorage.getItem("access_token")),
@@ -112,7 +111,6 @@ export class NotelistComponent implements OnInit {
     this.http.get<NoteListData>(cf.url.main + cf.url.note.list, listOptions).subscribe({
       next: data=>{
         this.notelist = data;
-        console.log(data);
       },
       error: err=>{
         /*insert error handler here
