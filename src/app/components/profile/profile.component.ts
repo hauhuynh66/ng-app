@@ -38,7 +38,7 @@ export class ProfileComponent implements OnInit {
     let options = {
       headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("access_token"))
     }
-    this.http.get(config.url.main+config.url.profile, options).subscribe({
+    this.http.get(config.url.main+config.url.user.profile, options).subscribe({
       next : data=>{
         this.profile = data;
       },

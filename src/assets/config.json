@@ -2,9 +2,12 @@
     "url": {
         "main" : "http://localhost:8400",
         "login" : "/login",
-        "profile" : "/api/user/profile",
+        "global" : {
+            "cr" : "/global/carousel"
+        },
         "user" : {
-            "check" : "/api/user/check_username"
+            "check" : "/api/user/check_username",
+            "profile" : "/api/user/profile"
         },
         "note" : {
             "export": "api/notes/export",

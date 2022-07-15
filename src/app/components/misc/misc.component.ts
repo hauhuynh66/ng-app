@@ -1,8 +1,21 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Observable, reduce } from 'rxjs';
+import { Observable, of, reduce } from 'rxjs';
 import config from '../../../assets/config.json';
 import moment from 'moment';
+
+
+interface WeatherData{
+  temp : number,
+  humid : number,
+  dt : number,
+  description : string
+}
+
+interface ForecastData{
+  data : Array<WeatherData>,
+  name : string
+}
 
 @Component({
   selector: 'app-misc',
@@ -10,16 +23,16 @@ import moment from 'moment';
   styleUrls: ['./misc.component.css', '../../global.style.css']
 })
 
-
 export class MiscComponent implements OnInit {
-  weatherData:any = {
-    t: 0,
-    h: 0,
-    name : "NAME",
-    status : "STATUS"
+  forecastData: ForecastData = {
+    data : Array(),
+    name : ""
   };
 
-  forecastData:any = {};
+  chartData : any = {
+
+  }
+
   chartOptions = {
     responsive: true,
     maintainAspectRatio: false
@@ -28,39 +41,15 @@ export class MiscComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.getWeatherData();
-    
     this.getForecastData();
-  }
-
-  getWeatherData(){
-    let p = {
-      lat : config.openweathermap.defaults.lat,
-      lon : config.openweathermap.defaults.lon,
-      appid : config.openweathermap.key
-    }
-
-    let weatherOptions = {
-      params : p
-    }
-    this.http.get<any>(config.openweathermap.url.weather, weatherOptions).subscribe({
-      next: data =>{
-        this.weatherData.t = data.main.temp - 273.15;
-        this.weatherData.h= data.main.humidity;
-        this.weatherData.name = data.name;
-        this.weatherData.status = data.weather[0].description;
-      },
-      error : err =>{
-        console.log(err.message);
-      }
-    });
   }
 
   getForecastData(){
     let p = {
       lat : config.openweathermap.defaults.lat,
       lon : config.openweathermap.defaults.lon,
-      appid : config.openweathermap.key
+      appid : config.openweathermap.key,
+      cnt : 40
     }
 
     let forecastOptions = {
@@ -68,30 +57,33 @@ export class MiscComponent implements OnInit {
     }
     this.http.get<any>(config.openweathermap.url.forecast, forecastOptions).subscribe({
       next: data =>{
-        let fList:Array<any> = data.list;
-        let label:Array<any> = [];
-        let tData:Array<number> = [];
-        let fData:Array<number> = [];
+        console.log(data)
+        let fList : Array<any> = data.list;
+        let label : Array<string> = [];
+        this.forecastData.name = data.city.name;
+
         fList.forEach(e =>{
-          let date = new Date(e.dt*1000);
-          //let dateLabel = date.toDateString().concat(' ', '0' + date.getHours().toString(),':', '0' + date.getMinutes().toString());
-          let dateLabel = moment(date).format('MM/DD HH:mm a')
-          label.push(dateLabel);
-          tData.push(e.main.temp - 273.15);
-          fData.push(e.main.humidity);
+          label.push(moment(new Date(e.dt * 1000)).format("Do hh:mm"))
+          let data : WeatherData = {
+            temp : e.main.temp - 273.15,
+            humid : e.main.humidity,
+            description : e.weather[0].description,
+            dt : e.dt
+          }
+          this.forecastData.data.push(data)
         })
 
-        this.forecastData = {
+        this.chartData = {
           labels : label,
           datasets : [
             {
               label : "Temperature",
-              data : tData,
+              data : this.forecastData.data.map(x=>x.temp),
               borderColor : 'red'
             },
             {
               label : "Humidity",
-              data : fData,
+              data : this.forecastData.data.map(x=>x.humid),
               borderColor : 'blue'
             }
           ]

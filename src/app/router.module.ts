@@ -15,11 +15,17 @@ import { PurchaseDialogComponent } from './components/dialog/purchase-dialog/pur
 import { MessageDialogComponent } from './components/dialog/message-dialog/message-dialog.component';
 import { ExcelEditorComponent } from './components/excel-editor/excel-editor.component';
 import { TextInputDialogComponent } from './components/dialog/text-input-dialog/text-input-dialog.component';
+import { MainPageComponent } from './components/main-page/main-page.component';
 
 import { CAGuard } from './guard';
 import { DA_Guard } from './guard_da';
 
 const routes: Routes = [
+    {
+        path: '',
+        component: MainPageComponent,
+        data: {animation : 'mainpage'}
+    },
     {
         path: 'login', 
         component: LoginComponent,
@@ -111,5 +117,6 @@ export class BasicRoutingModule implements OnInit{
      PurchaseDialogComponent,
      MessageDialogComponent,
      TextInputDialogComponent,
-     ExcelEditorComponent
+     ExcelEditorComponent,
+     MainPageComponent
  ];
