@@ -24,8 +24,14 @@ interface ForecastData{
 })
 
 export class MiscComponent implements OnInit {
+  weatherData : WeatherData = {
+    temp : 0,
+    humid : 0,
+    dt : 0,
+    description : 'test' 
+  }
   forecastData: ForecastData = {
-    data : Array(),
+    data : Array(this.weatherData),
     name : ""
   };
 
@@ -55,12 +61,13 @@ export class MiscComponent implements OnInit {
     let forecastOptions = {
       params : p
     }
+    
     this.http.get<any>(config.openweathermap.url.forecast, forecastOptions).subscribe({
       next: data =>{
-        console.log(data)
         let fList : Array<any> = data.list;
         let label : Array<string> = [];
         this.forecastData.name = data.city.name;
+        this.forecastData.data = []
 
         fList.forEach(e =>{
           label.push(moment(new Date(e.dt * 1000)).format("Do hh:mm"))

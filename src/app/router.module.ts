@@ -72,7 +72,7 @@ const routes: Routes = [
     {
         path: 'logout',
         component: LoginComponent,
-        data: {animation : 'edit'}
+        data: {animation : 'logout'}
     },
     {
         path: '404',
