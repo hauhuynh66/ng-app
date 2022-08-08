@@ -74,16 +74,16 @@
             </div>
         </div>
         <mat-paginator [length]="count"
-                    [pageSize]="12"
+                    [pageSize]="limit"
                     [pageSizeOptions]="[6, 12, 24, 100]"
                     (page)="pageChange($event)"
                     aria-label="Select page" #paginator>
         </mat-paginator>
         <button (click)="scrollTo(pList)" mat-fab class="floating-button" 
-        cdkDropList [cdkDropListData]="purchaseList" (cdkDropListDropped)="drop($event)">
+        cdkDropList [cdkDropListData]="purchaseList" (cdkDropListDropped)="drop($event)" [@jello] = "state" (@jello.done) = "state='added'">
             <span  matBadge="{{purchaseList.length}}" matBadgeColor="accent" [matBadgeHidden]="badge"></span><i class="fa-solid fa-cart-arrow-down"></i>
         </button>
-        <div class="boundary-container my-2" #pList>
+        <div class="boundary-container my-2" #pList [@shake] = "state2" (@shake.done) = "state2 = 'idle'">
             <div *ngFor="let p of purchaseList" class="boundary-item">
                 <div class="item-col">
                     <p class="st">{{p.name}}</p>

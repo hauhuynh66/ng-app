@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CdkDragDrop, CdkDragEnter, copyArrayItem, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop} from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import config from '../../../assets/config.json';
@@ -9,6 +9,8 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PurchaseDialogComponent } from '../dialog/purchase-dialog/purchase-dialog.component';
+import { transition, trigger, useAnimation } from '@angular/animations';
+import { Jello, ShakeAnimation } from 'src/app/animation';
 
 interface Item{
   count:number;
@@ -32,12 +34,33 @@ export interface ItemData{
 @Component({
   selector: 'app-itemlist',
   templateUrl: './itemlist.component.html',
-  styleUrls: ['./itemlist.component.css', '../../global.style.css']
+  styleUrls: ['./itemlist.component.css', '../../global.style.css'],
+  animations: [
+    trigger('jello', [
+      transition('added=>res',[
+        useAnimation(Jello, {
+          params : {
+            length: '0.2'
+          }
+        })
+      ])
+    ]),
+    trigger('shake', [
+      transition('idle=>shake',[
+        useAnimation(ShakeAnimation, {
+          params : {
+            length: '0.1'
+          }
+        })
+      ])
+    ])
+  ]
 })
 export class ItemlistComponent implements OnInit {
   @Input() itemList:Array<Item> = [];
   @Output() itemCountChange = new EventEmitter();
   purchaseList:ItemData[] = [];
+  limit:number = 12;
   total:number = 0;
   count:number = 0;
   keywords:Array<any> = [];
@@ -45,6 +68,9 @@ export class ItemlistComponent implements OnInit {
   searchText:FormControl = new FormControl("");
   sortOption:FormControl = new FormControl("NAME_ASC");
   badge:boolean = true;
+  state = "added";
+  state2 = "idle";
+
   constructor(private http:HttpClient, private router:Router, private dialog: MatDialog, private snackbar: MatSnackBar) { }
 
   ngOnInit(): void {
@@ -53,6 +79,7 @@ export class ItemlistComponent implements OnInit {
   }
 
   pageChange(event:PageEvent){
+    this.limit = event.pageSize;
     this.getItemList(event.pageIndex);
   }
 
@@ -60,6 +87,7 @@ export class ItemlistComponent implements OnInit {
     let data = {
       mode : this.sortOption.value,
       keys : this.selected.map(x=>x.word),
+      limit : this.limit,
       sw : this.searchText.value
     }
 
@@ -110,6 +138,7 @@ export class ItemlistComponent implements OnInit {
             count: item.count,
             price: item.price*item.count,
           });
+          this.state = "res";
         }
         
       }
@@ -193,6 +222,9 @@ export class ItemlistComponent implements OnInit {
   }
 
   scrollTo(el: Element){
-    el.scrollIntoView();
+    el.scrollIntoView({
+      behavior : 'smooth'
+    });
+    this.state2 = "shake"
   }
 }

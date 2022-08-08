@@ -13,10 +13,10 @@ import {
 
 export const ShakeAnimation = animation([
 	style({ transform: 'rotate(0)' }),
-	animate('{{length}}', style({ transform: 'rotate(2deg)' })),
-	animate('{{length}}', style({ transform: 'rotate(-2deg)' })),
-	animate('{{length}}', style({ transform: 'rotate(2deg)' })),
-	animate('{{length}}', style({ transform: 'rotate(0)' }))
+	animate('{{length}}s', style({ transform: 'rotate(2deg)' })),
+	animate('{{length}}s', style({ transform: 'rotate(-2deg)' })),
+	animate('{{length}}s', style({ transform: 'rotate(2deg)' })),
+	animate('{{length}}s', style({ transform: 'rotate(0)' }))
 ]);
 
 export const ScaleIn = animation([
@@ -98,16 +98,25 @@ export const SwingIn = animation([
 
 ])
 
+export const Jello = animation([
+	style({transform : 'scale3d(1, 1, 1)'}),
+	animate('{{length}}s', style({transform : 'scale3d(1.25, 0.75, 1)'})),
+	animate('{{length}}s', style({transform : 'scale3d(0.75, 1.25, 1)'})),
+	animate('{{length}}s', style({transform : 'scale3d(1.15, 0.85, 1)'})),
+	animate('{{length}}s', style({transform : 'scale3d(1.05, 0.95, 1)'})),
+	animate('{{length}}s', style({transform : 'scale3d(1, 1, 1)'}))
+])
+
 export const RouteAnimations =
   trigger('routeAnimations', [
     transition('* => login', [useAnimation(ShakeAnimation, {
 		params: {
-			length: '0.1s'
+			length: '0.1'
 		}
 	})]),
 	transition('* => register', [useAnimation(ShakeAnimation, {
 		params: {
-			length: '0.1s'
+			length: '0.1'
 		}
 	})]),
 	transition('* => edit', useAnimation(ScaleIn,{
