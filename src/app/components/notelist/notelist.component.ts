@@ -6,15 +6,22 @@ import { CdkDragDrop, CdkDragEnter, moveItemInArray } from "@angular/cdk/drag-dr
 import { FormControl } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
-import { CreatenoteComponent, Note } from '../dialog/createnote/createnote.component';
 import { PageEvent } from '@angular/material/paginator';
 import { ConfirmUploadComponent } from '../dialog/confirm-upload/confirm-upload.component';
 import { ConfirmExportComponent } from '../dialog/confirm-export/confirm-export.component';
 import { MessageDialogComponent } from '../dialog/message-dialog/message-dialog.component';
+import { CreatenoteComponent } from '../dialog/createnote/createnote.component';
 
 interface NoteListData{
   data:Array<Note>;
   count:number;
+}
+
+export interface Note{
+  id?:number,
+  title:string,
+  displayDate:Date,
+  message:string
 }
 
 @Component({
@@ -25,11 +32,13 @@ interface NoteListData{
 
 export class NotelistComponent implements OnInit {
   @ViewChild('file') fileRef:ElementRef = {} as ElementRef;
+
   notelist:NoteListData = {
     data: [],
     count: 0
   };
   date:FormControl = new FormControl(new Date());
+  current_page:number = 0;
   token = new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("access_token"));
 
   constructor(private http: HttpClient, private router:Router, public dialog: MatDialog) {
@@ -89,23 +98,13 @@ export class NotelistComponent implements OnInit {
     this.getNotes(this.date.value.toDateString());
   }
 
-  getNotes(dateString:string, pageNumber?:number){
-    let pn = {
-      "date" : dateString,
-      "page" : 0
-    };
-
-    let p = {
-      "date" : dateString
-    }
-    
-    if(pageNumber!==undefined){
-      pn.page = pageNumber
-    }
-
+  getNotes(dateString:string){
     let listOptions = {
       headers : this.token,
-      params : pn
+      params : {
+        date : dateString,
+        page : this.current_page
+      }
     }
 
     this.http.get<NoteListData>(cf.url.main + cf.url.note.list, listOptions).subscribe({
@@ -184,7 +183,8 @@ export class NotelistComponent implements OnInit {
   }
 
   pageChange(event: PageEvent){
-    
+    this.current_page = event.pageIndex
+    this.getNotes(this.date.value.toDateString())
   }
 
   test(e:DragEvent){

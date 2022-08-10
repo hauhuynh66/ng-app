@@ -41,6 +41,7 @@ export class TestResultComponent implements OnInit {
         i: this.time
       }
     }
+    
     this.http.get<Array<TestResult>>(cf.url.main + "/api/exam/result", options).subscribe({
       next: data=>{
         this.testResult = data;

@@ -1,15 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-
-export interface Note{
-  id?:number,
-  title:string,
-  displayDate:Date,
-  message:string
-}
+import { Note } from '../../notelist/notelist.component';
 
 @Component({
   selector: 'app-createnote',
