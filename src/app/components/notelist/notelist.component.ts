@@ -39,6 +39,7 @@ export class NotelistComponent implements OnInit {
   };
   date:FormControl = new FormControl(new Date());
   current_page:number = 0;
+  current_size:number = 5;
   token = new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("access_token"));
 
   constructor(private http: HttpClient, private router:Router, public dialog: MatDialog) {
@@ -103,7 +104,8 @@ export class NotelistComponent implements OnInit {
       headers : this.token,
       params : {
         date : dateString,
-        page : this.current_page
+        page : this.current_page,
+        limit : this.current_size
       }
     }
 
@@ -184,6 +186,7 @@ export class NotelistComponent implements OnInit {
 
   pageChange(event: PageEvent){
     this.current_page = event.pageIndex
+    this.current_size = event.pageSize
     this.getNotes(this.date.value.toDateString())
   }
 
