@@ -1,33 +1,39 @@
-<mat-sidenav-container>
-  <mat-sidenav mode="side" [(opened)] = "sidenavState">
-    <div class = "m-5" routerLink="/">
-      <div class="d-flex justify-content-center mb-3">
+<mat-drawer-container class="mat-typography" autosize>
+  <mat-drawer #drawer mode="side" disableClose="true" opened="true">
+    
+    <mat-list>
+    <div *ngIf="sidenavState;else closed" class="my-5">
+      <mat-list-item class="d-flex justify-content-center" routerLink="/">
         <i class="fa fa-cubes icon-large"></i>
-      </div>
-      <div class="d-flex justify-content-center">
-        <h1>{{title}}</h1>
+      </mat-list-item>
+      <div *ngIf="sidenavState" class="d-flex justify-content-center">
+        <h1 class="st">MY APP</h1>
       </div>
     </div>
-    <mat-list>
+    <ng-template #closed>
+      <mat-list-item class = "d-flex justify-content-center my-5" routerLink="/">
+        <i class="fa fa-cubes icon-normal"></i>
+      </mat-list-item>
+    </ng-template>
       <mat-divider></mat-divider>
       <mat-list-item class="justify-content-center" routerLink="/notelist">
         <i matListIcon class="fa-solid fa-book"></i>
-        <h1 matLine class="menuItem">Notes</h1>
+        <h1 matLine class="menuItem" *ngIf="sidenavState">Notes</h1>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item routerLink="/misc">
         <i matListIcon class="fa-solid fa-cloud-sun"></i>
-        <h1 matLine class="menuItem">Misc.</h1>
+        <h1 matLine class="menuItem" *ngIf="sidenavState">Misc.</h1>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item routerLink="/item">
         <i matListIcon class="fa-solid fa-rectangle-list"></i>
-        <h1 matLine class="menuItem">Item</h1>
+        <h1 matLine class="menuItem" *ngIf="sidenavState">Item</h1>
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item routerLink="/history">
         <i matListIcon class="fa-solid fa-clock-rotate-left"></i>
-        <h1 matLine class="menuItem">History</h1>
+        <h1 matLine class="menuItem" *ngIf="sidenavState">History</h1>
       </mat-list-item>
       <mat-divider></mat-divider>
       <!-- <mat-list-item routerLink="/edit">
@@ -37,13 +43,13 @@
       <mat-divider></mat-divider>
       <mat-list-item routerLink="/exam">
         <i matListIcon class="fa-solid fa-pen-to-square"></i>
-        <h1 matLine class="menuItem">Exam</h1>
+        <h1 matLine class="menuItem" *ngIf="sidenavState">Exam</h1>
       </mat-list-item>
       <mat-divider></mat-divider>
     </mat-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <!--TOPBAR-->
+  </mat-drawer>
+
+  <mat-drawer-content>
     <mat-toolbar color="primary">
       <button mat-raised-button color="primary" (click)="sidenavState = !sidenavState">
         <mat-icon>menu</mat-icon>
@@ -71,7 +77,6 @@
         <router-outlet #outlet="outlet"></router-outlet>
       </div>
     </div>
-    
-    <!--TOPBAR-->
-  </mat-sidenav-content>
-</mat-sidenav-container>
+  </mat-drawer-content>
+</mat-drawer-container>
+

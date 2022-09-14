@@ -8,20 +8,18 @@
 
 .icon-normal{
     transform: scale(2);
-    padding: 0 10px 0 10px;
 }
 
 .icon-large{
     transform: scale(3);
-    padding: 0 15px 0 15px;
 }
 
 .icon-xl{
     transform: scale(4);
-    padding: 0 20px 0 20px;
 }
 
 .menuItem{
+    font-family: Koulen, cursive;
     font-size: 1.5em !important;
     cursor: pointer;  
 }
