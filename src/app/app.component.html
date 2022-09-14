@@ -51,13 +51,16 @@
       <button mat-mini-fab color="primary" class="mx-2" routerLink="/profile">
         <i class="fa-solid fa-address-book icon-custom"></i>
       </button>
-      <button mat-mini-fab class="mx-2" color="primary">
+      <button mat-mini-fab class="mx-2" color="primary" [matMenuTriggerFor]="notificationMenu">
         <span matBadge = "5" matBadgePosition="before"><i class="fa-solid fa-bell icon-custom"></i></span>
       </button>
       <mat-menu #langMenu>
         <button mat-menu-item>English</button>
         <button mat-menu-item>Vietnamese</button>
         <button mat-menu-item>Japanese</button>
+      </mat-menu>
+      <mat-menu #notificationMenu>
+        
       </mat-menu>
       <span class="spacer"></span>
       <button color="primary" mat-raised-button [matMenuTriggerFor]="langMenu">Language</button>

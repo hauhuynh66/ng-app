@@ -37,10 +37,16 @@
             </mat-select>
         </mat-form-field>
     </div>
+    <mat-paginator [length]="count"
+                    [pageSize]="limit"
+                    [pageSizeOptions]="[6, 12, 24, 100]"
+                    (page)="pageChange($event)"
+                    aria-label="Select page" #paginator>
+    </mat-paginator>
     <div class="my-2" cdkDropListGroup>
         <div class="row" cdkDropList [cdkDropListData]="itemList" (cdkDropListDropped)="drop($event)">
             <div *ngFor="let item of itemList" class="col-lg-3 col-xs-6 col-md-3 col-sm-6 p-2">
-                <mat-card cdkDrag class="">
+                <mat-card cdkDrag (click)="animateItem(item)" [@jello]="item.animationState" (@jello.done) = "resetAS(item)">
                     <mat-card-header>
                         <div class="d-flex flex-row w-100">
                             <div class="w-50">
@@ -52,8 +58,7 @@
                         </div>
                     </mat-card-header>
                     <mat-card-content class="bordered py-2">
-                        <img [src]="item.imgUrl" class="w-100">
-                        <!-- <img class="w-100"> -->
+                            <img [src]="item.imgUrl" class="w-100">
                     </mat-card-content>
                     <mat-card-actions class="item-actions">
                         <div class="input-group">
@@ -84,7 +89,7 @@
             <span  matBadge="{{purchaseList.length}}" matBadgeColor="accent" [matBadgeHidden]="badge"></span><i class="fa-solid fa-cart-arrow-down"></i>
         </button>
         <div class="boundary-container my-2" #pList [@shake] = "state2" (@shake.done) = "state2 = 'idle'">
-            <div *ngFor="let p of purchaseList" class="boundary-item">
+            <div *ngFor="let p of purchaseList" class="boundary-item" [@item-dismiss] = "state3">
                 <div class="item-col">
                     <p class="st">{{p.name}}</p>
                 </div>

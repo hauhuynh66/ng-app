@@ -107,6 +107,11 @@ export const Jello = animation([
 	animate('{{length}}s', style({transform : 'scale3d(1, 1, 1)'}))
 ])
 
+export const BlurOut = animation([
+	style({tranform : 'translateY(0) scaleY(1) scaleX(1)', filter : 'blur(0)'}),
+	animate('{{length}}s', style({transform : 'scale3d(1.25, 0.75, 1)', filter : 'blur(40px)'}))
+])
+
 export const RouteAnimations =
   trigger('routeAnimations', [
     transition('* => login', [useAnimation(ShakeAnimation, {

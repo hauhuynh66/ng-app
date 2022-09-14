@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PurchaseDialogComponent } from '../dialog/purchase-dialog/purchase-dialog.component';
 import { transition, trigger, useAnimation } from '@angular/animations';
-import { Jello, ShakeAnimation } from 'src/app/animation';
+import { BlurOut, Jello, ShakeAnimation } from 'src/app/animation';
 
 interface Item{
   count:number;
@@ -18,6 +18,7 @@ interface Item{
   name:string;
   description:string;
   imgUrl:string;
+  animationState?:string;
 }
 
 interface SearchData{
@@ -53,6 +54,15 @@ export interface ItemData{
           }
         })
       ])
+    ]),
+    trigger('item-dismiss', [
+      transition('idle=>dismiss',[
+        useAnimation(BlurOut, {
+          params : {
+            length: '0.5'
+          }
+        })
+      ])
     ])
   ]
 })
@@ -70,6 +80,7 @@ export class ItemlistComponent implements OnInit {
   badge:boolean = true;
   state = "added";
   state2 = "idle";
+  state3 = "idle";
 
   constructor(private http:HttpClient, private router:Router, private dialog: MatDialog, private snackbar: MatSnackBar) { }
 
@@ -95,6 +106,7 @@ export class ItemlistComponent implements OnInit {
       next: data=>{
         this.itemList = [];
         data.result.forEach(item => {
+          item.animationState = "idle";
           item.count = 0;
           this.itemList.push(item);
         });
@@ -119,6 +131,10 @@ export class ItemlistComponent implements OnInit {
         // }
       }
     })
+  }
+
+  display(name : string){
+    
   }
   
   drop(event:CdkDragDrop<any[]>){
@@ -146,6 +162,15 @@ export class ItemlistComponent implements OnInit {
     }
     this.badge = this.purchaseList.length<1;
     this.total = this.purchaseList.length>0?this.purchaseList.map(item=>item.price).reduce(function(a,b){return a+b}):0;
+  }
+
+  resetAS(item : Item){
+    item.animationState = "idle";
+  }
+
+  animateItem(item : Item){
+    item.animationState = "res";
+    console.log(item.animationState);
   }
 
   deleteP(item:any){

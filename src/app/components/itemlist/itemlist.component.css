@@ -66,3 +66,12 @@
 img{
     min-height: 200px;
 }
+
+.hover-icon{
+    visibility: hidden;
+    display: none;
+}
+
+.hover-icon:hover{
+    display: block;
+}
