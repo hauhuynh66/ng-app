@@ -1,0 +1,39 @@
+.boundary-container {
+    width: 100%;
+    height: 200px;
+    border: dotted #ccc 2px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.boundary-item{
+    border: dotted #ccc 2px;
+    height: 75px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    margin: 5px 10px 5px 10px;
+}
+
+.item-col{
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item-actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.btn-small{
+    width: 30px;
+    height: 
+    30px;
+}

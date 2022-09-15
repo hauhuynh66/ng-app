@@ -45,12 +45,12 @@
     </mat-paginator>
     <div class="my-2" cdkDropListGroup>
         <div class="row" cdkDropList [cdkDropListData]="itemList" (cdkDropListDropped)="drop($event)">
-            <div *ngFor="let item of itemList" class="col-lg-3 col-xs-6 col-md-3 col-sm-6 p-2">
-                <mat-card cdkDrag (click)="animateItem(item)" [@jello]="item.animationState" (@jello.done) = "resetAS(item)">
+            <div *ngFor="let item of itemList" class="col-lg-3 col-xs-3 col-md-4 col-sm-6 p-2">
+                <mat-card cdkDrag>
                     <mat-card-header>
                         <div class="d-flex flex-row w-100">
                             <div class="w-50">
-                                <p class="st">{{item.name}}</p>
+                                <p class="st" (click)="openDetail(item.name)">{{item.name}}</p>
                             </div>
                             <div class="w-50">
                                 <p class="st text-danger te">{{item.price|currency: 'VND':'symbol-narrow':'4.'}}</p>
@@ -58,7 +58,7 @@
                         </div>
                     </mat-card-header>
                     <mat-card-content class="bordered py-2">
-                            <img [src]="item.imgUrl" class="w-100">
+                            <img [src]="item.imgUrl" class="w-100" (click)="animateItem(item)" [@item]="item.animationState" (@item.done) = "resetAS(item)">
                     </mat-card-content>
                     <mat-card-actions class="item-actions">
                         <div class="input-group">
@@ -84,33 +84,9 @@
                     (page)="pageChange($event)"
                     aria-label="Select page" #paginator>
         </mat-paginator>
-        <button (click)="scrollTo(pList)" mat-fab class="floating-button" 
+        <button (click)="openInfoDialog()" mat-fab class="floating-button" 
         cdkDropList [cdkDropListData]="purchaseList" (cdkDropListDropped)="drop($event)" [@jello] = "state" (@jello.done) = "state='added'">
             <span  matBadge="{{purchaseList.length}}" matBadgeColor="accent" [matBadgeHidden]="badge"></span><i class="fa-solid fa-cart-arrow-down"></i>
         </button>
-        <div class="boundary-container my-2" #pList [@shake] = "state2" (@shake.done) = "state2 = 'idle'">
-            <div *ngFor="let p of purchaseList" class="boundary-item" [@item-dismiss] = "state3">
-                <div class="item-col">
-                    <p class="st">{{p.name}}</p>
-                </div>
-                <div class="item-col">
-                    <p class="st">{{p.count}}</p>
-                </div>
-                <div class="item-col">
-                    <p class="st">{{p.price | currency: 'VND' : 'symbol-narrow' : '4.'}}</p>
-                </div>
-                <div>
-                    <button mat-fab (click)="deleteP(p)"><i class="fa-solid fa-xmark"></i></button>
-                </div>
-            </div>
-        </div>
-        <div class="my-2 d-flex">
-            <div class="w-50">
-                <p class="h4">{{total | currency:'VND' : 'symbol-narrow' : '4.'}}</p>
-            </div>
-            <div class="w-50 d-flex justify-content-end">
-                <button mat-raised-button color="primary" (click)="openInfoDialog()">Confirm</button>
-            </div>
-        </div>
     </div>
 </div>

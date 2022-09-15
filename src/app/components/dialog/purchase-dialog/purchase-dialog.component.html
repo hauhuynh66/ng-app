@@ -1,5 +1,32 @@
 <div class="m-3">
     <mat-stepper linear orientation="vertical" #stepper>
+        <mat-step>
+            <ng-template matStepLabel>Your Cart</ng-template>
+            <div class="boundary-container my-2" #pList>
+                <div *ngFor="let p of purchaseList" class="boundary-item">
+                    <div class="item-col">
+                        <p class="st">{{p.name}}</p>
+                    </div>
+                    <div class="item-col">
+                        <p class="st">{{p.count}}</p>
+                    </div>
+                    <div class="item-col">
+                        <p class="st">{{p.price | currency: 'VND' : 'symbol-narrow' : '4.'}}</p>
+                    </div>
+                    <div>
+                        <button mat-fab (click)="deleteP(p)"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="my-2 d-flex">
+                <div class="w-50">
+                    <p class="h4">{{total | currency:'VND' : 'symbol-narrow' : '4.'}}</p>
+                </div>
+                <div class="w-50 d-flex justify-content-end">
+                    <button mat-raised-button color="primary" matStepperNext [disabled]="purchaseList.length<1">Confirm</button>
+                </div>
+            </div>
+        </mat-step>
         <mat-step [stepControl]="userControl">
             <form [formGroup]="userControl">
                 <ng-template matStepLabel>Fill out your account information</ng-template>

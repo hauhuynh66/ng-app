@@ -1,16 +1,16 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CdkDragDrop} from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import config from '../../../assets/config.json';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatChip, MatChipInputEvent, MatChipList } from '@angular/material/chips';
+import { MatChip, MatChipList } from '@angular/material/chips';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PurchaseDialogComponent } from '../dialog/purchase-dialog/purchase-dialog.component';
 import { transition, trigger, useAnimation } from '@angular/animations';
-import { BlurOut, Jello, ShakeAnimation } from 'src/app/animation';
+import { BlurOut, Jello, Shake } from 'src/app/animation';
 
 interface Item{
   count:number;
@@ -48,15 +48,15 @@ export interface ItemData{
     ]),
     trigger('shake', [
       transition('idle=>shake',[
-        useAnimation(ShakeAnimation, {
+        useAnimation(Shake, {
           params : {
             length: '0.1'
           }
         })
       ])
     ]),
-    trigger('item-dismiss', [
-      transition('idle=>dismiss',[
+    trigger('item', [
+      transition('idle=>res',[
         useAnimation(BlurOut, {
           params : {
             length: '0.5'
@@ -71,7 +71,6 @@ export class ItemlistComponent implements OnInit {
   @Output() itemCountChange = new EventEmitter();
   purchaseList:ItemData[] = [];
   limit:number = 12;
-  total:number = 0;
   count:number = 0;
   keywords:Array<any> = [];
   selected:Array<any> = [];
@@ -161,7 +160,6 @@ export class ItemlistComponent implements OnInit {
       this.itemList[event.previousIndex].count = 0;
     }
     this.badge = this.purchaseList.length<1;
-    this.total = this.purchaseList.length>0?this.purchaseList.map(item=>item.price).reduce(function(a,b){return a+b}):0;
   }
 
   resetAS(item : Item){
@@ -170,15 +168,6 @@ export class ItemlistComponent implements OnInit {
 
   animateItem(item : Item){
     item.animationState = "res";
-    console.log(item.animationState);
-  }
-
-  deleteP(item:any){
-    let index = this.purchaseList.indexOf(item);
-    if(index!==-1){
-      this.purchaseList.splice(index,1);
-    }
-    this.total = this.purchaseList.length>0?this.purchaseList.map(item=>item.price).reduce(function(a,b){return a+b}):0;
   }
 
   plus(itemName:string){
@@ -251,5 +240,9 @@ export class ItemlistComponent implements OnInit {
       behavior : 'smooth'
     });
     this.state2 = "shake"
+  }
+
+  openDetail(name : String){
+    this.router.navigate(['/', name]);
   }
 }

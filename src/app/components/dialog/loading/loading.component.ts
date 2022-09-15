@@ -1,6 +1,6 @@
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { RotateInAnimation } from 'src/app/animation';
+import { RotateIn } from 'src/app/animation';
 
 @Component({
   selector: 'app-loading',
@@ -9,7 +9,7 @@ import { RotateInAnimation } from 'src/app/animation';
   animations: [
     trigger('move', [
       transition('false=>true',[
-        useAnimation(RotateInAnimation, {
+        useAnimation(RotateIn, {
           params : {
             length: 1
           }

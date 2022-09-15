@@ -1,8 +1,31 @@
 <div class="m-5">
     <div class="d-flex flex-row my-3 justify-content-center">
         <div class="d-flex flex-column">
-            <h1 class="w-100 st ft-xs text-center">{{forecastData.name}}</h1>
-            <h1 class="w-100 st ft-xs text-center">{{forecastData.data[0].description}}</h1>
+            <h1 class="w-100 st ft-xs text-center">{{name}}</h1>
+            <div [ngSwitch]="weatherData.main" class="d-flex justify-content-center mb-5 mt-3">
+                <i *ngSwitchCase="'Thunderstorm'">
+                    <i class="fa-solid fa-cloud-bolt icon-xl"></i>
+                </i>
+                <i *ngSwitchCase="'Drizzle'">
+                    <i class="fa-solid fa-cloud-showers-heavy icon-xl"></i>
+                </i>
+                <i *ngSwitchCase="'Rain'">
+                    <i class="fa-solid fa-cloud-rain icon-xl"></i>
+                </i>
+                <i *ngSwitchCase="'Snow'">
+                    <i class="fa-solid fa-snowflake icon-xl"></i>
+                </i>
+                <i *ngSwitchCase="'Atmosphere'">
+                    <i class="fa-solid fa-wind icon-xl"></i>
+                </i>
+                <i *ngSwitchCase="'Clouds'">
+                    <i class="fa-solid fa-cloud icon-xl"></i>
+                </i>
+                <i *ngSwitchDefault>
+                    <i class="fa-solid fa-cloud-sun icon-xl"></i>
+                </i>
+            </div>
+            <h1 class="w-100 st ft-xs text-center">{{weatherData.description}}</h1>
         </div>
         
     </div>

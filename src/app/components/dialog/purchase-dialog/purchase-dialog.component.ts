@@ -24,11 +24,13 @@ export class PurchaseDialogComponent implements OnInit {
   isComplete:boolean = false;
   userControl:FormGroup = this.formBuilder.group({});
   infoControl:FormGroup = this.formBuilder.group({});
-  purchaseList:ItemData[] = [];
+  purchaseList : Array<ItemData>;
+  total:number = 0;
   @Output() isConfirm:EventEmitter<boolean> = new EventEmitter();
   constructor(private dialogRef:MatDialogRef<PurchaseDialogComponent> ,
     private formBuilder:FormBuilder, @Inject(MAT_DIALOG_DATA) private data:any, private http:HttpClient) { 
       this.purchaseList = data.items;
+      this.total = this.purchaseList.length>0?this.purchaseList.map(item=>item.price).reduce(function(a,b){return a+b}):0;
     }
 
   ngOnInit(): void {
@@ -71,5 +73,13 @@ export class PurchaseDialogComponent implements OnInit {
 
   check(){
     this.isComplete = this.userControl.valid&&this.infoControl.valid
+  }
+
+  deleteP(item:any){
+    let index = this.purchaseList.indexOf(item);
+    if(index!==-1){
+      this.purchaseList.splice(index,1);
+    }
+    this.total = this.purchaseList.length>0?this.purchaseList.map(item=>item.price).reduce(function(a,b){return a+b}):0;
   }
 }

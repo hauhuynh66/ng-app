@@ -9,12 +9,12 @@ interface WeatherData{
   temp : number,
   humid : number,
   dt : number,
-  description : string
+  description : string,
+  main : string
 }
 
 interface ForecastData{
-  data : Array<WeatherData>,
-  name : string
+  data : Array<WeatherData>
 }
 
 @Component({
@@ -28,12 +28,15 @@ export class MiscComponent implements OnInit {
     temp : 0,
     humid : 0,
     dt : 0,
-    description : 'test' 
+    description : 'test' ,
+    main : ''
   }
+
   forecastData: ForecastData = {
-    data : Array(this.weatherData),
-    name : ""
+    data : Array(this.weatherData)
   };
+
+  name : string = 'CITY_NAME';
 
   chartData : any = {
 
@@ -51,22 +54,45 @@ export class MiscComponent implements OnInit {
   }
 
   getForecastData(){
-    let p = {
-      lat : config.openweathermap.defaults.lat,
-      lon : config.openweathermap.defaults.lon,
-      appid : config.openweathermap.key,
-      cnt : 40
+    let weatherOptions = {
+      params: {
+        lat : config.openweathermap.defaults.lat,
+        lon : config.openweathermap.defaults.lon,
+        appid : config.openweathermap.key
+      }
+    }
+    let forecastOptions = {
+      params : {
+        lat : config.openweathermap.defaults.lat,
+        lon : config.openweathermap.defaults.lon,
+        appid : config.openweathermap.key,
+        cnt : 40
+      }
     }
 
-    let forecastOptions = {
-      params : p
-    }
+    this.http.get<any>(config.openweathermap.url.weather, weatherOptions).subscribe({
+      next: data=>{
+        this.weatherData = {
+          temp : data.main.temp - 273.15,
+          humid : data.main.humidity,
+          description : data.weather[0].description,
+          dt : data.dt,
+          main : data.weather[0].main
+        }
+      },
+      error : err=>{
+        console.log(err.message);
+        
+      }
+    })
     
     this.http.get<any>(config.openweathermap.url.forecast, forecastOptions).subscribe({
       next: data =>{
+        console.log(data);
+        
         let fList : Array<any> = data.list;
         let label : Array<string> = [];
-        this.forecastData.name = data.city.name;
+        this.name = data.city.name;
         this.forecastData.data = []
 
         fList.forEach(e =>{
@@ -75,7 +101,8 @@ export class MiscComponent implements OnInit {
             temp : e.main.temp - 273.15,
             humid : e.main.humidity,
             description : e.weather[0].description,
-            dt : e.dt
+            dt : e.dt,
+            main : e.weather[0].main
           }
           this.forecastData.data.push(data)
         })

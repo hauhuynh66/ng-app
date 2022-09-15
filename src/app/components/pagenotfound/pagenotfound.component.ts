@@ -1,6 +1,6 @@
 import { transition, trigger, useAnimation } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { RotateInAnimation, TrackingInAnimation } from 'src/app/animation';
+import { RotateIn, TrackingIn } from 'src/app/animation';
 
 @Component({
   selector: 'app-pagenotfound',
@@ -8,7 +8,7 @@ import { RotateInAnimation, TrackingInAnimation } from 'src/app/animation';
   styleUrls: ['./pagenotfound.component.css', '../../global.style.css'],
   animations: [
     trigger('trackingIn', [
-      transition(':enter', [useAnimation(TrackingInAnimation, {
+      transition(':enter', [useAnimation(TrackingIn, {
         params: {
           x: -0.5,
           length: 0.3
@@ -16,7 +16,7 @@ import { RotateInAnimation, TrackingInAnimation } from 'src/app/animation';
       })])
     ]),
     trigger('test', [
-      transition(':enter', [useAnimation(RotateInAnimation, {
+      transition(':enter', [useAnimation(RotateIn, {
       params : {
         length: 1
       }

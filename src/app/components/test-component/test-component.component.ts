@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CanDeactivateComponent } from 'src/app/guard_da';
-import { cf, ms } from '../../../asset.loader';
+import { cf } from '../../../asset.loader';
 import { MessageDialogComponent } from '../dialog/message-dialog/message-dialog.component';
 
 interface Answer{
