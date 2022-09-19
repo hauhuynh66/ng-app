@@ -11,7 +11,7 @@ import {
 	animation,
 	useAnimation} from '@angular/animations';
 
-export const ShakeAnimation = animation([
+export const Shake = animation([
 	style({ transform: 'rotate(0)' }),
 	animate('{{length}}s', style({ transform: 'rotate(2deg)' })),
 	animate('{{length}}s', style({ transform: 'rotate(-2deg)' })),
@@ -35,7 +35,7 @@ export const BounceIn = animation([
 	animate('0.25s ease-out', style({transform : 'translateY(0px)'}))
 ])
 
-export const TrackingInAnimation = animation([
+export const TrackingIn = animation([
 	style({ 'letter-spacing' : '{{x}}em', opacity : 0 }),
 	animate('{{length}}s cubic-bezier(0.215, 0.610, 0.355, 1.000)', style({ opacity: 0.6})),
 	animate('{{length}}s cubic-bezier(0.215, 0.610, 0.355, 1.000)', style({ opacity: 1}))
@@ -47,21 +47,21 @@ export const Blur = animation([
 
 ])
 
-export const FadeOutAnimation = animation([
+export const FadeOut = animation([
 	animate('{{length}}s', style({ opacity: 0, transform: 'translateY({{tx}}px)' }))
 ])
 
-export const RotateInAnimation = animation([
+export const RotateIn = animation([
 	style({transform : 'rotate(0)'}),
 	animate('{{length}}s cubic-bezier(0.250, 0.460, 0.450, 0.940)', style({transform : 'rotate(360deg)'}))
 ])
 
-export const SlideInXAnimation = animation([
+export const SlideInX = animation([
 	style({transform: 'translateX(-{{ix}}px)', opacity: 0}),
 	animate('{{length}}s cubic-bezier(0.250, 0.460, 0.450, 0.940)', style({transform: 'translateX(0px)', opacity: 1}))
 ])
 
-export const FadeInAnimation = animation(
+export const FadeIn = animation(
 	[
 		style({ 
 			opacity: '{{opi}}', 
@@ -114,12 +114,12 @@ export const BlurOut = animation([
 
 export const RouteAnimations =
   trigger('routeAnimations', [
-    transition('* => login', [useAnimation(ShakeAnimation, {
+    transition('* => login', [useAnimation(Shake, {
 		params: {
 			length: '0.1'
 		}
 	})]),
-	transition('* => register', [useAnimation(ShakeAnimation, {
+	transition('* => register', [useAnimation(Shake, {
 		params: {
 			length: '0.1'
 		}
@@ -139,7 +139,7 @@ export const RouteAnimations =
 			length: '1'
 		}
 	})),
-	transition('* => *', useAnimation(SlideInXAnimation,{
+	transition('* => *', useAnimation(SlideInX,{
 		params: {
 			ix: '1000',
 			length: '0.5'

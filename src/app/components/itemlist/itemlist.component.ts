@@ -13,11 +13,11 @@ import { transition, trigger, useAnimation } from '@angular/animations';
 import { BlurOut, Jello, Shake } from 'src/app/animation';
 
 interface Item{
-  count:number;
   price:number;
   name:string;
   description:string;
   imgUrl:string;
+  count:number;
   animationState?:string;
 }
 
@@ -243,6 +243,6 @@ export class ItemlistComponent implements OnInit {
   }
 
   openDetail(name : String){
-    this.router.navigate(['/', name]);
+    this.router.navigate(['/item', name]);
   }
 }

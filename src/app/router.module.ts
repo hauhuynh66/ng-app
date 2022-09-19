@@ -19,6 +19,8 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 
 import { CAGuard } from './guard';
 import { DA_Guard } from './guard_da';
+import { ItemDetailComponent } from './components/item-detail/item-detail.component';
+import { MapComponent } from './components/map/map.component';
 
 const routes: Routes = [
     {
@@ -73,6 +75,16 @@ const routes: Routes = [
         path: 'logout',
         component: LoginComponent,
         data: {animation : 'logout'}
+    },
+    {
+        path : 'item/:name',
+        component : ItemDetailComponent,
+        data: {animation : 'item-detail'}
+    },
+    {
+        path : 'map',
+        component : MapComponent,
+        data: {animation : 'map'}
     },
     {
         path: '404',

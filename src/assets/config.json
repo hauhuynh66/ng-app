@@ -17,6 +17,7 @@
             "add" : "/api/notes/add"
         },
         "item" :{
+            "detail" : "/api/item",
             "list" : "/api/item/list",
             "word" : "/api/item/words",
             "search" : "/api/item/search",
@@ -37,5 +38,13 @@
             "weather" : "https://api.openweathermap.org/data/2.5/weather",
             "forecast" : "https://api.openweathermap.org/data/2.5/forecast"
         }
+    },
+    "time" : {
+        "url": "http://worldtimeapi.org/api/ip/"
+    },
+    "geolocation" : {
+        "url" : "https://ipgeolocation.abstractapi.com/v1/",
+        "key" : "6c1867f692234a1b860c77df41216724"
     }
+        
 }

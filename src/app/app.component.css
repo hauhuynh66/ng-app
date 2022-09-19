@@ -7,3 +7,12 @@
 .mat-drawer-container{
     height: 100%;
 }
+
+.width-line{
+    width: 300px;
+    height: 0px;
+}
+
+.mat-drawer{
+    background-color : #3F51B5;
+}

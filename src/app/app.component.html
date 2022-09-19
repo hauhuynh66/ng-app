@@ -1,6 +1,5 @@
 <mat-drawer-container class="mat-typography" autosize>
-  <mat-drawer #drawer mode="side" disableClose="true" opened="true">
-    
+  <mat-drawer #drawer mode="side" disableClose="true" opened="sidenavState" [@sidenav]="sidenavAnimationState">
     <mat-list>
     <div *ngIf="sidenavState;else closed" class="my-5">
       <mat-list-item class="d-flex justify-content-center" routerLink="/">
@@ -39,19 +38,20 @@
       <!-- <mat-list-item routerLink="/edit">
         <i matListIcon class="fa-solid fa-pen-to-square"></i>
         <h1 matLine class="menuItem">Edit</h1>
-      </mat-list-item> -->
-      <mat-divider></mat-divider>
+      </mat-list-item>
+      <mat-divider></mat-divider> -->
       <mat-list-item routerLink="/exam">
         <i matListIcon class="fa-solid fa-pen-to-square"></i>
         <h1 matLine class="menuItem" *ngIf="sidenavState">Exam</h1>
       </mat-list-item>
       <mat-divider></mat-divider>
+      <h1 matLine class="width-line" *ngIf="sidenavState"></h1>
     </mat-list>
   </mat-drawer>
 
   <mat-drawer-content>
     <mat-toolbar color="primary">
-      <button mat-raised-button color="primary" (click)="sidenavState = !sidenavState">
+      <button mat-raised-button color="primary" (click)="sidenav()">
         <mat-icon>menu</mat-icon>
       </button>
       <button mat-mini-fab color="primary" class="mx-2" routerLink="/profile">

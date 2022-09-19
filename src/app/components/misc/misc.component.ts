@@ -1,9 +1,21 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable, of, reduce } from 'rxjs';
-import config from '../../../assets/config.json';
+import { cf } from '../../../asset.loader';
 import moment from 'moment';
 
+interface GeolocationData{
+  ip : string,
+  city : string,
+  lon : number,
+  lat : number
+}
+
+interface TimeData{
+  hour : number,
+  minute : number,
+  second : number
+}
 
 interface WeatherData{
   temp : number,
@@ -32,14 +44,25 @@ export class MiscComponent implements OnInit {
     main : ''
   }
 
-  forecastData: ForecastData = {
+  forecastData : ForecastData = {
     data : Array(this.weatherData)
   };
 
-  name : string = 'CITY_NAME';
+  locationData : GeolocationData = {
+    ip : "",
+    city : "",
+    lon : 0,
+    lat : 0
+  }
 
   chartData : any = {
 
+  }
+
+  time : TimeData = {
+    hour : 0,
+    minute : 0,
+    second : 0
   }
 
   chartOptions = {
@@ -50,27 +73,101 @@ export class MiscComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.getForecastData();
+    this.getGeolocationData();
+    //this.getForecastData();
   }
 
-  getForecastData(){
+  getTimeString(time : TimeData){
+    return this.pad(time.hour,2) + ":" + this.pad(time.minute,2) + ":" + this.pad(time.second,2);
+  }
+
+  pad(num : number, length : number){
+    let strNum = num + ""
+    while(strNum.length < length){
+      strNum = "0"+ strNum
+    }
+    return num
+  }
+
+  getGeolocationData(){
+    let locationOption = {
+      params : {
+        api_key : cf.geolocation.key
+      }
+    }
+    this.http.get<any>(cf.geolocation.url, locationOption).subscribe({
+      next: data=>{
+        this.locationData = {
+          ip : data.ip_address,
+          city : data.city,
+          lon : data.longitude,
+          lat : data.latitude
+        }
+        this.getForecastData(this.locationData);
+        this.getTime(this.locationData);
+      }
+    })
+  }
+
+  unixToTime(unix : number){
+    let t = new Date(unix*1000);
+    let time : TimeData =  {
+      hour : t.getHours(),
+      minute : t.getMinutes(),
+      second : t.getSeconds()
+    }
+    return time
+  }
+
+  getTime(geolocation : GeolocationData){
+    this.http.get<any>(cf.time.url + geolocation.ip).subscribe({
+      next : data =>{
+        this.time = this.unixToTime(data.unixtime);
+        setInterval(()=>{
+          this.processTime(this.time)
+        }, 1000)
+      }
+    })
+  }
+
+  processTime(time : TimeData){
+    if(time.second<=60){
+      time.second++
+    }else{
+      if(time.minute<=60){
+        time.minute++
+        time.second = 0
+      }else{
+        if(time.hour<=23){
+          time.hour++
+          time.minute = 0
+        }else{
+          time.hour = 0
+          time.minute = 0
+          time.second = 0
+        }
+      }
+    }
+  }
+
+  getForecastData(location : GeolocationData){
     let weatherOptions = {
       params: {
-        lat : config.openweathermap.defaults.lat,
-        lon : config.openweathermap.defaults.lon,
-        appid : config.openweathermap.key
+        lat : location.lat,
+        lon : location.lon,
+        appid : cf.openweathermap.key
       }
     }
     let forecastOptions = {
       params : {
-        lat : config.openweathermap.defaults.lat,
-        lon : config.openweathermap.defaults.lon,
-        appid : config.openweathermap.key,
+        lat : location.lat,
+        lon : location.lon,
+        appid : cf.openweathermap.key,
         cnt : 40
       }
     }
 
-    this.http.get<any>(config.openweathermap.url.weather, weatherOptions).subscribe({
+    this.http.get<any>(cf.openweathermap.url.weather, weatherOptions).subscribe({
       next: data=>{
         this.weatherData = {
           temp : data.main.temp - 273.15,
@@ -82,17 +179,15 @@ export class MiscComponent implements OnInit {
       },
       error : err=>{
         console.log(err.message);
-        
       }
     })
     
-    this.http.get<any>(config.openweathermap.url.forecast, forecastOptions).subscribe({
+    this.http.get<any>(cf.openweathermap.url.forecast, forecastOptions).subscribe({
       next: data =>{
         console.log(data);
         
         let fList : Array<any> = data.list;
         let label : Array<string> = [];
-        this.name = data.city.name;
         this.forecastData.data = []
 
         fList.forEach(e =>{
