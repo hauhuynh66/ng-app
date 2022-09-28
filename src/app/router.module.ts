@@ -13,7 +13,6 @@ import { ConfirmUploadComponent } from './components/dialog/confirm-upload/confi
 import { ConfirmExportComponent } from './components/dialog/confirm-export/confirm-export.component';
 import { PurchaseDialogComponent } from './components/dialog/purchase-dialog/purchase-dialog.component';
 import { MessageDialogComponent } from './components/dialog/message-dialog/message-dialog.component';
-import { ExcelEditorComponent } from './components/excel-editor/excel-editor.component';
 import { TextInputDialogComponent } from './components/dialog/text-input-dialog/text-input-dialog.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 
@@ -65,11 +64,6 @@ const routes: Routes = [
         path: 'history', 
         component: PurchaseComponent,
         data: {animation : 'history'}
-    },
-    {
-        path: 'edit', 
-        component: ExcelEditorComponent,
-        data: {animation : 'edit'}
     },
     {
         path: 'logout',
@@ -129,6 +123,6 @@ export class BasicRoutingModule implements OnInit{
      PurchaseDialogComponent,
      MessageDialogComponent,
      TextInputDialogComponent,
-     ExcelEditorComponent,
-     MainPageComponent
+     MainPageComponent,
+     ItemDetailComponent
  ];

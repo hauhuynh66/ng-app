@@ -3,6 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import config from "../../../assets/config.json";
 import { Router } from '@angular/router';
 
+interface UserInfo{
+  firstname : string,
+  lastname : string,
+  username : string,
+  email : string,
+  imgUrl : string,
+  phoneNumber? : string
+}
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -10,7 +19,7 @@ import { Router } from '@angular/router';
 })
 
 export class ProfileComponent implements OnInit {
-  profile:any = {};
+  profile:UserInfo = {} as UserInfo;
   type:string = 'line';
   data:any;
   options:any;
@@ -38,7 +47,7 @@ export class ProfileComponent implements OnInit {
     let options = {
       headers: new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("access_token"))
     }
-    this.http.get(config.url.main+config.url.user.profile, options).subscribe({
+    this.http.get<UserInfo>(config.url.main+config.url.user.profile, options).subscribe({
       next : data=>{
         this.profile = data;
       },

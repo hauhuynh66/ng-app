@@ -1,47 +1,60 @@
 <div class="m-5">
     <mat-tab-group mat-stretch-tabs>
         <mat-tab label="Personal Info">
-            <mat-list>
-                <h2 mat-subheader>Personal Info</h2>
-                <mat-list-item>
-                    <i matListIcon class="fa fa-1"></i>
-                    <div matLine>
-                        <p>Firstname</p>
+            <mat-card class="m-2">
+                <mat-card-content>
+                    <div class="row mx-0">
+                        <div class="col-4" >
+                            <div class="d-flex justify-content-center my-5">
+                                <img class="img-wrapper justify-content-center" src="https://picsum.photos/id/237/200/300"/>
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <mat-list>
+                                <h2 mat-subheader>Personal Info</h2>
+                                <mat-list-item>
+                                    <i matListIcon class="fa fa-1"></i>
+                                    <div matLine>
+                                        <p>Firstname</p>
+                                    </div>
+                                    <div matLine>
+                                        <p class="st ft-bg">{{profile.firstname}}</p>
+                                    </div>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <i matListIcon class="fa fa-2"></i>
+                                    <div matLine>
+                                        <p>Lastname</p>
+                                    </div>
+                                    <div matLine>
+                                        <p class="st ft-bg">{{profile.lastname}}</p>
+                                    </div>
+                                </mat-list-item>
+                                <h2 mat-subheader>Account Info</h2>
+                                <mat-list-item>
+                                    <i matListIcon class="fa fa-1"></i>
+                                    <div matLine>
+                                        <p>Username</p>
+                                    </div>
+                                    <div matLine>
+                                        <p class="st ft-bg">{{profile.username}}</p>
+                                    </div>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <i matListIcon class="fa fa-2"></i>
+                                    <div matLine>
+                                        <p>Email</p>
+                                    </div>
+                                    <div matLine>
+                                        <p class="st ft-bg">{{profile.email}}</p>
+                                    </div>
+                                </mat-list-item>
+                                
+                            </mat-list>
+                        </div>
                     </div>
-                    <div matLine>
-                        <p class="st ft-bg">{{profile.firstname}}</p>
-                    </div>
-                </mat-list-item>
-                <mat-list-item>
-                    <i matListIcon class="fa fa-2"></i>
-                    <div matLine>
-                        <p>Lastname</p>
-                    </div>
-                    <div matLine>
-                        <p class="st ft-bg">{{profile.lastname}}</p>
-                    </div>
-                </mat-list-item>
-                <h2 mat-subheader>Account Info</h2>
-                <mat-list-item>
-                    <i matListIcon class="fa fa-1"></i>
-                    <div matLine>
-                        <p>Username</p>
-                    </div>
-                    <div matLine>
-                        <p class="st ft-bg">{{profile.username}}</p>
-                    </div>
-                </mat-list-item>
-                <mat-list-item>
-                    <i matListIcon class="fa fa-2"></i>
-                    <div matLine>
-                        <p>Email</p>
-                    </div>
-                    <div matLine>
-                        <p class="st ft-bg">{{profile.email}}</p>
-                    </div>
-                </mat-list-item>
-                
-            </mat-list>
+                </mat-card-content>
+            </mat-card>
         </mat-tab>
         <mat-tab label="Statistics">
             <div class="w-100 p-5">

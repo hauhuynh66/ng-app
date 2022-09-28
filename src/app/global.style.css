@@ -60,5 +60,9 @@ mat-sidenav{
     width: 25%;
     background-color: cornflowerblue;
 }
-  
+
+.img-wrapper{
+    min-width: 100px;
+    min-height: 200px;
+}
   
