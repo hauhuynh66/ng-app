@@ -58,7 +58,14 @@
                         </div>
                     </mat-card-header>
                     <mat-card-content class="bordered py-2">
-                            <img [src]="item.imgUrl" class="w-100" (click)="animateItem(item)" [@item]="item.animationState" (@item.done) = "resetAS(item)">
+                        <div class="item-container hover-trigger">
+                            <div class="item-holder">
+                                <button mat-mini-fab color="accent" class="action" (click)="openDetail(item.name)"><mat-icon>menu</mat-icon></button>
+                                <button mat-mini-fab color="primary" class="action"><mat-icon>menu</mat-icon></button>
+                                <button mat-mini-fab color="secondary" class="action"><mat-icon>menu</mat-icon></button>
+                            </div>
+                            <img [src]="item.imgUrl" class="w-100 image-hover" (click)="animateItem(item)" [@item]="item.animationState" (@item.done) = "resetAS(item)">
+                        </div>
                     </mat-card-content>
                     <mat-card-actions class="item-actions">
                         <div class="input-group">

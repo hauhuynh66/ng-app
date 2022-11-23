@@ -27,3 +27,27 @@ img{
     min-height: 100px;
     max-height: 200px;
 }
+
+.hover-trigger:hover .item-holder{
+    display: flex;
+    background-color: rgba(179, 191, 182, 0.5);
+}
+
+.item-holder{
+    display: none;
+    width: 100%;
+    min-height: 200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.item-holder .action{
+    margin: auto;
+}
+
+.item-container{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}

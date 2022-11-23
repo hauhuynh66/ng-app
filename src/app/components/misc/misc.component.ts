@@ -193,7 +193,7 @@ export class MiscComponent implements OnInit {
         fList.forEach(e =>{
           label.push(moment(new Date(e.dt * 1000)).format("Do hh:mm"))
           let data : WeatherData = {
-            temp : e.main.temp - 273.15,
+            temp : Math.round((e.main.temp - 273.15)*100)/100,
             humid : e.main.humidity,
             description : e.weather[0].description,
             dt : e.dt,

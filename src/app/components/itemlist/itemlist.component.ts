@@ -66,6 +66,7 @@ export interface ItemData{
     ])
   ]
 })
+
 export class ItemlistComponent implements OnInit {
   @Input() itemList:Array<Item> = [];
   @Output() itemCountChange = new EventEmitter();
