@@ -17,14 +17,15 @@ interface Content{
 })
 
 export class MainPageComponent implements OnInit {
-  
+  //main message
+  public message:string = "GENERIC MESSAGE";
   constructor(private http : HttpClient, private dlg: MatDialog) { 
-
+    
   }
 
   ngOnInit(): void {
-    
-    
+
+
   }
 
 }

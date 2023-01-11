@@ -1,0 +1,10 @@
+.upload-button{
+    height: 100%;
+    width: 100px;
+    margin-top : 5px;
+}
+
+.line{
+    display: flex;
+    flex-direction: row;
+}
