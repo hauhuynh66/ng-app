@@ -74,6 +74,11 @@ export class MiscComponent implements OnInit {
 
   ngOnInit(): void {
     this.getGeolocationData();
+
+    setInterval(()=>{
+      this.getForecastData(this.locationData);
+    }, 1000*60*5);
+
     //this.getForecastData();
   }
 
@@ -105,6 +110,9 @@ export class MiscComponent implements OnInit {
         }
         this.getForecastData(this.locationData);
         this.getTime(this.locationData);
+      },
+      error: err=>{
+        confirm("Failed to get computer geolocation.\n Please try again.");
       }
     })
   }

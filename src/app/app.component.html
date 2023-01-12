@@ -35,14 +35,24 @@
         <h1 matLine class="menuItem" *ngIf="sidenavState">History</h1>
       </mat-list-item>
       <mat-divider></mat-divider>
-      <!-- <mat-list-item routerLink="/edit">
-        <i matListIcon class="fa-solid fa-pen-to-square"></i>
-        <h1 matLine class="menuItem">Edit</h1>
+      <mat-list-item routerLink="/edit">
+        <i matListIcon class="fa-solid fa-book"></i>
+        <h1 matLine class="menuItem" *ngIf="sidenavState">Edit</h1>
       </mat-list-item>
-      <mat-divider></mat-divider> -->
+      <mat-divider></mat-divider>
       <mat-list-item routerLink="/exam">
         <i matListIcon class="fa-solid fa-pen-to-square"></i>
         <h1 matLine class="menuItem" *ngIf="sidenavState">Exam</h1>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item routerLink="/test">
+        <i matListIcon class="fa-solid fa-paperclip"></i>
+        <h1 matLine class="menuItem" *ngIf="sidenavState">Test</h1>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item routerLink="/upload">
+        <i matListIcon class="fa-solid fa-upload"></i>
+        <h1 matLine class="menuItem" *ngIf="sidenavState">Test</h1>
       </mat-list-item>
       <mat-divider></mat-divider>
       <h1 matLine class="width-line" *ngIf="sidenavState"></h1>

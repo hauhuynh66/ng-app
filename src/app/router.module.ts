@@ -20,6 +20,8 @@ import { CAGuard } from './guard';
 import { DA_Guard } from './guard_da';
 import { ItemDetailComponent } from './components/item-detail/item-detail.component';
 import { MapComponent } from './components/map/map.component';
+import { ViewerComponent } from './components/viewer/viewer.component';
+import { ImportDataComponent } from './components/import-data/import-data.component';
 
 const routes: Routes = [
     {
@@ -81,6 +83,16 @@ const routes: Routes = [
         data: {animation : 'map'}
     },
     {
+        path : 'upload',
+        component : ImportDataComponent,
+        data : {animation : 'upload'}
+    },
+    {
+        path : 'test',
+        component : ViewerComponent,
+        data: {animation : 'test'}
+    },
+    {
         path: '404',
         component: PagenotfoundComponent
     },
@@ -124,5 +136,7 @@ export class BasicRoutingModule implements OnInit{
      MessageDialogComponent,
      TextInputDialogComponent,
      MainPageComponent,
-     ItemDetailComponent
+     ItemDetailComponent,
+     ViewerComponent,
+     ImportDataComponent
  ];
