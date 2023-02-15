@@ -4,7 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NotelistComponent } from './components/notelist/notelist.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
-import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { PageNotFoundComponent} from './components/pagenotfound/pagenotfound.component';
 import { MiscComponent } from './components/misc/misc.component';
 import { CreatenoteComponent } from './components/dialog/createnote/createnote.component';
 import { ItemlistComponent } from './components/itemlist/itemlist.component';
@@ -22,6 +22,8 @@ import { ItemDetailComponent } from './components/item-detail/item-detail.compon
 import { MapComponent } from './components/map/map.component';
 import { ViewerComponent } from './components/viewer/viewer.component';
 import { ImportDataComponent } from './components/import-data/import-data.component';
+import { FnxComponent } from './components/fnx/fnx.component';
+import { OfficeProcessesComponent } from './components/officeprocs/officeprocs.component';
 
 const routes: Routes = [
     {
@@ -93,8 +95,18 @@ const routes: Routes = [
         data: {animation : 'test'}
     },
     {
+        path : 'edit',
+        component : OfficeProcessesComponent,
+        data: {animation : 'office'}
+    },
+    {
+        path : 'fnx',
+        component : FnxComponent,
+        data : {animation : 'fnx'}
+    },
+    {
         path: '404',
-        component: PagenotfoundComponent
+        component: PageNotFoundComponent
     },
     {
         path: '**', 
@@ -126,7 +138,7 @@ export class BasicRoutingModule implements OnInit{
      ProfileComponent,
      RegisterComponent,
      MiscComponent,
-     PagenotfoundComponent,
+     PageNotFoundComponent,
      CreatenoteComponent,
      ItemlistComponent,
      PurchaseComponent,
@@ -138,5 +150,7 @@ export class BasicRoutingModule implements OnInit{
      MainPageComponent,
      ItemDetailComponent,
      ViewerComponent,
-     ImportDataComponent
+     ImportDataComponent,
+     OfficeProcessesComponent,
+     FnxComponent
  ];

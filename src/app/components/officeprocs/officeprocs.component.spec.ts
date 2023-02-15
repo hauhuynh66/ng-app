@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PageNotFoundComponent } from './pagenotfound.component';
+import { OfficeProcessesComponent } from './officeprocs.component';
 
-describe('PagenotfoundComponent', () => {
-  let component: PageNotFoundComponent;
-  let fixture: ComponentFixture<PageNotFoundComponent>;
+describe('OfficeProcessesComponent', () => {
+  let component: OfficeProcessesComponent;
+  let fixture: ComponentFixture<OfficeProcessesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PageNotFoundComponent ]
+      declarations: [ OfficeProcessesComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PageNotFoundComponent);
+    fixture = TestBed.createComponent(OfficeProcessesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

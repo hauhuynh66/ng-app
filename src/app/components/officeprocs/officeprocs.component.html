@@ -1,0 +1,14 @@
+<div class="m-5">
+    <div class="d-flex">
+        <div class="fileContainer" *ngFor="let i of files">
+
+        </div>
+        <div class="fileContainer">
+            <input type="file" (change)="onFileSelect($event)" accept=".xlsx" hidden #input/>
+            <i class="fa-solid fa-plus icon-xl" (click)="fileSelect()"></i>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center mt-5">
+        <button mat-raised-button color="accent" [hidden]="files.length < 1" (click)="check()">Check</button>
+    </div>
+</div>

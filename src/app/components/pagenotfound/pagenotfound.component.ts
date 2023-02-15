@@ -23,8 +23,9 @@ import { RotateIn, TrackingIn } from 'src/app/animation';
     })])
   ])]
 })
-export class PagenotfoundComponent implements OnInit {
 
+export class PageNotFoundComponent implements OnInit {
+  
   constructor() { }
 
   ngOnInit(): void {

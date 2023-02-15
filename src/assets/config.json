@@ -41,10 +41,5 @@
     },
     "time" : {
         "url": "http://worldtimeapi.org/api/ip/"
-    },
-    "geolocation" : {
-        "url" : "https://ipgeolocation.abstractapi.com/v1/",
-        "key" : "6c1867f692234a1b860c77df41216724"
-    }
-        
+    }   
 }

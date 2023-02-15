@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable, of, reduce } from 'rxjs';
 import { cf } from '../../../asset.loader';
+
 import moment from 'moment';
 
 interface GeolocationData{
@@ -48,11 +49,12 @@ export class MiscComponent implements OnInit {
     data : Array(this.weatherData)
   };
 
+  //change later
   locationData : GeolocationData = {
-    ip : "",
-    city : "",
-    lon : 0,
-    lat : 0
+    ip : "115.77.184.52",
+    city : "Ho Chi Minh City",
+    lon : 106.6667,
+    lat : 10.7500
   }
 
   chartData : any = {
@@ -73,13 +75,11 @@ export class MiscComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.getGeolocationData();
+    this.getForecastData(this.locationData);
 
     setInterval(()=>{
       this.getForecastData(this.locationData);
     }, 1000*60*5);
-
-    //this.getForecastData();
   }
 
   getTimeString(time : TimeData){
@@ -92,29 +92,6 @@ export class MiscComponent implements OnInit {
       strNum = "0"+ strNum
     }
     return num
-  }
-
-  getGeolocationData(){
-    let locationOption = {
-      params : {
-        api_key : cf.geolocation.key
-      }
-    }
-    this.http.get<any>(cf.geolocation.url, locationOption).subscribe({
-      next: data=>{
-        this.locationData = {
-          ip : data.ip_address,
-          city : data.city,
-          lon : data.longitude,
-          lat : data.latitude
-        }
-        this.getForecastData(this.locationData);
-        this.getTime(this.locationData);
-      },
-      error: err=>{
-        confirm("Failed to get computer geolocation.\n Please try again.");
-      }
-    })
   }
 
   unixToTime(unix : number){

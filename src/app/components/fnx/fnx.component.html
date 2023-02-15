@@ -1,0 +1,11 @@
+<div class="m-5">
+    <div class="row">
+        <div class="col-6 my-3 clickable" *ngFor="let item of nItem">
+            <mat-card>
+                <mat-card-content routerLink="{{item.link}}">
+                    <h1 class="d-flex justify-content-center st">{{item.displayName}}</h1>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

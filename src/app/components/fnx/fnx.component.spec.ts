@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PageNotFoundComponent } from './pagenotfound.component';
+import { FnxComponent } from './fnx.component';
 
-describe('PagenotfoundComponent', () => {
-  let component: PageNotFoundComponent;
-  let fixture: ComponentFixture<PageNotFoundComponent>;
+describe('FnxComponent', () => {
+  let component: FnxComponent;
+  let fixture: ComponentFixture<FnxComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PageNotFoundComponent ]
+      declarations: [ FnxComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PageNotFoundComponent);
+    fixture = TestBed.createComponent(FnxComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
