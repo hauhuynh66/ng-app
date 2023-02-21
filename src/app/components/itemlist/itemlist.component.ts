@@ -104,6 +104,7 @@ export class ItemlistComponent implements OnInit {
 
     this.http.post<SearchData>(config.url.main + config.url.item.list + "/" + page, data).subscribe({
       next: data=>{
+        console.log(data);
         this.itemList = [];
         data.result.forEach(item => {
           item.animationState = "idle";
