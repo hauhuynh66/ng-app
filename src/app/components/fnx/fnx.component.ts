@@ -28,8 +28,6 @@ export class FnxComponent implements OnInit {
         link : "/gapi"
       }
     ]
-
-    console.log(this.nItem)
   }
 
 }

@@ -21,11 +21,6 @@ interface Item{
   animationState?:string;
 }
 
-interface SearchData{
-  result:Array<Item>;
-  count:number;
-}
-
 export interface ItemData{
   name: string;
   count: number;
@@ -102,11 +97,11 @@ export class ItemlistComponent implements OnInit {
       sw : this.searchText.value
     }
 
-    this.http.post<SearchData>(config.url.main + config.url.item.list + "/" + page, data).subscribe({
+    this.http.post<any>(config.url.main + config.url.item.list + "/" + page, data).subscribe({
       next: data=>{
         console.log(data);
         this.itemList = [];
-        data.result.forEach(item => {
+        data.list.forEach((item: Item) => {
           item.animationState = "idle";
           item.count = 0;
           this.itemList.push(item);
@@ -127,9 +122,7 @@ export class ItemlistComponent implements OnInit {
         this.keywords = data;
       },
       error: err=>{
-        // if(err.status === 403){
-        //   this.router.navigate(["/login"]);
-        // }
+        
       }
     })
   }
