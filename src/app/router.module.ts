@@ -24,6 +24,7 @@ import { ViewerComponent } from './components/viewer/viewer.component';
 import { ImportDataComponent } from './components/import-data/import-data.component';
 import { FnxComponent } from './components/fnx/fnx.component';
 import { OfficeProcessesComponent } from './components/officeprocs/officeprocs.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 const routes: Routes = [
     {
@@ -152,5 +153,6 @@ export class BasicRoutingModule implements OnInit{
      ViewerComponent,
      ImportDataComponent,
      OfficeProcessesComponent,
-     FnxComponent
+     FnxComponent,
+     CalendarComponent
  ];

@@ -2,19 +2,23 @@
   <div class="cal-base">
     <div class="cal-header pt-3 pr-3">
       <div class="control">
-        <i class="fa-solid fa-angle-left icon-normal "></i>
+        <i class="fa-solid fa-angle-left icon-normal" (click)="previousmonth()"></i>
       </div>
-      <div class="month control">{{headerDisp}}</div>
+      <div class="month control">{{headerTimeDisplay}}</div>
       <div class="control">
-        <i class="fa-solid fa-angle-right icon-normal"></i>
+        <i class="fa-solid fa-angle-right icon-normal" (click)="nextmonth()"></i>
       </div>
-
       <div class="control">
 
       </div>
     </div>
+    <div class="cal-day">
+      <div class="day" *ngFor="let i of shortWeekDayNames">
+        <span>{{i}}</span>
+      </div>
+    </div>
     <div class="cal-body">
-      <div class="date" *ngFor="let i of icalendar">
+      <div class="date" *ngFor="let i of calendarElementList">
         <div *ngIf="i.highlighted; else not" class="disp highlight">
           <span>{{i.data}}</span>
         </div>
