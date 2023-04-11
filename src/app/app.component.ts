@@ -1,5 +1,5 @@
 import { transition, trigger, useAnimation } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { filter, map, Observable, of } from 'rxjs';
 import { Blur, RouteAnimations } from './animation';
@@ -32,6 +32,11 @@ import { Blur, RouteAnimations } from './animation';
 })
 
 export class AppComponent implements OnInit{
+  @HostListener("window:toggle", ['$event']) toolbarToggle()
+  {
+    
+  }
+
   title = 'My App';
   sidenavState : boolean;
   sidenavAnimationState : string = "opened";

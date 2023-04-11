@@ -1,20 +1,42 @@
-import { Component, OnInit } from '@angular/core';
-import moment, { Moment } from 'moment';
+import { transition, trigger, useAnimation } from '@angular/animations';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import moment from 'moment';
+import { Blur } from 'src/app/animation';
 
 interface CalendarDisplay{
   data : number,
-  highlighted : boolean
+  highlighted : boolean,
+  date? : Date
+}
+
+export interface CalendarEvent{
+  name : string,
+  start : Date,
+  end : Date
 }
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.css', '../../global.style.css']
+  styleUrls: ['./calendar.component.css', '../../global.style.css'],
+  animations: [
+    trigger('blur', [
+      transition('iddle=>run',[
+        useAnimation(Blur, {
+          params : {
+            x : 10,
+            length: '1'
+          }
+        })
+      ])
+    ])
+  ]
 })
 
 export class CalendarComponent implements OnInit {
+  
   private currentTime : Date = new Date()
-  private currentYear: number =this.currentTime.getFullYear();
+  private currentYear: number = this.currentTime.getFullYear();
   private currentMonth: number = this.currentTime.getMonth() + 1;
 
   public headerTimeDisplay : String = moment(this.currentTime).format("MM YYYY");
@@ -24,14 +46,26 @@ export class CalendarComponent implements OnInit {
   public fullWeekDayNames : string[] = []
   public shortWeekDayNames : string[] = ["Su", "M", "Tu", "W", "Th", "F", "Sa"]
 
+  public selected : Date = this.currentTime
+  public state : string = 'iddle'
+  public events : CalendarEvent[] = []
+
   constructor() { }
 
   ngOnInit(): void {
+    this.events = [
+      {
+        name : "EVENT 1",
+        start : new Date(2023, 1, 28),
+        end : new Date(2023, 2, 1)
+      }
+    ]
     this.render()
   }
 
   nextmonth()
   {
+    this.state = 'run'
     if(this.currentMonth > 11
       )
     {
@@ -45,6 +79,7 @@ export class CalendarComponent implements OnInit {
 
   previousmonth()
   {
+    this.state = 'run'
     if(this.currentMonth < 2)
     {
       this.currentMonth = 12;
@@ -57,6 +92,27 @@ export class CalendarComponent implements OnInit {
     
   }
 
+  select(element : any)
+  {
+    this.selected = element.date
+  }
+
+  isDisp(element : any)
+  {
+    if(moment(element.date).format("YYYY MM DD") == moment(new Date()).format("YYYY MM DD"))
+    {
+      return 1;
+    }
+    else if(element.highlighted)
+    {
+      return 0;
+    }
+    else{
+      return -1;
+    }
+  }
+
+
   render()
   {
     let seletedMoment = moment(this.currentYear + " " + this.currentMonth, "YYYY MM");
@@ -67,22 +123,54 @@ export class CalendarComponent implements OnInit {
     this.calendarElementList = Array.from({length : this.elementCnt}, (i)=> i = {data : 0, highlighted : false})
     let currentMonthDayCnt = seletedMoment.daysInMonth()
 
+    //current month
     for(let i = firstDatePositionInWeek;i < firstDatePositionInWeek + currentMonthDayCnt ;i++)
     {
-      this.calendarElementList[i].data = i - firstDatePositionInWeek + 1;
-      this.calendarElementList[i].highlighted = true;
+      let d : CalendarDisplay = {
+        data : i - firstDatePositionInWeek + 1,
+        highlighted : true,
+        date : new Date(this.currentYear, this.currentMonth - 1, i - firstDatePositionInWeek + 1)
+      }
+
+      this.calendarElementList[i] = d;
     }
 
-    let latestMonthDayCnt = moment(firstDateOfMonth).add(-1, 'M').daysInMonth()
+    let latestMonth = moment(firstDateOfMonth).add(-1, 'M')
+    let nextMonth = moment(firstDateOfMonth).add(1, 'M')
 
+    let latestMonthDayCnt = latestMonth.daysInMonth()
+
+    //last month
     for(let i = firstDatePositionInWeek; i > 0; i--)
     {
-      this.calendarElementList[firstDatePositionInWeek - i].data = latestMonthDayCnt - i + 1;
+      let d : CalendarDisplay = {
+        data : latestMonthDayCnt - i + 1,
+        highlighted : false,
+        date : new Date(latestMonth.toDate().getFullYear(), latestMonth.toDate().getMonth(), latestMonthDayCnt - i + 1)
+      }
+      this.calendarElementList[firstDatePositionInWeek - i] = d;
     }
 
+    //next month
     for(let i = firstDatePositionInWeek + currentMonthDayCnt; i < this.elementCnt; i ++)
     {
-      this.calendarElementList[i].data = i - (firstDatePositionInWeek + currentMonthDayCnt) + 1;
+      let d : CalendarDisplay = {
+        data : i - (firstDatePositionInWeek + currentMonthDayCnt) + 1,
+        highlighted : false,
+        date : new Date(nextMonth.toDate().getFullYear(), nextMonth.toDate().getMonth(), i - (firstDatePositionInWeek + currentMonthDayCnt) + 1)
+      }
+
+      this.calendarElementList[i] = d;
     }
+  }
+
+  today()
+  {
+    this.state = 'run'
+
+    this.currentYear = this.currentTime.getFullYear();
+    this.currentMonth = this.currentTime.getMonth() + 1;
+
+    this.render();
   }
 }

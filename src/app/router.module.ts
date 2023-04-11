@@ -25,6 +25,9 @@ import { ImportDataComponent } from './components/import-data/import-data.compon
 import { FnxComponent } from './components/fnx/fnx.component';
 import { OfficeProcessesComponent } from './components/officeprocs/officeprocs.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { GaugeComponent } from './components/gauge/gauge.component';
+import { OvalComponent } from './components/oval/oval.component';
+import { LoadingComponent } from './components/dialog/loading/loading.component';
 
 const routes: Routes = [
     {
@@ -154,5 +157,8 @@ export class BasicRoutingModule implements OnInit{
      ImportDataComponent,
      OfficeProcessesComponent,
      FnxComponent,
-     CalendarComponent
+     CalendarComponent,
+     GaugeComponent,
+     OvalComponent,
+     LoadingComponent
  ];

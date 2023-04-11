@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Observable, of, reduce } from 'rxjs';
 import { cf } from '../../../asset.loader';
 
 import moment from 'moment';
@@ -43,6 +42,11 @@ export class MiscComponent implements OnInit {
     dt : 0,
     description : 'test' ,
     main : ''
+  }
+
+  public sun  = {
+    sunrise : 0,
+    sunset : 0
   }
 
   forecastData : ForecastData = {
@@ -154,8 +158,13 @@ export class MiscComponent implements OnInit {
 
     this.http.get<any>(cf.openweathermap.url.weather, weatherOptions).subscribe({
       next: data=>{
+        this.sun = {
+          sunrise : data.sys.sunrise,
+          sunset : data.sys.sunset,
+        }
+        
         this.weatherData = {
-          temp : data.main.temp - 273.15,
+          temp : Math.ceil((data.main.temp - 273.15)*100)/100,
           humid : data.main.humidity,
           description : data.weather[0].description,
           dt : data.dt,
@@ -163,20 +172,18 @@ export class MiscComponent implements OnInit {
         }
       },
       error : err=>{
-        console.log(err.message);
+        
       }
     })
     
     this.http.get<any>(cf.openweathermap.url.forecast, forecastOptions).subscribe({
       next: data =>{
-        console.log(data);
-        
         let fList : Array<any> = data.list;
         let label : Array<string> = [];
         this.forecastData.data = []
 
         fList.forEach(e =>{
-          label.push(moment(new Date(e.dt * 1000)).format("Do hh:mm"))
+          label.push(moment(new Date(e.dt * 1000)).format("hh:mm A"))
           let data : WeatherData = {
             temp : Math.round((e.main.temp - 273.15)*100)/100,
             humid : e.main.humidity,
@@ -193,18 +200,23 @@ export class MiscComponent implements OnInit {
             {
               label : "Temperature",
               data : this.forecastData.data.map(x=>x.temp),
-              borderColor : 'red'
+              borderColor : 'red',
+              borderWidth : 8,
+              backgroundColor : 'rgba(255, 0, 0, 0.2)'
+
             },
             {
               label : "Humidity",
               data : this.forecastData.data.map(x=>x.humid),
-              borderColor : 'blue'
+              borderColor : 'blue',
+              borderWidth : 8,
+              backgroundColor : 'rgba(0, 0, 255, 0.2)'
             }
           ]
         }
       },
       error : err =>{
-        console.log(err.message);
+
       }
     });
     

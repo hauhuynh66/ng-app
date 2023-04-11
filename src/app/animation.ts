@@ -44,7 +44,6 @@ export const TrackingIn = animation([
 export const Blur = animation([
 	style({ filter: 'blur({{x}}px)', opacity: 0}),
 	animate('{{length}}s cubic-bezier(0.215, 0.610, 0.355, 1.000)', style({filter: 'blur(0px)', opacity: 1}))
-
 ])
 
 export const FadeOut = animation([
@@ -81,10 +80,14 @@ export const SlideInElliptic = animation([
 	)
 ]);
 
-export const FlipScaleUp = animation([
-	style({transform : 'scale(1) rotateX(0)'}),
-	animate('{{length}}s linear', style({transform : 'scale(1) rotateX(-180deg)'})),
-	animate('{{length}}s linear', style({transform : 'scale(1) rotateX(-360deg)'}))
+export const FlipRight = animation([
+	style({transform : 'rotateY(0)'}),
+	animate('{{length}}s cubic-bezier(0.455, 0.030, 0.515, 0.955)', style({transform : 'rotateY(180deg)'}))
+]);
+
+export const FlipLeft = animation([
+	style({transform : 'rotateY(0)'}),
+	animate('{{length}}s cubic-bezier(0.455, 0.030, 0.515, 0.955)', style({transform : 'rotateY(-180deg)'}))
 ]);
 
 export const RollIn = animation([
@@ -146,3 +149,4 @@ export const RouteAnimations =
 		}
 	}))
 ]);
+

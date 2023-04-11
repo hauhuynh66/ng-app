@@ -1,5 +1,8 @@
-<h1 class="t">Please wait</h1>
-<div class="container1">
-    <div [@move]="state" class="square" (@move.done)="animationEnd()">
+<div class="d-flex justify-content-center">
+    <h1 class="ms">Please wait</h1>
+</div>
+<div class="container">
+    <div *ngFor="let i of items" [@move]="i.animationState" (@move.done) = "animationEnd(i)">
+        <div class="dot mx-3"></div>
     </div>
 </div>

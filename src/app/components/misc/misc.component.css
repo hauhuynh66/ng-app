@@ -1,4 +1,23 @@
-.large{
-    width: 100%;
+.h-400{
     height: 400px;
 }
+
+.ms{
+    font-family: 'Comic Sans MS';
+}
+
+.text-large{
+    font-size: 40px;
+    line-height: 60px;
+}
+
+.text-normal{
+    font-size: 30px;
+    line-height: 40px;
+}
+
+.text-small{
+    font-size: 20px;
+    line-height: 25px;
+}
+
